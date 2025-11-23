@@ -1,57 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+import nodemailer from 'nodemailer'
+
 export const runtime = 'nodejs'
-import * as fs from 'fs'
-import * as path from 'path'
-
-// Minimal CSV helpers to avoid external dependencies
-function escapeCsv(value: string): string {
-  const needsQuotes = /[",\n]/.test(value)
-  let v = value.replace(/"/g, '""')
-  return needsQuotes ? `"${v}"` : v
-}
-
-function toCsvLine(record: Record<string, string>): string {
-  return [
-    escapeCsv(record.timestamp || ''),
-    escapeCsv(record.name || ''),
-    escapeCsv(record.phone || ''),
-    escapeCsv(record.email || ''),
-    escapeCsv(record.businessType || ''),
-    escapeCsv(record.message || ''),
-  ].join(',')
-}
-
-function parseCsvLine(line: string): string[] {
-  const result: string[] = []
-  let current = ''
-  let inQuotes = false
-  for (let i = 0; i < line.length; i++) {
-    const ch = line[i]
-    if (inQuotes) {
-      if (ch === '"') {
-        if (i + 1 < line.length && line[i + 1] === '"') {
-          current += '"'
-          i++
-        } else {
-          inQuotes = false
-        }
-      } else {
-        current += ch
-      }
-    } else {
-      if (ch === ',') {
-        result.push(current)
-        current = ''
-      } else if (ch === '"') {
-        inQuotes = true
-      } else {
-        current += ch
-      }
-    }
-  }
-  result.push(current)
-  return result
-}
 
 interface ContactData {
   name: string
@@ -59,104 +9,6 @@ interface ContactData {
   email: string
   businessType: string
   message: string
-  timestamp?: string
-}
-
-// Data abstraction layer for easy migration to database
-class DataStore {
-  private filePath: string
-
-  constructor() {
-    // Store in a data folder that can be easily migrated
-    this.filePath = path.join(process.cwd(), 'data', 'contacts.csv')
-    this.ensureDataDirectory()
-  }
-
-  private ensureDataDirectory() {
-    const dataDir = path.dirname(this.filePath)
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir, { recursive: true })
-    }
-
-    // Create CSV with headers if it doesn't exist
-    if (!fs.existsSync(this.filePath)) {
-      const headers = 'timestamp,name,phone,email,businessType,message\n'
-      fs.writeFileSync(this.filePath, headers, 'utf-8')
-    }
-  }
-
-  async save(data: ContactData): Promise<void> {
-    const record = {
-      timestamp: new Date().toISOString(),
-      ...data
-    }
-
-    // Append record to CSV (headers already ensured in constructor)
-    const line = `\n${toCsvLine(record as any)}`
-    fs.appendFileSync(this.filePath, line, 'utf-8')
-  }
-
-  // Future migration helper
-  async getAll(): Promise<ContactData[]> {
-    try {
-      const fileContent = fs.readFileSync(this.filePath, 'utf-8')
-      const lines = fileContent.split(/\r?\n/).filter(l => l.trim().length > 0)
-      if (lines.length <= 1) return []
-      const header = parseCsvLine(lines[0])
-      const indexes = {
-        timestamp: header.indexOf('timestamp'),
-        name: header.indexOf('name'),
-        phone: header.indexOf('phone'),
-        email: header.indexOf('email'),
-        businessType: header.indexOf('businessType'),
-        message: header.indexOf('message'),
-      }
-      const records: ContactData[] = []
-      for (let i = 1; i < lines.length; i++) {
-        const cols = parseCsvLine(lines[i])
-        records.push({
-          timestamp: cols[indexes.timestamp] || '',
-          name: cols[indexes.name] || '',
-          phone: cols[indexes.phone] || '',
-          email: cols[indexes.email] || '',
-          businessType: cols[indexes.businessType] || '',
-          message: cols[indexes.message] || '',
-        })
-      }
-      return records
-    } catch (error) {
-      console.error('Error reading contacts:', error)
-      return []
-    }
-  }
-}
-
-// Email notification service (abstracted for easy replacement)
-class NotificationService {
-  async sendEmail(data: ContactData): Promise<void> {
-    // This would normally use nodemailer or another email service
-    // For now, we'll just log it - in production, implement email sending
-    console.log('Email notification for new contact:', {
-      to: 'earthpowerjourney@gmail.com',
-      subject: `New Contact Form Submission from ${data.name}`,
-      body: `
-        New contact form submission received:
-        
-        Name: ${data.name}
-        Phone: ${data.phone}
-        Email: ${data.email}
-        Business Type: ${data.businessType}
-        Message: ${data.message}
-        
-        Timestamp: ${new Date().toLocaleString('en-IN')}
-      `
-    })
-
-    // In production, implement actual email sending:
-    // const nodemailer = require('nodemailer')
-    // const transporter = nodemailer.createTransport({...})
-    // await transporter.sendMail({...})
-  }
 }
 
 export async function POST(request: NextRequest) {
@@ -189,37 +41,58 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Save to data store
-    const dataStore = new DataStore()
-    await dataStore.save(data)
+    // Check for environment variables
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      console.error('Missing email configuration')
+      return NextResponse.json(
+        { error: 'Server configuration error' },
+        { status: 500 }
+      )
+    }
 
-    // Send email notification
-    const notificationService = new NotificationService()
-    await notificationService.sendEmail(data)
+    // Create Transporter
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    })
+
+    // Email Content
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: 'earthpowerjourney@gmail.com', // Send to yourself
+      subject: `New Contact Form Submission from ${data.name}`,
+      html: `
+        <h2>New Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${data.name}</p>
+        <p><strong>Phone:</strong> ${data.phone}</p>
+        <p><strong>Email:</strong> ${data.email}</p>
+        <p><strong>Business Type:</strong> ${data.businessType}</p>
+        <p><strong>Message:</strong></p>
+        <p>${data.message}</p>
+        <br>
+        <p><small>Received on ${new Date().toLocaleString('en-IN')}</small></p>
+      `,
+    }
+
+    // Send Email
+    await transporter.sendMail(mailOptions)
 
     return NextResponse.json(
-      { 
+      {
         success: true,
-        message: 'Contact form submitted successfully' 
+        message: 'Message sent successfully'
       },
       { status: 200 }
     )
+
   } catch (error) {
     console.error('Contact form error:', error)
     return NextResponse.json(
-      { error: 'Failed to process contact form' },
+      { error: 'Failed to send message' },
       { status: 500 }
     )
   }
-}
-
-export async function GET(request: NextRequest) {
-  // Optional: Add authentication here for admin access
-  const dataStore = new DataStore()
-  const contacts = await dataStore.getAll()
-  
-  return NextResponse.json({ 
-    contacts,
-    count: contacts.length 
-  })
 }
