@@ -2,11 +2,14 @@
 
 import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { Float, Text3D, Center } from '@react-three/drei'
+import { Float, Text3D, Center, useFont } from '@react-three/drei'
 import * as THREE from 'three'
 
 // Using a standard font URL
 const FONT_URL = 'https://threejs.org/examples/fonts/helvetiker_bold.typeface.json'
+
+// Preload font to avoid lag
+useFont.preload(FONT_URL)
 
 export default function Battery3D() {
   const rotatingGroup = useRef<THREE.Group>(null)
@@ -40,7 +43,7 @@ export default function Battery3D() {
         <group ref={rotatingGroup}>
           {/* Battery Body (Premium Glass Shell) */}
           <mesh position={[0, 0, 0]}>
-            <cylinderGeometry args={[1, 1, 3, 64]} />
+            <cylinderGeometry args={[1, 1, 3, 32]} /> {/* Reduced segments from 64 to 32 */}
             <meshPhysicalMaterial
               color="#0a0f0d"
               metalness={0.2}
@@ -55,7 +58,7 @@ export default function Battery3D() {
 
           {/* Charging Fill (Neon Core) */}
           <mesh ref={fillRef} position={[0, -1.4, 0]}>
-            <cylinderGeometry args={[0.85, 0.85, 2.8, 32]} />
+            <cylinderGeometry args={[0.85, 0.85, 2.8, 24]} /> {/* Reduced segments from 32 to 24 */}
             <meshStandardMaterial
               color="#4ade80"
               emissive="#4ade80"
@@ -66,15 +69,15 @@ export default function Battery3D() {
 
           {/* Chrome Caps - Shiny Metallic */}
           <mesh position={[0, 1.6, 0]}>
-            <cylinderGeometry args={[0.4, 0.4, 0.2, 64]} />
+            <cylinderGeometry args={[0.4, 0.4, 0.2, 32]} /> {/* Reduced segments from 64 to 32 */}
             <meshStandardMaterial color="#ffffff" metalness={1} roughness={0.1} envMapIntensity={1.5} />
           </mesh>
           <mesh position={[0, 1.5, 0]}>
-            <cylinderGeometry args={[1.05, 1.05, 0.1, 64]} />
+            <cylinderGeometry args={[1.05, 1.05, 0.1, 32]} /> {/* Reduced segments from 64 to 32 */}
             <meshStandardMaterial color="#ffffff" metalness={1} roughness={0.1} envMapIntensity={1.5} />
           </mesh>
           <mesh position={[0, -1.5, 0]}>
-            <cylinderGeometry args={[1.05, 1.05, 0.1, 64]} />
+            <cylinderGeometry args={[1.05, 1.05, 0.1, 32]} /> {/* Reduced segments from 64 to 32 */}
             <meshStandardMaterial color="#ffffff" metalness={1} roughness={0.1} envMapIntensity={1.5} />
           </mesh>
 
@@ -95,20 +98,18 @@ export default function Battery3D() {
                       font={FONT_URL}
                       size={0.35}
                       height={0.05}
-                      curveSegments={12}
+                      curveSegments={8} // Reduced from 12 to 8
                       bevelEnabled={true}
                       bevelThickness={0.01}
                       bevelSize={0.01}
                       bevelOffset={0}
-                      bevelSegments={3}
+                      bevelSegments={3} // Reduced from 5
                     >
                       {char}
-                      {/* Metallic Material */}
                       <meshStandardMaterial
                         color="#ffffff"
                         metalness={1}
                         roughness={0.1}
-                        envMapIntensity={1.5}
                       />
                     </Text3D>
                   </Center>

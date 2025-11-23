@@ -5,7 +5,8 @@ import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
 export default function ParticlesBackground() {
-    const count = 1500
+    // Reduced count for better performance
+    const count = 800
     const mesh = useRef<THREE.InstancedMesh>(null)
     const dummy = useMemo(() => new THREE.Object3D(), [])
 
@@ -26,9 +27,15 @@ export default function ParticlesBackground() {
     useFrame((state) => {
         if (!mesh.current) return
 
+        // Optimize: Use a single time variable for smoother, less calculation-heavy animation
+        const time = state.clock.getElapsedTime()
+
         particles.forEach((particle, i) => {
-            let { t, factor, speed, xFactor, yFactor, zFactor } = particle
-            t = particle.t += speed / 2
+            let { factor, speed, xFactor, yFactor, zFactor } = particle
+
+            // Simplified movement logic
+            const t = particle.t + time * speed * 5
+
             const a = Math.cos(t) + Math.sin(t * 1) / 10
             const b = Math.sin(t) + Math.cos(t * 2) / 10
             const s = Math.cos(t)
@@ -38,7 +45,7 @@ export default function ParticlesBackground() {
                 (particle.my / 10) * b + yFactor + Math.sin((t / 10) * factor) + (Math.cos(t * 2) * factor) / 10,
                 (particle.my / 10) * b + zFactor + Math.cos((t / 10) * factor) + (Math.sin(t * 3) * factor) / 10
             )
-            dummy.scale.setScalar(s * 0.5 + 0.5) // Pulsing size
+            dummy.scale.setScalar(s * 0.5 + 0.5)
             dummy.rotation.set(s * 5, s * 5, s * 5)
             dummy.updateMatrix()
 
@@ -49,7 +56,8 @@ export default function ParticlesBackground() {
 
     return (
         <instancedMesh ref={mesh} args={[undefined, undefined, count]}>
-            <sphereGeometry args={[0.05, 16, 16]} />
+            {/* Use DodecahedronGeometry for fewer vertices than Sphere but still round-ish */}
+            <dodecahedronGeometry args={[0.05, 0]} />
             <meshStandardMaterial
                 color="#4ade80"
                 emissive="#4ade80"
