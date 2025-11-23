@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Shield, Zap, Thermometer, Leaf, TrendingUp, Clock } from 'lucide-react'
 import { Canvas } from '@react-three/fiber'
+import { useState, useEffect } from 'react'
 import FloatingIcons3D from './FloatingIcons3D'
 
 const advantages = [
@@ -57,15 +58,28 @@ export default function WhyLFP() {
     threshold: 0.1,
   })
 
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   return (
     <section className="section-padding bg-white relative overflow-hidden">
-      {/* 3D Background Layer */}
-      <div className="absolute inset-0 z-0 opacity-[0.18] pointer-events-none">
-        <Canvas camera={{ position: [0, 0, 15], fov: 50 }}>
-          <ambientLight intensity={0.5} />
-          <FloatingIcons3D />
-        </Canvas>
-      </div>
+      {/* 3D Background Layer - Desktop Only */}
+      {!isMobile && (
+        <div className="absolute inset-0 z-0 opacity-[0.18] pointer-events-none">
+          <Canvas camera={{ position: [0, 0, 15], fov: 50 }}>
+            <ambientLight intensity={0.5} />
+            <FloatingIcons3D />
+          </Canvas>
+        </div>
+      )}
 
       {/* Subtle Background Decoration */}
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-earth-green-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
