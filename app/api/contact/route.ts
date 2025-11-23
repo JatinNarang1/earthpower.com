@@ -82,7 +82,7 @@ export async function POST(request: NextRequest) {
     // Email Content
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: 'earthpowerjourney@gmail.com', // Send to yourself
+      to: 'jatinnarang421@gmail.com', // Send to yourself
       subject: `New Contact Form Submission from ${data.name}`,
       html: `
         <h2>New Contact Form Submission</h2>
