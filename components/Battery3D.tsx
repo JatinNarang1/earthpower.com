@@ -11,7 +11,11 @@ const FONT_URL = 'https://threejs.org/examples/fonts/helvetiker_bold.typeface.js
 // Preload font to avoid lag
 useFont.preload(FONT_URL)
 
-export default function Battery3D() {
+interface Battery3DProps {
+  isMobile?: boolean
+}
+
+export default function Battery3D({ isMobile = false }: Battery3DProps) {
   const rotatingGroup = useRef<THREE.Group>(null)
   const fillRef = useRef<THREE.Mesh>(null)
 
@@ -30,6 +34,12 @@ export default function Battery3D() {
     }
   })
 
+  // Reduce segments on mobile for performance
+  const bodySegments = isMobile ? 24 : 32
+  const capSegments = isMobile ? 24 : 32
+  const textCurveSegments = isMobile ? 4 : 8
+  const textBevelSegments = isMobile ? 1 : 3
+
   return (
     <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
       <group rotation={[0.15, -0.2, 0.05]}>
@@ -43,22 +53,34 @@ export default function Battery3D() {
         <group ref={rotatingGroup}>
           {/* Battery Body (Premium Glass Shell) */}
           <mesh position={[0, 0, 0]}>
-            <cylinderGeometry args={[1, 1, 3, 32]} /> {/* Reduced segments from 64 to 32 */}
-            <meshPhysicalMaterial
-              color="#0a0f0d"
-              metalness={0.2}
-              roughness={0.1}
-              transmission={0.8}
-              transparent
-              opacity={0.9}
-              clearcoat={1}
-              clearcoatRoughness={0.1}
-            />
+            <cylinderGeometry args={[1, 1, 3, bodySegments]} />
+            {isMobile ? (
+              // Mobile: Simple transparent material (much faster)
+              <meshStandardMaterial
+                color="#0a0f0d"
+                transparent
+                opacity={0.8}
+                roughness={0.2}
+                metalness={0.5}
+              />
+            ) : (
+              // Desktop: Premium physical material with transmission
+              <meshPhysicalMaterial
+                color="#0a0f0d"
+                metalness={0.2}
+                roughness={0.1}
+                transmission={0.8}
+                transparent
+                opacity={0.9}
+                clearcoat={1}
+                clearcoatRoughness={0.1}
+              />
+            )}
           </mesh>
 
           {/* Charging Fill (Neon Core) */}
           <mesh ref={fillRef} position={[0, -1.4, 0]}>
-            <cylinderGeometry args={[0.85, 0.85, 2.8, 24]} /> {/* Reduced segments from 32 to 24 */}
+            <cylinderGeometry args={[0.85, 0.85, 2.8, bodySegments]} />
             <meshStandardMaterial
               color="#4ade80"
               emissive="#4ade80"
@@ -69,15 +91,15 @@ export default function Battery3D() {
 
           {/* Chrome Caps - Shiny Metallic */}
           <mesh position={[0, 1.6, 0]}>
-            <cylinderGeometry args={[0.4, 0.4, 0.2, 32]} /> {/* Reduced segments from 64 to 32 */}
+            <cylinderGeometry args={[0.4, 0.4, 0.2, capSegments]} />
             <meshStandardMaterial color="#ffffff" metalness={1} roughness={0.1} envMapIntensity={1.5} />
           </mesh>
           <mesh position={[0, 1.5, 0]}>
-            <cylinderGeometry args={[1.05, 1.05, 0.1, 32]} /> {/* Reduced segments from 64 to 32 */}
+            <cylinderGeometry args={[1.05, 1.05, 0.1, capSegments]} />
             <meshStandardMaterial color="#ffffff" metalness={1} roughness={0.1} envMapIntensity={1.5} />
           </mesh>
           <mesh position={[0, -1.5, 0]}>
-            <cylinderGeometry args={[1.05, 1.05, 0.1, 32]} /> {/* Reduced segments from 64 to 32 */}
+            <cylinderGeometry args={[1.05, 1.05, 0.1, capSegments]} />
             <meshStandardMaterial color="#ffffff" metalness={1} roughness={0.1} envMapIntensity={1.5} />
           </mesh>
 
@@ -98,12 +120,12 @@ export default function Battery3D() {
                       font={FONT_URL}
                       size={0.35}
                       height={0.05}
-                      curveSegments={8} // Reduced from 12 to 8
+                      curveSegments={textCurveSegments}
                       bevelEnabled={true}
                       bevelThickness={0.01}
                       bevelSize={0.01}
                       bevelOffset={0}
-                      bevelSegments={3} // Reduced from 5
+                      bevelSegments={textBevelSegments}
                     >
                       {char}
                       <meshStandardMaterial

@@ -4,9 +4,15 @@ import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
-export default function ParticlesBackground() {
+interface ParticlesBackgroundProps {
+    isMobile?: boolean
+}
+
+export default function ParticlesBackground({ isMobile = false }: ParticlesBackgroundProps) {
     // Reduced count for better performance
-    const count = 800
+    // Mobile: 200 particles (very lightweight)
+    // Desktop: 800 particles (richer background)
+    const count = isMobile ? 200 : 800
     const mesh = useRef<THREE.InstancedMesh>(null)
     const dummy = useMemo(() => new THREE.Object3D(), [])
 
