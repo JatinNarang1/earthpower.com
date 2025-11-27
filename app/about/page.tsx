@@ -15,7 +15,7 @@ import ParticlesBackground from '@/components/ParticlesBackground'
 const timeline = [
   { year: '2021', event: 'Earth Power founded with vision for clean energy' },
   { year: '2022', event: 'R&D center established for LFP technology' },
-  { year: '2022', event: 'First production facility operational' },
+  { year: '2023', event: 'First production facility operational' },
   { year: '2024', event: 'Launched EV Wheeler battery series' },
   { year: '2025', event: 'Expanding across India with dealer network' },
 ]
