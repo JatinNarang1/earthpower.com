@@ -41,7 +41,7 @@ const products: Product[] = [
     voltage: '51.2V',
     capacity: '105Ah',
     chemistry: 'Lithium Iron Phosphate (LFP)',
-    applications: ['E-Rickshaws', 'E-Carts', 'EV Wheelers', 'Electric Scooters'],
+    applications: ['E-Rickshaw', 'E-Cart', 'EV Wheeler'],
     features: [
       'Plug-and-play installation',
       'Modular architecture',
@@ -55,8 +55,95 @@ const products: Product[] = [
       'Nominal Capacity': '105Ah',
       'Energy': '5.376 kWh',
       'Chemistry': 'LiFePO4',
-      'Cycle Life': '5000+ cycles',
-      'Charging Time': '2-3 hours',
+      'Cycle Life': '4000+ cycles',
+      'Charging Time': '4-5 hours',
+      'Operating Temp': '-20°C to 60°C',
+      'Warranty': '3 years'
+    },
+    isAvailable: true,
+    isNew: true
+  },
+  {
+    id: 'inverter-battery-12v',
+    name: 'Inverter Battery',
+    model: '12.8V 105Ah',
+    category: 'Energy Storage',
+    voltage: '12.8V',
+    capacity: '105Ah',
+    chemistry: 'Lithium Iron Phosphate (LFP)',
+    applications: ['Home Backup', 'Solar Storage', 'Inverter Systems'],
+    features: [
+      'Compatible with lead acid invertors',
+      'Drop-in replacement for lead acid batteries',
+      'Advanced BMS protection',
+      'Maintenance-free operation',
+      'Lightweight design',
+      'Long cycle life'
+    ],
+    specifications: {
+      'Nominal Voltage': '12.8V',
+      'Nominal Capacity': '105Ah',
+      'Energy': '1.344 kWh',
+      'Chemistry': 'LiFePO4',
+      'Compatibility': 'Lead Acid Invertors',
+      'Operating Temp': '-20°C to 60°C',
+      'Warranty': '5 years'
+    },
+    isAvailable: true,
+    isNew: true
+  },
+  {
+    id: 'inverter-battery-25v',
+    name: 'Inverter Battery',
+    model: '25.6V 105Ah',
+    category: 'Energy Storage',
+    voltage: '25.6V',
+    capacity: '105Ah',
+    chemistry: 'Lithium Iron Phosphate (LFP)',
+    applications: ['Home Backup', 'Solar Storage', 'Inverter Systems'],
+    features: [
+      'Compatible with lead acid invertors',
+      'Drop-in replacement for lead acid batteries',
+      'Advanced BMS protection',
+      'Maintenance-free operation',
+      'Lightweight design',
+      'Long cycle life'
+    ],
+    specifications: {
+      'Nominal Voltage': '25.6V',
+      'Nominal Capacity': '105Ah',
+      'Energy': '2.688 kWh',
+      'Chemistry': 'LiFePO4',
+      'Compatibility': 'Lead Acid Invertors',
+      'Operating Temp': '-20°C to 60°C',
+      'Warranty': '5 years'
+    },
+    isAvailable: true,
+    isNew: true
+  },
+  {
+    id: 'inverter-battery-48v',
+    name: 'Inverter Battery',
+    model: '48.0V 105Ah',
+    category: 'Energy Storage',
+    voltage: '48.0V',
+    capacity: '105Ah',
+    chemistry: 'Lithium Iron Phosphate (LFP)',
+    applications: ['Home Backup', 'Solar Storage', 'Inverter Systems'],
+    features: [
+      'Compatible with lead acid invertors',
+      'Drop-in replacement for lead acid batteries',
+      'Advanced BMS protection',
+      'Maintenance-free operation',
+      'Lightweight design',
+      'Long cycle life'
+    ],
+    specifications: {
+      'Nominal Voltage': '48.0V',
+      'Nominal Capacity': '105Ah',
+      'Energy': '5.04 kWh',
+      'Chemistry': 'LiFePO4',
+      'Compatibility': 'Lead Acid Invertors',
       'Operating Temp': '-20°C to 60°C',
       'Warranty': '5 years'
     },
@@ -392,18 +479,18 @@ export default function ProductsPage() {
             </div>
             <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
               <Shield className="w-10 h-10 text-earth-green-500 mb-4" />
-              <h3 className="text-lg font-bold mb-2">5-Year Warranty</h3>
-              <p className="text-gray-600 text-sm">Industry-leading warranty coverage for peace of mind</p>
+              <h3 className="text-lg font-bold mb-2">Long Warranty</h3>
+              <p className="text-gray-600 text-sm">Up to 5-year warranty coverage for peace of mind</p>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-              <Clock className="w-10 h-10 text-earth-green-500 mb-4" />
-              <h3 className="text-lg font-bold mb-2">Fast Charging</h3>
-              <p className="text-gray-600 text-sm">2-3 hour charging time for minimal downtime</p>
+              <Thermometer className="w-10 h-10 text-earth-green-500 mb-4" />
+              <h3 className="text-lg font-bold mb-2">Wide Temp Range</h3>
+              <p className="text-gray-600 text-sm">Reliable operation from -20°C to 60°C</p>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
               <TrendingUp className="w-10 h-10 text-earth-green-500 mb-4" />
-              <h3 className="text-lg font-bold mb-2">5000+ Cycles</h3>
-              <p className="text-gray-600 text-sm">Long-lasting performance with minimal capacity loss</p>
+              <h3 className="text-lg font-bold mb-2">Long Cycle Life</h3>
+              <p className="text-gray-600 text-sm">Thousands of cycles with minimal capacity loss</p>
             </div>
           </div>
         </div>

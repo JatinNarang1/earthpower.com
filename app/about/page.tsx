@@ -12,13 +12,7 @@ import { Canvas } from '@react-three/fiber'
 import FloatingIcons3D from '@/components/FloatingIcons3D'
 import ParticlesBackground from '@/components/ParticlesBackground'
 
-const timeline = [
-  { year: '2021', event: 'Earth Power founded with vision for clean energy' },
-  { year: '2022', event: 'R&D center established for LFP technology' },
-  { year: '2023', event: 'First production facility operational' },
-  { year: '2024', event: 'Launched EV Wheeler battery series' },
-  { year: '2025', event: 'Expanding across India with dealer network' },
-]
+
 
 const values = [
   {
@@ -81,7 +75,7 @@ export default function AboutPage() {
   const [storyRef, storyInView] = useInView({ triggerOnce: true, threshold: 0.1 })
   const [missionRef, missionInView] = useInView({ triggerOnce: true, threshold: 0.1 })
   const [valuesRef, valuesInView] = useInView({ triggerOnce: true, threshold: 0.1 })
-  const [timelineRef, timelineInView] = useInView({ triggerOnce: true, threshold: 0.1 })
+
   const [advantagesRef, advantagesInView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
   return (
@@ -254,59 +248,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Brand Story Timeline */}
-      <section className="section-padding bg-earth-charcoal-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 z-0 opacity-40">
-          <Canvas camera={{ position: [0, 0, 20], fov: 60 }}>
-            <ambientLight intensity={0.5} />
-            <ParticlesBackground />
-          </Canvas>
-        </div>
-        <div className="container-custom relative z-10">
-          <motion.div
-            ref={timelineRef}
-            initial={{ opacity: 0, y: 30 }}
-            animate={timelineInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold font-display mb-4">
-                Our <span className="gradient-text">Journey</span>
-              </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                From a vision to revolutionize energy storage to becoming India's emerging
-                leader in LFP battery technology.
-              </p>
-            </div>
-
-            <div className="relative max-w-4xl mx-auto">
-              {/* Timeline Line */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-earth-green-500/30" />
-
-              {/* Timeline Items */}
-              {timeline.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                  animate={timelineInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className={`relative flex items-center mb-12 ${index % 2 === 0 ? 'justify-start' : 'justify-end'
-                    }`}
-                >
-                  <div className={`w-5/12 ${index % 2 === 0 ? 'text-right pr-8' : 'text-left pl-8'}`}>
-                    <div className="glass-card p-6 hover:bg-white/15 transition-colors">
-                      <div className="text-earth-neon-green font-bold text-2xl mb-2">{item.year}</div>
-                      <p className="text-gray-300">{item.event}</p>
-                    </div>
-                  </div>
-                  {/* Center Dot */}
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-earth-green-500 rounded-full border-4 border-earth-charcoal-900 z-10" />
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
       {/* Why Earth Power Section */}
       <section className="section-padding bg-white">

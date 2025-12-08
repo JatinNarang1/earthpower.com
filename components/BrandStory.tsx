@@ -2,8 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { Target, Eye, Heart, Sparkles } from 'lucide-react'
-import Link from 'next/link'
+import { Target, Eye, Heart } from 'lucide-react'
 
 export default function BrandStory() {
   const [ref, inView] = useInView({
@@ -32,21 +31,14 @@ export default function BrandStory() {
               <span className="block gradient-text">Built for the Future</span>
             </h2>
             <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-              Earth Power emerged from a vision to revolutionize India's energy storage landscape. 
-              We recognized the critical need for safer, more efficient battery solutions that could 
+              Earth Power emerged from a vision to revolutionize India's energy storage landscape.
+              We recognized the critical need for safer, more efficient battery solutions that could
               withstand our unique environmental challenges while powering the electric mobility revolution.
             </p>
             <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-              Today, we're not just manufacturing batteries – we're building the foundation for 
+              Today, we're not just manufacturing batteries – we're building the foundation for
               India's sustainable transportation future, one cell at a time.
             </p>
-            <Link
-              href="/about"
-              className="inline-flex items-center px-6 py-3 bg-earth-green-500 text-white font-semibold rounded-full hover:bg-earth-green-600 transition-colors group"
-            >
-              Learn Our Story
-              <Sparkles className="ml-2 w-5 h-5 group-hover:rotate-12 transition-transform" />
-            </Link>
           </motion.div>
 
           {/* Right Content - Mission/Vision Cards */}
@@ -65,7 +57,7 @@ export default function BrandStory() {
                 <div>
                   <h3 className="text-xl font-bold mb-2 text-earth-neon-green">Our Mission</h3>
                   <p className="text-gray-300">
-                    To provide cutting-edge LFP battery solutions that empower India's transition 
+                    To provide cutting-edge LFP battery solutions that empower India's transition
                     to clean energy, making electric mobility accessible, safe, and sustainable for all.
                   </p>
                 </div>
@@ -81,7 +73,7 @@ export default function BrandStory() {
                 <div>
                   <h3 className="text-xl font-bold mb-2 text-earth-neon-green">Our Vision</h3>
                   <p className="text-gray-300">
-                    To become India's most trusted name in advanced battery technology, leading the 
+                    To become India's most trusted name in advanced battery technology, leading the
                     charge towards a carbon-neutral future with innovation and excellence.
                   </p>
                 </div>

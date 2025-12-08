@@ -20,8 +20,8 @@ export default function Header() {
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${scrolled
-                    ? 'bg-earth-charcoal-900/80 backdrop-blur-xl border-b border-white/5 py-3 shadow-[0_4px_30px_rgba(0,0,0,0.1)]'
-                    : 'bg-transparent py-6'
+                ? 'bg-earth-charcoal-900/80 backdrop-blur-xl border-b border-white/5 py-3 shadow-[0_4px_30px_rgba(0,0,0,0.1)]'
+                : 'bg-transparent py-6'
                 }`}
         >
             <nav className="container-custom">
@@ -42,7 +42,6 @@ export default function Header() {
                         {[
                             { name: 'Home', href: '/' },
                             { name: 'Products', href: '/products' },
-                            { name: 'Technology', href: '/technology' },
                             { name: 'About', href: '/about' },
                         ].map((item) => (
                             <Link
@@ -116,7 +115,6 @@ export default function Header() {
                                 {[
                                     { name: 'Home', href: '/' },
                                     { name: 'Products', href: '/products' },
-                                    { name: 'Technology', href: '/technology' },
                                     { name: 'About', href: '/about' },
                                     { name: 'Contact', href: '/contact' },
                                 ].map((item, i) => (

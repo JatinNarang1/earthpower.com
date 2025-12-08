@@ -132,7 +132,7 @@ export default function ContactPage() {
               <a href="tel:+01141435047" className="text-earth-green-500 font-semibold hover:text-earth-green-600">
                 +011 41435047
               </a>
-              <p className="text-gray-600 text-sm mt-1">Mon-Sat: 9:00 AM - 6:00 PM</p>
+              <p className="text-gray-600 text-sm mt-1">Sun-Fri: 9:00 AM - 6:00 PM</p>
             </div>
 
             {/* Email Card */}
@@ -397,7 +397,7 @@ export default function ContactPage() {
                           <Clock className="w-6 h-6 text-white drop-shadow-lg" />
                         </div>
                         <div className="flex-1">
-                          <p className="font-semibold text-white text-lg">Monday - Saturday: 9:00 AM - 6:00 PM</p>
+                          <p className="font-semibold text-white text-lg">Sunday - Friday: 9:00 AM - 6:00 PM</p>
                         </div>
                       </div>
                     </div>
