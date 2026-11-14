@@ -113,8 +113,9 @@ export default function Footer() {
 
                 <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
                     <p>&copy; {new Date().getFullYear()} Earth Power. All rights reserved.</p>
-                    <div className="flex space-x-6 mt-4 md:mt-0">
+                    <div className="flex flex-wrap gap-6 mt-4 md:mt-0">
                         <Link href="/privacy" className="hover:text-white transition-colors hover:underline decoration-earth-neon-green underline-offset-4">Privacy Policy</Link>
+                        <Link href="/privacy-app" className="hover:text-white transition-colors hover:underline decoration-earth-neon-green underline-offset-4">App Privacy</Link>
                         <Link href="/terms" className="hover:text-white transition-colors hover:underline decoration-earth-neon-green underline-offset-4">Terms of Service</Link>
                     </div>
                 </div>
