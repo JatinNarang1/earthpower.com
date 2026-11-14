@@ -22,6 +22,16 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/privacy_app',
+        destination: '/privacy-app',
+        permanent: true,
+      },
+      {
+        source: '/privacyapp',
+        destination: '/privacy-app',
+        permanent: true,
+      },
+      {
         source: '/terms-of-service',
         destination: '/terms',
         permanent: true,
