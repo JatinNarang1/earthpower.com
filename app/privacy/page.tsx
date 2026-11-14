@@ -25,15 +25,15 @@ import {
 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Earth Power Mobile App & Web',
+  title: 'Privacy Policy | Earth Power Battery',
   description:
-    'Comprehensive Privacy Policy for Earth Power website and Google Play mobile application. Fully compliant with Google Play Developer Policy, user data safety, and data deletion requirements.',
+    'Comprehensive Privacy Policy for the Earth Power Battery Android application and official website. Fully compliant with Google Play Developer Policy, user data safety, and data deletion requirements.',
   keywords:
-    'Earth Power privacy policy, Google play privacy policy, battery telemetry data safety, Earth Power app privacy',
+    'Earth Power Battery privacy policy, Google play privacy policy, battery telemetry data safety, Earth Power Battery app privacy',
   openGraph: {
-    title: 'Privacy Policy - Earth Power',
+    title: 'Privacy Policy - Earth Power Battery',
     description:
-      'Understand how Earth Power collects, protects, and manages user information and battery telemetry across our mobile app and website.',
+      'Understand how Earth Power Battery collects, protects, and manages user information and battery telemetry across our Android application and website.',
     url: 'https://earthpowerbattery.com/privacy',
   },
 }
@@ -77,7 +77,7 @@ export default function PrivacyPolicyPage() {
             <div className="hidden sm:block text-gray-600">•</div>
             <div className="flex items-center space-x-2">
               <Smartphone className="w-4 h-4 text-earth-neon-green" />
-              <span>App: <strong className="text-gray-200">Earth Power Companion App (Android)</strong></span>
+              <span>App: <strong className="text-gray-200">Earth Power Battery</strong></span>
             </div>
           </div>
         </div>
@@ -193,7 +193,7 @@ export default function PrivacyPolicyPage() {
                 </div>
                 <div className="space-y-4 text-gray-300 leading-relaxed text-sm sm:text-base">
                   <p>
-                    This Privacy Policy governs the manner in which <strong className="text-white">Earth Power</strong> (hereinafter referred to as &ldquo;Earth Power&rdquo;, &ldquo;Company&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) collects, processes, maintains, stores, and discloses information collected from users (each, a &ldquo;User&rdquo;) of our official mobile application (&ldquo;<strong className="text-white">Earth Power</strong>&rdquo; available on the Google Play Store) and our website located at{' '}
+                    This Privacy Policy governs the manner in which <strong className="text-white">Earth Power</strong> (hereinafter referred to as &ldquo;Earth Power&rdquo;, &ldquo;Company&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) collects, processes, maintains, stores, and discloses information collected from users (each, a &ldquo;User&rdquo;) of our official mobile application (&ldquo;<strong className="text-white">Earth Power Battery</strong>&rdquo; available on the Google Play Store) and our website located at{' '}
                     <Link href="https://earthpowerbattery.com" className="text-earth-neon-green hover:underline">
                       https://earthpowerbattery.com
                     </Link>.
@@ -301,7 +301,7 @@ export default function PrivacyPolicyPage() {
                 </div>
                 <div className="space-y-4 text-gray-300 leading-relaxed text-sm sm:text-base">
                   <p>
-                    In accordance with Google Play Developer Policies, we provide complete, transparent disclosures regarding why the Earth Power Android application requests specific system permissions:
+                    In accordance with Google Play Developer Policies, we provide complete, transparent disclosures regarding why the Earth Power Battery Android application requests specific system permissions:
                   </p>
 
                   <div className="space-y-4">
@@ -377,7 +377,7 @@ export default function PrivacyPolicyPage() {
                     </div>
                   </div>
                   <p className="text-xs text-gray-400 mt-2">
-                    You can grant or revoke these permissions at any time through your Android device settings (<span className="text-gray-300">Settings &gt; Apps &gt; Earth Power &gt; Permissions</span>).
+                    You can grant or revoke these permissions at any time through your Android device settings (<span className="text-gray-300">Settings &gt; Apps &gt; Earth Power Battery &gt; Permissions</span>).
                   </p>
                 </div>
               </section>
@@ -566,7 +566,7 @@ export default function PrivacyPolicyPage() {
                       <div>
                         <strong className="text-white block mb-1">Option 1: In-App Deletion</strong>
                         <p className="text-gray-400">
-                          Within the Earth Power mobile app, navigate to <code className="px-2 py-0.5 rounded bg-white/10 text-earth-neon-green">Settings &gt; Profile &gt; Delete Account &amp; Erase Data</code>. Confirm the prompt to initiate the immediate purge of your credentials and profile.
+                          Within the Earth Power Battery mobile app, navigate to <code className="px-2 py-0.5 rounded bg-white/10 text-earth-neon-green">Settings &gt; Profile &gt; Delete Account &amp; Erase Data</code>. Confirm the prompt to initiate the immediate purge of your credentials and profile.
                         </p>
                       </div>
 
@@ -610,7 +610,7 @@ export default function PrivacyPolicyPage() {
                 </div>
                 <div className="space-y-4 text-gray-300 leading-relaxed text-sm sm:text-base">
                   <p>
-                    Earth Power&apos;s mobile app and products are industrial, commercial, and adult consumer energy storage systems designed for vehicle owners, fleet operators, dealers, and technicians.
+                    The Earth Power Battery mobile app and related energy storage products are industrial, commercial, and adult consumer systems designed for vehicle owners, fleet operators, dealers, and technicians.
                   </p>
                   <p>
                     Our services are not intended for use by children under the age of 13 (or under 16 in certain international jurisdictions). We do not knowingly solicit or collect personal identifiable information from children. If we discover that a child under 13 has provided personal data to us, we will take immediate steps to delete such information from our records. If you are a parent or guardian and believe your child has submitted data to us, please notify us immediately at <a href="mailto:earthpowerjourney@gmail.com" className="text-earth-neon-green hover:underline">earthpowerjourney@gmail.com</a>.

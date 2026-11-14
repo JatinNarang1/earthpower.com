@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Terms of Service - Earth Power',
     description:
-      'Terms of Service governing the use of Earth Power website and mobile companion applications.',
+      'Terms of Service governing the use of Earth Power website and Earth Power Battery mobile applications.',
     url: 'https://earthpowerbattery.com/terms',
   },
 }
@@ -79,7 +79,7 @@ export default function TermsOfServicePage() {
                 Use of Mobile Application & Telemetry
               </h2>
               <p>
-                The Earth Power companion mobile application is designed to interface via Bluetooth Low Energy (BLE) with compatible Earth Power Lithium Iron Phosphate (LiFePO4) battery packs and Battery Management Systems (BMS).
+                The Earth Power Battery mobile application is designed to interface via Bluetooth Low Energy (BLE) with compatible Earth Power Lithium Iron Phosphate (LiFePO4) battery packs and Battery Management Systems (BMS).
               </p>
               <ul className="list-disc list-inside space-y-2 text-sm text-gray-400 ml-2">
                 <li>You agree to use the application solely for monitoring and diagnostics of your authorized Earth Power hardware.</li>
