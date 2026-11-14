@@ -65,7 +65,7 @@ export default function PrivacyPolicyPage() {
           </h1>
 
           <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
-            Welcome to <strong className="text-white">Earth Power</strong>. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our official mobile application (&ldquo;<strong className="text-white">Earth Power Battery</strong>&rdquo;) on <strong className="text-white">iOS (Apple App Store)</strong>, <strong className="text-white">Android (Google Play Store)</strong>, and our web services.
+            Welcome to <strong className="text-white">Earth Power Battery</strong>. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our official mobile application (&ldquo;<strong className="text-white">Earth Power Battery</strong>&rdquo;) on <strong className="text-white">iOS (Apple App Store)</strong>, <strong className="text-white">Android (Google Play Store)</strong>, and our web services.
           </p>
 
           {/* Compliance & Meta Badges */}
@@ -192,7 +192,7 @@ export default function PrivacyPolicyPage() {
                   <Building className="w-5 h-5 mr-2" /> Application Developer &amp; Data Controller:
                 </p>
                 <p className="text-sm leading-relaxed mt-2 text-gray-300">
-                  <strong className="text-white">Entity:</strong> Earth Power<br />
+                  <strong className="text-white">Entity:</strong> Earth Power Battery<br />
                   <strong className="text-white">Application Name:</strong> Earth Power Battery (iOS &amp; Android)<br />
                   <strong className="text-white">Registered Address:</strong> G.F. 960, Block G, DSIDC Industrial Area Narela, New Delhi – 110040, India<br />
                   <strong className="text-white">Official Contact Email:</strong> earthpowerjourney@gmail.com<br />
@@ -242,7 +242,7 @@ export default function PrivacyPolicyPage() {
                       Battery Telemetry &amp; BMS Diagnostics Data
                     </h3>
                     <p className="text-sm text-gray-400">
-                      To provide live telemetry instrumentation and safety monitoring, the App communicates with the on-board Battery Management System (BMS) of your Earth Power LFP battery pack:
+                      To provide live telemetry instrumentation and safety monitoring, the App communicates with the on-board Battery Management System (BMS) of your Earth Power Battery LFP battery pack:
                     </p>
                     <ul className="list-disc list-inside space-y-1.5 text-sm text-gray-300 ml-2">
                       <li>Total battery pack voltage (V), individual cell voltages, and cell balance metrics.</li>
@@ -298,7 +298,7 @@ export default function PrivacyPolicyPage() {
                       },
                       {
                         title: 'Account & Warranty Management',
-                        desc: 'Authenticate genuine Earth Power hardware, track warranty coverage, process claims, and maintain service records.',
+                        desc: 'Authenticate genuine Earth Power Battery hardware, track warranty coverage, process claims, and maintain service records.',
                       },
                       {
                         title: 'Technical Support & Troubleshooting',
@@ -336,7 +336,7 @@ export default function PrivacyPolicyPage() {
 
                 <div className="space-y-4 text-gray-300 leading-relaxed text-sm sm:text-base">
                   <div className="p-4 rounded-xl bg-earth-green-500/10 border border-earth-green-500/30 text-white font-medium">
-                    🛡️ <strong className="text-earth-neon-green">Strict Zero-Sale Guarantee:</strong> Earth Power does not sell, rent, monetize, or trade your personal information or battery telemetry with third parties or data brokers.
+                    🛡️ <strong className="text-earth-neon-green">Strict Zero-Sale Guarantee:</strong> Earth Power Battery does not sell, rent, monetize, or trade your personal information or battery telemetry with third parties or data brokers.
                   </div>
 
                   <p>
@@ -347,7 +347,7 @@ export default function PrivacyPolicyPage() {
                       <strong className="text-gray-200">Third-Party Service Providers:</strong> We may share your information with trusted infrastructure providers that perform services on our behalf, including cloud database hosting, server infrastructure, data analysis, email/SMS delivery, and customer service. All providers are bound by strict confidentiality obligations.
                     </li>
                     <li>
-                      <strong className="text-gray-200">Authorized Dealers &amp; Service Centers:</strong> If you request on-site battery maintenance, inspection, or warranty replacement, your contact information and battery serial details may be shared with your local authorized Earth Power technician.
+                      <strong className="text-gray-200">Authorized Dealers &amp; Service Centers:</strong> If you request on-site battery maintenance, inspection, or warranty replacement, your contact information and battery serial details may be shared with your local authorized Earth Power Battery technician.
                     </li>
                     <li>
                       <strong className="text-gray-200">Legal Requirements &amp; Safety:</strong> If required by law, subpoena, court order, or to prevent fraudulent activity or imminent bodily harm, we may disclose your information to lawful authorities.
@@ -394,7 +394,7 @@ export default function PrivacyPolicyPage() {
                         <span>Protected BLE Handshakes</span>
                       </div>
                       <p className="text-xs text-gray-400">
-                        Bluetooth communication with the Earth Power BMS uses authenticated device handshakes to prevent unauthorized tampering.
+                        Bluetooth communication with the Earth Power Battery BMS uses authenticated device handshakes to prevent unauthorized tampering.
                       </p>
                     </div>
                     <div className="p-4 rounded-xl bg-white/[0.03] border border-white/5">
@@ -519,7 +519,7 @@ export default function PrivacyPolicyPage() {
                             iOS: <code>NSBluetoothAlwaysUsageDescription</code> / Android: <code>BLUETOOTH_SCAN, BLUETOOTH_CONNECT</code>
                           </p>
                           <p className="text-sm text-gray-400 mt-1">
-                            <strong>Why we need it:</strong> Required to scan for, discover, securely pair with, and stream real-time operational telemetry from your Earth Power LFP battery BMS.
+                            <strong>Why we need it:</strong> Required to scan for, discover, securely pair with, and stream real-time operational telemetry from your Earth Power Battery BMS.
                           </p>
                         </div>
                       </div>
@@ -542,7 +542,7 @@ export default function PrivacyPolicyPage() {
                             <strong>Operating System Context:</strong> On Android operating systems, Bluetooth Low Energy (BLE) scanning APIs are categorized under location permissions by the OS.
                           </p>
                           <p className="text-sm text-earth-neon-green/90 mt-1.5 font-medium">
-                            <strong>Our Commitment:</strong> Earth Power does NOT track, log, or sell your physical GPS location or journey routes. Location access is strictly used to trigger Android BLE hardware scanning.
+                            <strong>Our Commitment:</strong> Earth Power Battery does NOT track, log, or sell your physical GPS location or journey routes. Location access is strictly used to trigger Android BLE hardware scanning.
                           </p>
                         </div>
                       </div>
@@ -620,7 +620,7 @@ export default function PrivacyPolicyPage() {
                         Data Used to Track You
                       </h4>
                       <p className="text-xs text-gray-400">
-                        <strong className="text-earth-neon-green">None.</strong> Earth Power does NOT track users across apps and websites owned by other companies for advertising purposes.
+                        <strong className="text-earth-neon-green">None.</strong> Earth Power Battery does NOT track users across apps and websites owned by other companies for advertising purposes.
                       </p>
                     </div>
 
@@ -695,7 +695,7 @@ export default function PrivacyPolicyPage() {
 
                 <div className="space-y-4 text-gray-300 leading-relaxed text-sm sm:text-base">
                   <p>
-                    Earth Power&apos;s mobile app and battery systems are engineered for commercial, industrial, and adult consumer electric mobility applications (vehicle owners, fleet operators, dealers, and technicians).
+                    The Earth Power Battery mobile app and battery systems are engineered for commercial, industrial, and adult consumer electric mobility applications (vehicle owners, fleet operators, dealers, and technicians).
                   </p>
                   <p>
                     Our services are not intended for use by children under the age of 13 (or under 16 where applicable). We do not knowingly solicit or collect personal identifiable information from children. If we discover that a child under 13 has provided personal data to us, we take immediate steps to permanently delete such information. If you believe your child has submitted data to us, please notify us immediately at <a href="mailto:earthpowerjourney@gmail.com" className="text-earth-neon-green hover:underline">earthpowerjourney@gmail.com</a>.
@@ -740,7 +740,7 @@ export default function PrivacyPolicyPage() {
                     <div className="flex items-start space-x-3">
                       <Building className="w-5 h-5 text-earth-neon-green flex-shrink-0 mt-1" />
                       <div>
-                        <h4 className="font-bold text-white text-base">Earth Power Support</h4>
+                        <h4 className="font-bold text-white text-base">Earth Power Battery Support</h4>
                         <p className="text-sm text-gray-400">Attn: Privacy &amp; Data Protection Team</p>
                       </div>
                     </div>
