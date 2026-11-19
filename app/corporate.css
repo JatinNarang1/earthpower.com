@@ -29,7 +29,7 @@ html{-webkit-text-size-adjust:100%;scroll-padding-top:84px}
 html:not(.lenis){scroll-behavior:smooth}
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-stopped{overflow:hidden}
-html body{font-family:var(--f-b);font-size:1rem;line-height:1.65;color:var(--tx);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html body{font-family:var(--f-b);font-size:1rem;line-height:1.65;color:var(--tx);background:var(--white);-webkit-font-smoothing:antialiased}
 img,svg{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button,input,select,textarea{font:inherit;color:inherit}
@@ -838,9 +838,23 @@ main:focus{outline:0}
 .nav>.btn{justify-self:end}
 @media (max-width:1280px){
   .nav{grid-template-columns:1fr auto}
+  .nav .menu,.nav>.btn{display:none}
   .nav .burger{margin-left:0;justify-self:end}
 }
 
 /* 3D hero loader (no static image is ever shown) */
 .hero3d .h3-loader{position:absolute;left:50%;top:46%;width:44px;height:44px;margin:-22px 0 0 -22px;z-index:1;border-radius:50%;border:2px solid rgba(74,222,128,.18);border-top-color:var(--signal);animation:h3spin .9s linear infinite}
 @keyframes h3spin{to{transform:rotate(360deg)}}
+
+/* ---------- responsive hardening ---------- */
+.pnav{flex-wrap:wrap}
+.pnav a{min-width:0}
+.pnav a b{overflow-wrap:anywhere}
+@media (max-width:640px){
+  .pnav{display:grid;grid-template-columns:1fr 1fr;gap:16px 12px}
+  .pnav a:nth-child(2){grid-column:1/-1;order:3;text-align:center}
+  .pd .sp4 b{white-space:normal}
+  .hero3d .h3-cap{flex-wrap:wrap}
+}
+@media (max-width:960px){.hero3d{aspect-ratio:1/.92;min-height:0}}
+@media (max-width:480px){.hero3d{aspect-ratio:1/1.02}}
