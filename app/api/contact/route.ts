@@ -11,6 +11,9 @@ interface ContactData {
   message: string
 }
 
+const esc = (v: string) =>
+  String(v).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] as string))
+
 export async function POST(request: NextRequest) {
   console.log('API /api/contact called')
 
@@ -82,16 +85,17 @@ export async function POST(request: NextRequest) {
     // Email Content
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: 'earthpowerjourney@gmail.com', // Send to yourself
-      subject: `New Contact Form Submission from ${data.name}`,
+      replyTo: data.email,
+      to: process.env.CONTACT_TO || 'contact@earthpowerbattery.com', // company inbox (override with CONTACT_TO)
+      subject: `${data.businessType === 'Warranty Registration' ? 'New Warranty Registration' : 'New Contact Form Submission'} from ${data.name}`,
       html: `
         <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${data.name}</p>
-        <p><strong>Phone:</strong> ${data.phone}</p>
-        <p><strong>Email:</strong> ${data.email}</p>
-        <p><strong>Business Type:</strong> ${data.businessType}</p>
+        <p><strong>Name:</strong> ${esc(data.name)}</p>
+        <p><strong>Phone:</strong> ${esc(data.phone)}</p>
+        <p><strong>Email:</strong> ${esc(data.email)}</p>
+        <p><strong>Business Type:</strong> ${esc(data.businessType)}</p>
         <p><strong>Message:</strong></p>
-        <p>${data.message}</p>
+        <p>${esc(data.message).split('\n').join('<br>')}</p>
         <br>
         <p><small>Received on ${new Date().toLocaleString('en-IN')}</small></p>
       `,

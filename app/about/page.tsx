@@ -1,307 +1,97 @@
-'use client'
+import type { Metadata } from 'next'
+import { PageHero, Reveal, SectionHead } from '@/components/ep/ui'
+import { SITE } from '@/lib/site'
 
-import { motion } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
-import {
-  Target, Eye, Heart, Shield, Users, Award,
-  TrendingUp, Leaf, Battery, CheckCircle,
-  ArrowRight, Sparkles, Zap, Globe
-} from 'lucide-react'
-import Link from 'next/link'
-import { Canvas } from '@react-three/fiber'
-import FloatingIcons3D from '@/components/FloatingIcons3D'
-import ParticlesBackground from '@/components/ParticlesBackground'
-
-
-
-const values = [
-  {
-    icon: Shield,
-    title: 'Safety First',
-    description: 'Every battery undergoes rigorous testing to ensure absolute safety'
-  },
-  {
-    icon: Leaf,
-    title: 'Sustainability',
-    description: 'Committed to eco-friendly solutions for a greener tomorrow'
-  },
-  {
-    icon: TrendingUp,
-    title: 'Innovation',
-    description: 'Continuous R&D to deliver cutting-edge battery technology'
-  },
-  {
-    icon: Users,
-    title: 'Customer Focus',
-    description: 'Your success drives our innovation and service excellence'
-  },
-]
-
-const advantages = [
-  {
-    category: 'Performance Advantages',
-    items: [
-      '3-5 times longer cycle life than lead-acid',
-      'Consistent power output throughout discharge',
-      'Fast charging capability (2-3 hours)',
-      'Higher energy density and efficiency',
-      'Superior performance in extreme temperatures'
-    ]
-  },
-  {
-    category: 'Safety Advantages',
-    items: [
-      'No thermal runaway risk',
-      'Non-toxic and environmentally friendly',
-      'No explosion or fire hazards',
-      'Built-in Battery Management System',
-      'Stable chemistry even when damaged'
-    ]
-  },
-  {
-    category: 'Economic Advantages',
-    items: [
-      'Lower total cost of ownership',
-      'Zero maintenance required',
-      'Reduced replacement frequency',
-      'Lower electricity consumption',
-      'Higher resale value'
-    ]
-  }
-]
+export const metadata: Metadata = {
+  title: 'About Us',
+  description: 'Earth Power company profile, mission, vision, core values and quality testing. Narela, New Delhi.',
+}
 
 export default function AboutPage() {
-  const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 })
-  const [storyRef, storyInView] = useInView({ triggerOnce: true, threshold: 0.1 })
-  const [missionRef, missionInView] = useInView({ triggerOnce: true, threshold: 0.1 })
-  const [valuesRef, valuesInView] = useInView({ triggerOnce: true, threshold: 0.1 })
-
-  const [advantagesRef, advantagesInView] = useInView({ triggerOnce: true, threshold: 0.1 })
-
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center justify-center bg-gradient-to-br from-earth-charcoal-900 via-earth-green-900 to-earth-charcoal-900 overflow-hidden">
-        {/* 3D Background */}
-        <div className="absolute inset-0 z-0 opacity-[0.18]">
-          <Canvas camera={{ position: [0, 0, 15], fov: 50 }}>
-            <ambientLight intensity={0.5} />
-            <FloatingIcons3D />
-            <ParticlesBackground />
-          </Canvas>
-        </div>
+      <PageHero
+        crumbs={[{ label: 'About Us' }]}
+        title={<>Engineered for India, <em>built for the future</em></>}
+        lead="Pioneering India's transition to sustainable electric mobility through advanced LFP battery technology and unwavering commitment to excellence."
+      />
 
-        <div className="absolute inset-0 bg-[repeating-linear-gradient(135deg,rgba(53,189,56,0.05)_0px,rgba(53,189,56,0.05)_1px,transparent_1px,transparent_30px)] opacity-30 z-[1]" />
-
-        <div className="container-custom relative z-10 pt-20 text-center">
-          <motion.div
-            ref={heroRef}
-            initial={{ opacity: 0, y: 30 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-display text-white mb-6">
-              About <span className="gradient-text">Earth Power</span>
-            </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Pioneering India's transition to sustainable electric mobility through
-              advanced LFP battery technology and unwavering commitment to excellence.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* What We Stand For Section */}
-      <section className="section-padding bg-white">
-        <div className="container-custom">
-          <motion.div
-            ref={storyRef}
-            initial={{ opacity: 0, y: 30 }}
-            animate={storyInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto"
-          >
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold font-display mb-4">
-                What We <span className="gradient-text">Stand For</span>
-              </h2>
+      <section className="sec">
+        <div className="wrap">
+          <div className="intro">
+            <div>
+              <div className="eyebrow">Company profile</div>
+              <h2>Who we <span className="hl">are</span></h2>
             </div>
-
-            <div className="prose prose-lg max-w-none">
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="bg-gradient-to-br from-earth-green-50 to-white p-8 rounded-2xl border border-earth-green-100">
-                  <Globe className="w-12 h-12 text-earth-green-500 mb-4" />
-                  <h3 className="text-2xl font-bold mb-4">Our Purpose</h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Earth Power exists to accelerate India's transition to clean energy.
-                    We believe that sustainable transportation shouldn't be a luxury but a
-                    standard, accessible to every Indian. Our LFP batteries are designed to
-                    make electric mobility safer, more reliable, and economically viable for all.
-                  </p>
-                </div>
-
-                <div className="bg-gradient-to-br from-earth-green-50 to-white p-8 rounded-2xl border border-earth-green-100">
-                  <Zap className="w-12 h-12 text-earth-green-500 mb-4" />
-                  <h3 className="text-2xl font-bold mb-4">Our Promise</h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Every Earth Power battery carries our promise of uncompromised quality,
-                    safety, and performance. We stand behind our products with comprehensive
-                    warranties, 24/7 support, and a commitment to continuous innovation that
-                    keeps you ahead of the curve.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+            <Reveal className="body">
+              <p className="big">Earth Power is building the foundation for India&apos;s sustainable transportation and energy-storage future, one cell at a time.</p>
+              <p>Earth Power emerged from a vision to revolutionize India&apos;s energy storage landscape. We recognized the critical need for safer, more efficient battery solutions that could withstand our unique environmental challenges while powering the electric mobility revolution.</p>
+              <p>Today, we&apos;re not just manufacturing batteries – we&apos;re building the foundation for India&apos;s sustainable transportation future, one cell at a time.</p>
+            </Reveal>
+          </div>
+          <Reveal className="dl2" >
+            <div><small>Company</small><b>{SITE.legalName}</b></div>
+            <div><small>Registered address</small><b>{SITE.address}</b></div>
+            <div><small>Email</small><b><a href={`mailto:${SITE.email}`}>{SITE.email}</a></b></div>
+            <div><small>Phone</small><b><a href={SITE.phoneHref}>{SITE.phone}</a></b></div>
+            <div><small>Business hours</small><b>Sunday – Friday · 9:00 AM – 6:00 PM</b></div>
+            <div><small>Website</small><b>earthpowerbattery.com</b></div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Mission, Vision, Values Section */}
-      <section className="section-padding bg-gray-50">
-        <div className="container-custom">
-          <motion.div
-            ref={missionRef}
-            initial={{ opacity: 0, y: 30 }}
-            animate={missionInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold font-display mb-4">
-                Mission, Vision & <span className="gradient-text">Values</span>
-              </h2>
-            </div>
-
-            <div className="grid lg:grid-cols-3 gap-8 mb-12">
-              {/* Mission */}
-              <div className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow">
-                <div className="w-16 h-16 bg-earth-green-500 rounded-2xl flex items-center justify-center mb-6">
-                  <Target className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold mb-4 text-earth-charcoal-800">Our Mission</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  To revolutionize India's energy storage landscape with cutting-edge LFP battery
-                  solutions that empower sustainable electric mobility, making it accessible, safe,
-                  and economically viable for every Indian.
-                </p>
-              </div>
-
-              {/* Vision */}
-              <div className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow">
-                <div className="w-16 h-16 bg-earth-green-500 rounded-2xl flex items-center justify-center mb-6">
-                  <Eye className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold mb-4 text-earth-charcoal-800">Our Vision</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  To become India's most trusted name in advanced battery technology, leading the
-                  charge towards a carbon-neutral future through relentless innovation, superior
-                  quality, and unwavering commitment to sustainability.
-                </p>
-              </div>
-
-              {/* Values Preview */}
-              <div className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow">
-                <div className="w-16 h-16 bg-earth-green-500 rounded-2xl flex items-center justify-center mb-6">
-                  <Heart className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold mb-4 text-earth-charcoal-800">Our Values</h3>
-                <ul className="space-y-2">
-                  <li className="flex items-center space-x-2">
-                    <CheckCircle className="w-5 h-5 text-earth-green-500" />
-                    <span className="text-gray-600">Safety Without Compromise</span>
-                  </li>
-                  <li className="flex items-center space-x-2">
-                    <CheckCircle className="w-5 h-5 text-earth-green-500" />
-                    <span className="text-gray-600">Innovation in Every Cell</span>
-                  </li>
-                  <li className="flex items-center space-x-2">
-                    <CheckCircle className="w-5 h-5 text-earth-green-500" />
-                    <span className="text-gray-600">Sustainability at Core</span>
-                  </li>
-                  <li className="flex items-center space-x-2">
-                    <CheckCircle className="w-5 h-5 text-earth-green-500" />
-                    <span className="text-gray-600">Customer Success First</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Detailed Values */}
-            <motion.div
-              ref={valuesRef}
-              initial={{ opacity: 0, y: 30 }}
-              animate={valuesInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-            >
-              {values.map((value, index) => (
-                <div
-                  key={index}
-                  className="group bg-white rounded-xl p-6 hover:bg-earth-green-50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-                >
-                  <value.icon className="w-10 h-10 text-earth-green-500 mb-4 group-hover:scale-110 transition-transform" />
-                  <h4 className="text-lg font-bold mb-2">{value.title}</h4>
-                  <p className="text-gray-600 text-sm">{value.description}</p>
-                </div>
-              ))}
-            </motion.div>
-          </motion.div>
+      <section className="sec dark" id="mission">
+        <div className="wrap">
+          <div className="head"><div><div className="eyebrow">Mission &amp; Vision</div><h2>What We <span className="hl">Stand For</span></h2></div></div>
+          <div className="mv">
+            <div><small className="mono">Our Mission</small><p>To revolutionize India&apos;s energy storage landscape with cutting-edge LFP battery solutions that empower sustainable electric mobility, making it accessible, safe, and economically viable for every Indian.</p></div>
+            <div><small className="mono">Our Vision</small><p>To become India&apos;s most trusted name in advanced battery technology, leading the charge towards a carbon-neutral future through relentless innovation, superior quality, and unwavering commitment to sustainability.</p></div>
+          </div>
+          <div className="pp">
+            <div><h3>Our Purpose</h3><p>Earth Power exists to accelerate India&apos;s transition to clean energy. We believe that sustainable transportation shouldn&apos;t be a luxury but a standard, accessible to every Indian. Our LFP batteries are designed to make electric mobility safer, more reliable, and economically viable for all.</p></div>
+            <div><h3>Our Promise</h3><p>Every Earth Power battery carries our promise of uncompromised quality, safety, and performance. We stand behind our products with comprehensive warranties, 24/7 support, and a commitment to continuous innovation that keeps you ahead of the curve.</p></div>
+          </div>
         </div>
       </section>
 
+      <section className="sec">
+        <div className="wrap">
+          <div className="head"><div><div className="eyebrow">Core values</div><h2>How we <span className="hl">work</span></h2></div></div>
+          <div className="vals">
+            {[
+              ['Safety First', 'Safety Without Compromise', 'Every battery undergoes rigorous testing to ensure absolute safety'],
+              ['Sustainability', 'Sustainability at Core', 'Committed to eco-friendly solutions for a greener tomorrow'],
+              ['Innovation', 'Innovation in Every Cell', 'Continuous R&D to deliver cutting-edge battery technology'],
+              ['Customer Focus', 'Customer Success First', 'Your success drives our innovation and service excellence'],
+            ].map(([t, s, d], i) => (
+              <Reveal key={t} delay={i * 70}>
+                <small>{String(i + 1).padStart(2, '0')} / VALUE</small>
+                <h3>{t}</h3><em>{s}</em><p>{d}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      {/* Why Earth Power Section */}
-      <section className="section-padding bg-white">
-        <div className="container-custom">
-          <motion.div
-            ref={advantagesRef}
-            initial={{ opacity: 0, y: 30 }}
-            animate={advantagesInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold font-display mb-4">
-                Why Choose <span className="gradient-text">Earth Power?</span>
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Experience the advantages of advanced LFP technology combined with our
-                commitment to excellence and customer success.
-              </p>
-            </div>
+      <section className="sec paper" id="quality">
+        <div className="wrap">
+          <SectionHead eyebrow="Quality testing" title={<>Reliability and safety, <span className="hl">by design</span></>} lead="Every Earth Power battery undergoes rigorous testing to ensure absolute safety. The points below are limited to what Earth Power's own documents state." />
+          <div className="q3">
+            <Reveal><small>01</small><h3>Rigorous testing</h3><p>“Every battery undergoes rigorous testing to ensure absolute safety” — Earth Power&apos;s published commitment under Safety First.</p></Reveal>
+            <Reveal delay={80}><small>02</small><h3>Protected by a smart BMS</h3><p>Every model includes a Bluetooth-enabled BMS (JK BMS with active balancer, or JBD BMS) that reports overvoltage, undervoltage, overcurrent, short-circuit and high-temperature protection trips.</p></Reveal>
+            <Reveal delay={160}><small>03</small><h3>Defined operating limits</h3><p>Each datasheet specifies a voltage range, peak charge and discharge current, and an operating temperature of −20 °C to 60 °C, to be checked before installation.</p></Reveal>
+          </div>
+        </div>
+      </section>
 
-            <div className="grid lg:grid-cols-3 gap-8">
-              {advantages.map((category, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={advantagesInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 border border-gray-200 hover:border-earth-green-300 transition-colors"
-                >
-                  <Battery className="w-10 h-10 text-earth-green-500 mb-4" />
-                  <h3 className="text-2xl font-bold mb-6 text-earth-charcoal-800">{category.category}</h3>
-                  <ul className="space-y-3">
-                    {category.items.map((item, itemIndex) => (
-                      <li key={itemIndex} className="flex items-start space-x-3">
-                        <CheckCircle className="w-5 h-5 text-earth-green-500 mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-600">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* CTA */}
-            <div className="text-center mt-12">
-              <Link
-                href="/products"
-                className="inline-flex items-center px-8 py-4 bg-earth-green-500 text-white font-semibold rounded-full hover:bg-earth-green-600 transition-colors group"
-              >
-                Explore Our Products
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-          </motion.div>
+      <section className="sec">
+        <div className="wrap">
+          <SectionHead eyebrow="Capabilities" title={<>Engineering &amp; <span className="hl">support</span></>} lead="Experience the advantages of advanced LFP technology combined with our commitment to excellence and customer success." />
+          <div className="why3">
+            <Reveal><small>01</small><h3>Eight LiFePO4 models</h3><ul><li>12.8 V, 25.6 V, 51.2 V and 96 V</li><li>1.280 kWh to 16.076 kWh</li><li>Datasheet for every model</li><li>Five-year warranty</li></ul></Reveal>
+            <Reveal delay={80}><small>02</small><h3>Battery intelligence</h3><ul><li>Bluetooth BMS on every model</li><li>Active balancing (JK BMS models)</li><li>Parallel communication up to 15 batteries (EP-series)</li><li>EarthPower customer &amp; dealer apps</li></ul></Reveal>
+            <Reveal delay={160}><small>03</small><h3>Support</h3><ul><li>Expert consultation</li><li>Response to enquiries within 24 hours</li><li>24/7 email support available</li><li>Facility visits at Narela, Sun–Fri 9:00 AM – 6:00 PM</li></ul></Reveal>
+          </div>
         </div>
       </section>
     </>

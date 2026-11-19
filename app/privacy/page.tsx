@@ -174,10 +174,10 @@ export default function PrivacyPolicyPage() {
                     Need help or want to request account deletion?
                   </p>
                   <a
-                    href="mailto:earthpowerjourney@gmail.com?subject=Account%20and%20Data%20Deletion%20Request"
+                    href="mailto:contact@earthpowerbattery.com?subject=Account%20and%20Data%20Deletion%20Request"
                     className="inline-flex items-center text-earth-neon-green hover:underline font-medium"
                   >
-                    <span>earthpowerjourney@gmail.com</span>
+                    <span>contact@earthpowerbattery.com</span>
                     <ExternalLink className="w-3 h-3 ml-1" />
                   </a>
                 </div>
@@ -194,8 +194,8 @@ export default function PrivacyPolicyPage() {
                 <p className="text-sm leading-relaxed mt-2 text-gray-300">
                   <strong className="text-white">Entity:</strong> Earth Power Battery<br />
                   <strong className="text-white">Application Name:</strong> Earth Power Battery (iOS &amp; Android)<br />
-                  <strong className="text-white">Registered Address:</strong> G.F. 960, Block G, DSIDC Industrial Area Narela, New Delhi – 110040, India<br />
-                  <strong className="text-white">Official Contact Email:</strong> earthpowerjourney@gmail.com<br />
+                  <strong className="text-white">Registered Address:</strong> G-960, DSIIDC Industrial Area Narela, New Delhi – 110040, India<br />
+                  <strong className="text-white">Official Contact Email:</strong> contact@earthpowerbattery.com<br />
                   <strong className="text-white">Helpline Phone:</strong> +011 41435047<br />
                   <strong className="text-white">Official Website:</strong>{' '}
                   <Link href="https://earthpowerbattery.com" className="text-earth-neon-green hover:underline">
@@ -471,11 +471,11 @@ export default function PrivacyPolicyPage() {
                           Email our privacy and support team directly at:
                         </p>
                         <a
-                          href="mailto:earthpowerjourney@gmail.com?subject=Account%20and%20Data%20Deletion%20Request"
+                          href="mailto:contact@earthpowerbattery.com?subject=Account%20and%20Data%20Deletion%20Request"
                           className="inline-flex items-center px-4 py-2 rounded-lg bg-earth-green-500 text-earth-charcoal-900 font-bold hover:bg-earth-neon-green transition-colors text-sm"
                         >
                           <Mail className="w-4 h-4 mr-2" />
-                          earthpowerjourney@gmail.com
+                          contact@earthpowerbattery.com
                         </a>
                         <p className="text-xs text-gray-400 mt-2">
                           Subject Line: <code className="text-earth-neon-green">&quot;Account &amp; Data Deletion Request&quot;</code> along with your registered phone number, email, or battery serial number.
@@ -679,7 +679,7 @@ export default function PrivacyPolicyPage() {
                     </li>
                   </ul>
                   <p className="text-xs text-gray-400">
-                    To exercise any of these rights, please email us directly at <a href="mailto:earthpowerjourney@gmail.com" className="text-earth-neon-green hover:underline">earthpowerjourney@gmail.com</a>.
+                    To exercise any of these rights, please email us directly at <a href="mailto:contact@earthpowerbattery.com" className="text-earth-neon-green hover:underline">contact@earthpowerbattery.com</a>.
                   </p>
                 </div>
               </section>
@@ -698,7 +698,7 @@ export default function PrivacyPolicyPage() {
                     The Earth Power Battery mobile app and battery systems are engineered for commercial, industrial, and adult consumer electric mobility applications (vehicle owners, fleet operators, dealers, and technicians).
                   </p>
                   <p>
-                    Our services are not intended for use by children under the age of 13 (or under 16 where applicable). We do not knowingly solicit or collect personal identifiable information from children. If we discover that a child under 13 has provided personal data to us, we take immediate steps to permanently delete such information. If you believe your child has submitted data to us, please notify us immediately at <a href="mailto:earthpowerjourney@gmail.com" className="text-earth-neon-green hover:underline">earthpowerjourney@gmail.com</a>.
+                    Our services are not intended for use by children under the age of 13 (or under 16 where applicable). We do not knowingly solicit or collect personal identifiable information from children. If we discover that a child under 13 has provided personal data to us, we take immediate steps to permanently delete such information. If you believe your child has submitted data to us, please notify us immediately at <a href="mailto:contact@earthpowerbattery.com" className="text-earth-neon-green hover:underline">contact@earthpowerbattery.com</a>.
                   </p>
                 </div>
               </section>
@@ -748,7 +748,7 @@ export default function PrivacyPolicyPage() {
                     <div className="flex items-start space-x-3">
                       <MapPin className="w-5 h-5 text-earth-neon-green flex-shrink-0 mt-1" />
                       <p className="text-sm text-gray-300">
-                        G.F. 960, Block G, DSIDC Industrial Area Narela,<br />
+                        G-960, DSIIDC Industrial Area Narela,<br />
                         New Delhi – 110040, India
                       </p>
                     </div>
@@ -762,8 +762,8 @@ export default function PrivacyPolicyPage() {
 
                     <div className="flex items-center space-x-3">
                       <Mail className="w-5 h-5 text-earth-neon-green flex-shrink-0" />
-                      <a href="mailto:earthpowerjourney@gmail.com" className="text-sm text-earth-neon-green hover:underline">
-                        earthpowerjourney@gmail.com
+                      <a href="mailto:contact@earthpowerbattery.com" className="text-sm text-earth-neon-green hover:underline">
+                        contact@earthpowerbattery.com
                       </a>
                     </div>
                   </div>
