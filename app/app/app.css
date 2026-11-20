@@ -729,6 +729,119 @@
   text-decoration: underline;
 }
 
+/* ---------- FAQ Accordion (Clean, Modern, Responsive) ---------- */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 8px;
+  width: 100%;
+}
+.faq-row {
+  border-bottom: 1px solid #e8eaed;
+  transition: background-color 0.2s ease;
+}
+.faq-row:hover {
+  background-color: #fafbfa;
+}
+.faq-trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 8px;
+  text-align: left;
+  font-family: var(--f-d);
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: #202124;
+  gap: 16px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: none;
+  transition: color 0.2s ease;
+}
+.faq-trigger:hover {
+  color: #01875f;
+}
+.faq-trigger:focus-visible {
+  outline: 2px solid #01875f;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.faq-question-text {
+  flex: 1;
+  min-width: 0;
+}
+.faq-icon-wrapper {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  border-radius: 50%;
+  background: #f1f3f4;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease, transform 0.25s var(--ease);
+}
+.faq-trigger:hover .faq-icon-wrapper {
+  background: #e6f4ea;
+}
+.faq-chevron {
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  max-width: 16px !important;
+  max-height: 16px !important;
+  flex-shrink: 0 !important;
+  color: #5f6368;
+  display: block;
+  transition: transform 0.25s var(--ease), color 0.2s ease;
+}
+.faq-trigger:hover .faq-chevron {
+  color: #01875f;
+}
+.faq-row.open .faq-icon-wrapper {
+  background: #e6f4ea;
+}
+.faq-row.open .faq-chevron {
+  transform: rotate(180deg);
+  color: #01875f;
+}
+.faq-answer-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s var(--ease);
+}
+.faq-answer-collapse.expanded {
+  grid-template-rows: 1fr;
+}
+.faq-answer-inner {
+  overflow: hidden;
+}
+.faq-answer-inner p {
+  padding: 0 44px 18px 8px;
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: #5f6368;
+  margin: 0;
+}
+@media (max-width: 640px) {
+  .faq-trigger {
+    padding: 14px 4px;
+    font-size: 0.95rem;
+    gap: 12px;
+  }
+  .faq-answer-inner p {
+    padding: 0 4px 16px 4px;
+    font-size: 0.9rem;
+  }
+}
+
 /* Lightbox Modal (Full Screen) */
 .lightbox-modal {
   position: fixed;

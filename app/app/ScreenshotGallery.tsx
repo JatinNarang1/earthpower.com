@@ -103,7 +103,7 @@ export function ScreenshotGallery() {
             onClick={() => scroll('left')}
             aria-label="Scroll screenshots left"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ flexShrink: 0 }}>
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </button>
@@ -113,7 +113,7 @@ export function ScreenshotGallery() {
             onClick={() => scroll('right')}
             aria-label="Scroll screenshots right"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ flexShrink: 0 }}>
               <path d="M9 18l6-6-6-6" />
             </svg>
           </button>

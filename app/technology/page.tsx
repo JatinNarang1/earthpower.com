@@ -130,7 +130,7 @@ export default function TechnologyPage() {
             <Reveal><h3>System integration</h3><ul>{SYSTEM.map(([k, v]) => <li key={k}><b style={{ color: 'var(--tx)' }}>{k}:</b> {v}</li>)}</ul></Reveal>
           </div>
           <div className="hv" style={{ marginTop: 24 }}>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l10 18H2z" /><path d="M12 10v5M12 18h.01" /></svg>
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true" style={{ flexShrink: 0 }}><path d="M12 3l10 18H2z" /><path d="M12 10v5M12 18h.01" /></svg>
             <div>
               <h3>High-voltage DC · EPL961050S (96 V)</h3>
               <p>This battery operates at up to 106.5 V DC. Use insulated tools and suitable protective equipment, and isolate the battery before working on terminals or wiring. Use only with inverters, UPS or charge controllers rated for the 90.0 – 106.5 V window.</p>

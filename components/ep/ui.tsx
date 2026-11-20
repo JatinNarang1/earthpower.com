@@ -4,14 +4,38 @@ import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import type { Product } from '@/data/products'
 
-export const Arrow = () => (
-  <svg viewBox="0 0 24 24" aria-hidden="true">
+export const Arrow = ({ size = 16, className = '' }: { size?: number; className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    width={size}
+    height={size}
+    className={`ico-arrow ${className}`.trim()}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    style={{ flexShrink: 0 }}
+  >
     <path d="M5 12h14M13 6l6 6-6 6" />
   </svg>
 )
 
-export const DownloadIcon = () => (
-  <svg className="dl" viewBox="0 0 24 24" aria-hidden="true">
+export const DownloadIcon = ({ size = 16, className = '' }: { size?: number; className?: string }) => (
+  <svg
+    className={`dl ${className}`.trim()}
+    viewBox="0 0 24 24"
+    width={size}
+    height={size}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    style={{ flexShrink: 0 }}
+  >
     <path d="M12 3v12M7 11l5 5 5-5M4 21h16" />
   </svg>
 )

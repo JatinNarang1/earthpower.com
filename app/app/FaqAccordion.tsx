@@ -38,7 +38,7 @@ export function FaqAccordion() {
   }
 
   return (
-    <div className="faq-list">
+    <div className="faq-list" role="region" aria-label="Frequently Asked Questions">
       {FAQS.map((item, idx) => {
         const isOpen = openIdx === idx
         return (
@@ -48,17 +48,37 @@ export function FaqAccordion() {
               className="faq-trigger"
               onClick={() => toggle(idx)}
               aria-expanded={isOpen}
+              aria-controls={`faq-ans-${idx}`}
+              id={`faq-btn-${idx}`}
             >
-              <span>{item.q}</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <polyline points="6 9 12 15 18 9" />
-              </svg>
+              <span className="faq-question-text">{item.q}</span>
+              <span className="faq-icon-wrapper" aria-hidden="true">
+                <svg
+                  className="faq-chevron"
+                  viewBox="0 0 24 24"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </span>
             </button>
-            {isOpen && (
-              <div className="faq-answer">
+            <div
+              id={`faq-ans-${idx}`}
+              role="region"
+              aria-labelledby={`faq-btn-${idx}`}
+              className={`faq-answer-collapse ${isOpen ? 'expanded' : ''}`}
+            >
+              <div className="faq-answer-inner">
                 <p>{item.a}</p>
               </div>
-            )}
+            </div>
           </div>
         )
       })}

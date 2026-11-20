@@ -31,6 +31,7 @@ html.lenis,html.lenis body{height:auto}
 .lenis.lenis-stopped{overflow:hidden}
 html body{font-family:var(--f-b);font-size:1rem;line-height:1.65;color:var(--tx);background:var(--white);-webkit-font-smoothing:antialiased}
 img,svg{display:block;max-width:100%}
+.btn svg,.link svg,.logo svg,.util svg,.soc svg,.nl button svg,.show .pause svg,.hv svg,.ico,svg[width][height]{flex-shrink:0}
 a{color:inherit;text-decoration:none}
 button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer;background:none;border:0}
