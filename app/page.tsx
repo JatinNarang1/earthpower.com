@@ -99,33 +99,62 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ============ APP SECTION (change #8) ============ */}
+      {/* ============ APP SECTION ============ */}
       <section className="sec dark" id="app-home">
         <div className="wrap">
           <div className="appgrid">
             <div>
-              <div className="eyebrow">EarthPower app</div>
-              <h2 style={{ marginBottom: 22 }}>Monitor every battery, <span className="hl">over Bluetooth.</span></h2>
-              <p className="lead">Each model includes a Bluetooth-enabled BMS that connects to the EarthPower app for live monitoring of voltage, current, state of charge, cell voltages and temperature.</p>
+              <div className="eyebrow">EarthPower Mobile App</div>
+              <h2 style={{ marginBottom: 22 }}>
+                Monitor every battery, <span className="hl">over Bluetooth.</span>
+              </h2>
+              <p className="lead">
+                Each EarthPower LiFePO4 battery includes a Bluetooth-enabled BMS that pairs with the EarthPower Battery mobile app for live telemetry of voltage, current, state of charge, individual cell voltages, and thermal safety alarms.
+              </p>
               <ul className="chk">
-                {APP_FEATURES.map((f) => <li key={f}>{f}</li>)}
-              </ul>
-              <div className="cta-row" style={{ marginTop: 32 }}>
-                <Link href="/app" className="btn btn-primary">Customer &amp; Dealer apps <Arrow /></Link>
-              </div>
-            </div>
-            <Reveal className="panel">
-              <div className="panel-h mono"><span>Monitored over Bluetooth</span><b>BLE</b></div>
-              <ul className="tele">
-                {['Battery voltage (V)', 'Current (A)', 'State of charge (SoC %)', 'Individual cell voltages', 'Temperature'].map((t, i) => (
-                  <li key={t}><small>{String(i + 1).padStart(2, '0')}</small>{t}<i /></li>
+                {APP_FEATURES.map((f) => (
+                  <li key={f}>{f}</li>
                 ))}
               </ul>
-              <div className="trips">
-                <p className="mono">Fault alarms reported by the BMS</p>
-                <div>
-                  {['Overvoltage', 'Undervoltage', 'Overcurrent', 'Short-circuit', 'High-temperature'].map((t) => <span key={t}>{t}</span>)}
-                </div>
+              <div className="cta-row" style={{ marginTop: 32 }}>
+                <a
+                  href="https://pub-cc0109618c354dc782a659bd3b0589bb.r2.dev/earthpower-customer.apk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary"
+                  download="earthpower-customer.apk"
+                >
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true">
+                    <path d="M12 3v12M7 11l5 5 5-5M4 21h16" />
+                  </svg>
+                  Download APK (v1.0.4)
+                </a>
+                <Link href="/app" className="btn btn-outline dark">
+                  Explore App Listing <Arrow />
+                </Link>
+              </div>
+            </div>
+
+            <Reveal className="app-showcase-wrap">
+              <div className="app-showcase-glow" />
+              <div className="app-float-badge top-left">
+                <span className="app-float-pulse" />
+                <span><b>78% SOC</b> · 0.6 kW Discharging</span>
+              </div>
+              <div className="app-showcase-phone">
+                <div className="app-showcase-notch" />
+                <Image
+                  src="/app/screenshot-home-dark.jpg"
+                  alt="EarthPower Battery App Live Telemetry Dashboard"
+                  width={360}
+                  height={780}
+                  quality={90}
+                  priority
+                />
+              </div>
+              <div className="app-float-badge bottom-right">
+                <span className="mono" style={{ color: 'var(--signal)', fontSize: '0.74rem' }}>BLE 4.2+</span>
+                <span><b>16 Cells</b> · 30mV Delta</span>
               </div>
             </Reveal>
           </div>

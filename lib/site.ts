@@ -16,19 +16,21 @@ export const MAP_URL =
   encodeURIComponent('G-960, DSIIDC Industrial Area Narela, New Delhi – 110040')
 
 /**
- * App download links. No store URLs exist in the repository or supplied files, so none are invented.
- * Paste the real Play Store / App Store URLs here and the buttons on /app switch on automatically.
+ * App download links.
  */
-export const APP_LINKS: { customer: string; dealer: string } = {
-  customer: '',
+export const APP_LINKS = {
+  customer: 'https://pub-cc0109618c354dc782a659bd3b0589bb.r2.dev/earthpower-customer.apk',
   dealer: '',
-}
+  directApk: 'https://pub-cc0109618c354dc782a659bd3b0589bb.r2.dev/earthpower-customer.apk',
+  packageId: 'com.earthpowerbattery.customer_app',
+} as const
 
 export const NAV = [
   { name: 'Home', href: '/' },
   { name: 'Products', href: '/products' },
   { name: 'Technology', href: '/technology' },
   { name: 'About Us', href: '/about' },
+  { name: 'App', href: '/app' },
   { name: 'Warranty', href: '/warranty' },
   { name: 'FAQ', href: '/faq' },
   { name: 'Contact', href: '/contact' },

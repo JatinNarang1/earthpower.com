@@ -698,7 +698,22 @@ html:not(.js) .rv{opacity:1;transform:none}
 .need li span{font-family:var(--f-m);font-size:.7rem;color:var(--mut);text-transform:uppercase;letter-spacing:.08em;align-self:center}
 
 /* ---------- app ---------- */
-.appgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,96px);align-items:start}
+.appgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr);gap:clamp(32px,6vw,96px);align-items:center}
+.app-showcase-wrap{position:relative;display:flex;justify-content:center;align-items:center;padding:20px 0}
+.app-showcase-glow{position:absolute;width:320px;height:520px;background:radial-gradient(circle,rgba(74,222,128,.25) 0%,rgba(53,189,56,.08) 50%,transparent 75%);filter:blur(44px);pointer-events:none;z-index:0}
+.app-showcase-phone{position:relative;z-index:1;width:min(280px,80vw);aspect-ratio:9/19.5;border-radius:36px;background:#0d1a11;border:8px solid #162a1c;box-shadow:0 24px 50px -12px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.1),inset 0 0 0 1px rgba(255,255,255,.1);overflow:hidden}
+.app-showcase-notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:54px;height:12px;background:#08120a;border-radius:8px;z-index:10}
+.app-showcase-phone img{width:100%;height:100%;object-fit:cover;display:block}
+.app-float-badge{position:absolute;z-index:2;background:rgba(16,42,27,.9);border:1px solid rgba(74,222,128,.35);backdrop-filter:blur(8px);padding:8px 14px;border-radius:var(--r-2);color:#fff;font-size:.82rem;box-shadow:0 12px 28px -6px rgba(0,0,0,.5);display:flex;align-items:center;gap:8px;white-space:nowrap}
+.app-float-badge.top-left{top:12%;left:-16px}
+.app-float-badge.bottom-right{bottom:12%;right:-16px}
+.app-float-pulse{width:8px;height:8px;border-radius:50%;background:var(--signal);box-shadow:0 0 0 4px rgba(74,222,128,.25)}
+@media (max-width:960px){
+  .appgrid{grid-template-columns:1fr}
+  .app-showcase-wrap{margin-top:24px}
+  .app-float-badge.top-left{left:4px}
+  .app-float-badge.bottom-right{right:4px}
+}
 .apps2{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);background:var(--white);border-radius:var(--r-2)}
 .apps2>article{padding:clamp(26px,3.2vw,44px)}
 .apps2>article+article{border-left:1px solid var(--line)}
