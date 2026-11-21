@@ -874,3 +874,41 @@ main:focus{outline:0}
 }
 @media (max-width:960px){.hero3d{aspect-ratio:1/.92;min-height:0}}
 @media (max-width:480px){.hero3d{aspect-ratio:1/1.02}}
+
+/* ---------- privacy policy documents ---------- */
+.pol{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,8fr);gap:clamp(28px,5vw,72px);align-items:start}
+.pol-toc{position:sticky;top:104px;font-size:.9rem;max-height:calc(100vh - 128px);overflow:auto}
+.pol-toc h2{font-family:var(--f-m);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:500;margin-bottom:14px}
+.pol-toc ol{list-style:none;display:grid;gap:2px;border-left:1px solid var(--line)}
+.pol-toc a{display:flex;gap:10px;padding:7px 0 7px 14px;margin-left:-1px;border-left:2px solid transparent;color:var(--tx-2);line-height:1.35}
+.pol-toc a span{font-family:var(--f-m);font-size:.7rem;color:var(--brand-700);padding-top:2px}
+.pol-toc a:hover{color:var(--tx);border-color:var(--brand)}
+.pol-toc p{margin-top:22px}
+.pol-body{background:var(--white);border:1px solid var(--line);border-radius:var(--r-2);padding:clamp(24px,4vw,56px);min-width:0}
+.pol-sec{padding:30px 0;border-top:1px solid var(--line);scroll-margin-top:100px}
+.pol-sec:first-child{border-top:0;padding-top:0}
+.pol-sec:last-child{padding-bottom:0}
+body .pol-sec h2{font-size:clamp(1.25rem,2vw,1.55rem);display:flex;gap:14px;align-items:baseline;margin-bottom:16px;letter-spacing:-.01em}
+.pol-sec h2 span{font-family:var(--f-m);font-size:.78rem;font-weight:400;color:var(--brand-700)}
+body .pol-sec h3{font-size:1.02rem;margin:22px 0 8px}
+.pol-sec p{color:var(--tx-2);margin-bottom:12px;max-width:78ch;overflow-wrap:anywhere}
+.pol-sec ul{list-style:none;display:grid;gap:8px;margin:0 0 14px;max-width:78ch}
+.pol-sec li{position:relative;padding-left:20px;color:var(--tx-2);font-size:.96rem}
+.pol-sec li::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:1px;background:var(--brand-700)}
+.pol-contact{display:grid;border-top:1px solid var(--tx);margin:8px 0 14px;max-width:640px}
+.pol-contact>div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}
+.pol-contact dt{font-family:var(--f-m);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);padding-top:3px}
+.pol-contact dd{font-weight:600;overflow-wrap:anywhere}
+.pol-contact a:hover{color:var(--brand-700)}
+@media (max-width:960px){.pol{grid-template-columns:minmax(0,1fr)}.pol-toc{position:static;max-height:none;border:1px solid var(--line);background:var(--white);border-radius:var(--r-2);padding:18px 20px}.pol-toc ol{border-left:0;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}.pol-toc a{padding-left:0;border-left:0}}
+@media (max-width:640px){.pol-contact>div{grid-template-columns:1fr;gap:2px}}
+
+/* ---------- clickable app phone + zoom ---------- */
+button.app-phone-btn{cursor:zoom-in;padding:0;display:block;transition:transform .3s var(--ease),box-shadow .3s}
+button.app-phone-btn:hover{transform:translateY(-4px)}
+.app-phone-hint{position:absolute;left:50%;bottom:14px;z-index:3;translate:-50% 6px;opacity:0;transition:opacity .25s,translate .25s;background:rgba(11,31,20,.85);color:#fff;font-family:var(--f-m);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:var(--r);white-space:nowrap}
+button.app-phone-btn:hover .app-phone-hint,button.app-phone-btn:focus-visible .app-phone-hint{opacity:1;translate:-50% 0}
+.app-zoom{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:24px;background:rgba(5,14,9,.88);backdrop-filter:blur(6px);cursor:zoom-out}
+.app-zoom img{width:auto;height:auto;max-width:min(92vw,420px);max-height:90vh;object-fit:contain;border-radius:28px;box-shadow:0 30px 80px -20px rgba(0,0,0,.8);cursor:default}
+.app-zoom-close{position:absolute;top:16px;right:16px;width:44px;height:44px;border:1px solid var(--d-line);border-radius:50%;color:#fff;font-size:1.6rem;line-height:1;display:grid;place-items:center}
+.app-zoom-close:hover{border-color:var(--signal);color:var(--signal)}

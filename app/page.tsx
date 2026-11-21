@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import Hero3D from '@/components/ep/Hero3D'
+import AppPhone from '@/components/ep/AppPhone'
 import { Arrow, Reveal, SectionHead } from '@/components/ep/ui'
 import { PRODUCTS } from '@/data/products'
 import { ADV, APP_FEATURES, WHY3 } from '@/data/content'
@@ -141,17 +142,7 @@ export default function HomePage() {
                 <span className="app-float-pulse" />
                 <span><b>78% SOC</b> · 0.6 kW Discharging</span>
               </div>
-              <div className="app-showcase-phone">
-                <div className="app-showcase-notch" />
-                <Image
-                  src="/app/screenshot-home-dark.jpg"
-                  alt="EarthPower Battery App Live Telemetry Dashboard"
-                  width={360}
-                  height={780}
-                  quality={90}
-                  priority
-                />
-              </div>
+              <AppPhone src="/app/screenshot-home-dark.jpg" alt="EarthPower Battery App Live Telemetry Dashboard" />
               <div className="app-float-badge bottom-right">
                 <span className="mono" style={{ color: 'var(--signal)', fontSize: '0.74rem' }}>BLE 4.2+</span>
                 <span><b>16 Cells</b> · 30mV Delta</span>
