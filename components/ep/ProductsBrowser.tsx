@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
-import { PRODUCTS, VOLTAGE_GROUPS } from '@/data/products'
+import { CATEGORIES, PRODUCTS, type Category } from '@/data/products'
 import ProductCard from './ProductCard'
 import { Arrow, SectionHead } from './ui'
 
@@ -15,14 +15,14 @@ const ROWS: [string, (p: (typeof PRODUCTS)[number]) => React.ReactNode][] = [
   ['Cell configuration', (p) => p.cfg],
   ['BMS', (p) => p.bms],
   ['Specified voltage range', (p) => p.range],
-  ['Peak charging current', (p) => `${p.chg} A`],
-  ['Peak discharging current', (p) => `${p.dis} A`],
+  ['Charge current (peak / max. continuous)', (p) => `${p.chg} A`],
+  ['Discharge current (peak / max. continuous)', (p) => `${p.dis} A`],
+  ['Peak discharge (duration)', (p) => (p.peak ? p.peak : 'Not specified')],
   ['Parallel communication', (p) => (p.parallel ? `Up to ${p.parallel} batteries` : 'Not specified')],
   ['Parallel balancing current', (p) => (p.balancing ? `${p.balancing} A` : 'Not specified')],
   ['Operating temperature', () => '−20 °C to 60 °C'],
-  ['Product weight', (p) => p.weight],
-  ['Dimensions (L × W × H)', (p) => p.dimensions],
-  ['Warranty', () => '5 years'],
+  ['Product weight', (p) => p.weight ?? 'Not specified'],
+  ['Dimensions (L × W × H)', (p) => p.dimensions ?? 'Not specified'],
   [
     'Datasheet',
     (p) => (
@@ -32,13 +32,13 @@ const ROWS: [string, (p: (typeof PRODUCTS)[number]) => React.ReactNode][] = [
 ]
 
 export default function ProductsBrowser() {
-  const [group, setGroup] = useState('All')
+  const [group, setGroup] = useState<'All' | Category>('All')
   const [q, setQ] = useState('')
   const [sort, setSort] = useState<Sort>('v')
 
   const list = useMemo(() => {
     let L = PRODUCTS.filter(
-      (p) => (group === 'All' || p.group === group) && p.id.toLowerCase().includes(q.trim().toLowerCase()),
+      (p) => (group === 'All' || p.category === group) && p.id.toLowerCase().includes(q.trim().toLowerCase()),
     )
     if (sort === 'e') L = [...L].sort((a, b) => parseFloat(b.kwh) - parseFloat(a.kwh))
     if (sort === 'm') L = [...L].sort((a, b) => a.id.localeCompare(b.id))
@@ -50,16 +50,16 @@ export default function ProductsBrowser() {
       <div className="wrap">
         <div className="faqbar">
           <div className="filters" role="group" aria-label="Filter by nominal voltage">
-            {['All', ...VOLTAGE_GROUPS].map((g) => (
+            {[{ id: 'All' as const, label: 'All models' }, ...CATEGORIES].map((c) => (
               <button
-                key={g}
+                key={c.id}
                 type="button"
-                aria-pressed={group === g}
-                aria-selected={group === g}
-                onClick={() => setGroup(g)}
+                aria-pressed={group === c.id}
+                aria-selected={group === c.id}
+                onClick={() => setGroup(c.id)}
               >
-                {g === 'All' ? 'All models' : g}
-                <small>{g === 'All' ? PRODUCTS.length : PRODUCTS.filter((p) => p.group === g).length}</small>
+                {c.label}
+                <small>{c.id === 'All' ? PRODUCTS.length : PRODUCTS.filter((p) => p.category === c.id).length}</small>
               </button>
             ))}
           </div>
@@ -70,7 +70,7 @@ export default function ProductsBrowser() {
             </div>
             <label className="sr" htmlFor="psort">Sort products</label>
             <select id="psort" value={sort} onChange={(e) => setSort(e.target.value as Sort)}>
-              <option value="v">Sort: voltage</option>
+              <option value="v">Sort: catalogue order</option>
               <option value="e">Sort: energy (high–low)</option>
               <option value="m">Sort: model number</option>
             </select>
@@ -99,14 +99,14 @@ export default function ProductsBrowser() {
           <SectionHead
             eyebrow="Technical specifications"
             title="Compare all models"
-            lead="Every value is taken from the model's datasheet. Select a model number for its full page."
+            lead="Every value is taken from the model's datasheet; values a datasheet does not state are marked “Not specified”. Select a model number for its full page."
           />
           <div className="mx">
-            <table style={{ minWidth: 1180 }}>
+            <table style={{ minWidth: Math.max(760, 220 + list.length * 150) }}>
               <thead>
                 <tr>
                   <th scope="col">Specification</th>
-                  {PRODUCTS.map((p) => (
+                  {list.map((p) => (
                     <th scope="col" key={p.id}>
                       <Link href={`/products/${p.id}`}>{p.id}</Link>
                       <small>{p.voltage} · {p.capacity}</small>
@@ -118,7 +118,7 @@ export default function ProductsBrowser() {
                 {ROWS.map(([k, f]) => (
                   <tr key={k}>
                     <th scope="row">{k}</th>
-                    {PRODUCTS.map((p) => {
+                    {list.map((p) => {
                       const v = f(p)
                       return <td key={p.id} className={v === 'Not specified' ? 'na' : undefined}>{v}</td>
                     })}

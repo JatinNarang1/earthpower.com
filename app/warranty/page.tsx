@@ -6,7 +6,7 @@ import { SITE } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'Warranty & Registration',
-  description: 'Five-year warranty on every Earth Power LiFePO4 battery model, and online warranty registration.',
+  description: 'Earth Power battery warranty information and online warranty registration.',
 }
 
 export default function WarrantyPage() {
@@ -16,8 +16,8 @@ export default function WarrantyPage() {
         <div className="wrap">
           <div className="crumb"><Link href="/">Home</Link> / <b>Warranty</b></div>
           <div className="eyebrow" style={{ color: 'var(--signal)' }}>Warranty &amp; registration</div>
-          <h1 className="big5" style={{ maxWidth: 'none' }}><b>5</b><span>year warranty<br />on all eight models</span></h1>
-          <p className="lead" style={{ marginTop: 26 }}>Every Earth Power model datasheet specifies a five-year warranty period. Register your battery below so your purchase details are on record.</p>
+          <h1>Warranty <em>&amp; registration</em></h1>
+          <p className="lead">Earth Power batteries are backed by a manufacturer warranty. Register your battery below so your purchase details are on record.</p>
           <div className="cta-row">
             <a href="#register" className="btn btn-primary">Register your battery <Arrow /></a>
             <Link href="/products" className="btn btn-outline">Product datasheets</Link>
@@ -30,9 +30,9 @@ export default function WarrantyPage() {
           <SectionHead eyebrow="Warranty terms" title={<>What our documents <span className="hl">state</span></>} lead="These terms are quoted from Earth Power's published datasheets and Terms of Service. For the complete written warranty document, contact Earth Power." />
           <div className="wcols">
             <Reveal>
-              <h3>Coverage &amp; period</h3>
+              <h3>Coverage</h3>
               <ul className="note-list">
-                <li><b>Warranty period: 5 years.</b> Stated on the datasheet of all eight models.</li>
+                <li><b>Warranty coverage</b> is provided by Earth Power for its battery models.</li>
                 <li>“The warranty is governed by the applicable written warranty document” (every datasheet).</li>
                 <li>“Warranty terms are subject to the specific documentation provided with your purchase” (Terms of Service).</li>
                 <li>Earth Power stands behind its products with comprehensive warranties and 24/7 support.</li>

@@ -5,7 +5,7 @@ import { PageHero } from '@/components/ep/ui'
 export const metadata: Metadata = {
   title: 'Products',
   description:
-    'All eight Earth Power LiFePO4 models — 12.8 V to 96 V — with real photographs, model numbers, specifications and downloadable PDF datasheets.',
+    'The full Earth Power LiFePO4 range — energy storage, two-wheeler, high-voltage and rack systems from 12.8 V to 480 V — with model numbers, specifications and downloadable PDF datasheets.',
 }
 
 export default function ProductsPage() {
@@ -14,7 +14,7 @@ export default function ProductsPage() {
       <PageHero
         crumbs={[{ label: 'Products' }]}
         title={<>Power <em>Solutions</em></>}
-        lead="Advanced LFP battery technology designed for performance, safety, and longevity. All eight models, each with its real datasheet, specifications and five-year warranty."
+        lead="Advanced LFP battery technology designed for performance, safety, and longevity. Every model comes with its real photograph, datasheet and specifications."
       />
       <ProductsBrowser />
     </>

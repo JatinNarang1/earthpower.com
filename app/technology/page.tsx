@@ -82,9 +82,9 @@ export default function TechnologyPage() {
             <div>
               <div className="eyebrow">Battery management &amp; safety</div>
               <h2 style={{ marginBottom: 22 }}>A Bluetooth BMS in <span className="hl">every model.</span></h2>
-              <p className="lead">Seven models use a JK BMS with a built-in active balancer; the EPL121058H uses a JBD BMS. All connect via Bluetooth to the EarthPower app for live monitoring of voltage, current, state of charge, cell voltages and temperature.</p>
+              <p className="lead">Models use a JK BMS with active balancer, a JBD BMS (EPL121058H), an ANT BMS with passive balancing (rack systems) or a smart BMS with built-in active balancer (two-wheeler packs). All connect via Bluetooth to the EarthPower app for live monitoring of voltage, current, state of charge, cell voltages and temperature.</p>
               <ul className="chk">
-                <li>Active balancing keeps cells matched (JK BMS models)</li>
+                <li>Cell balancing keeps cells matched (active balancing on JK and two-wheeler models, passive on ANT rack systems)</li>
                 <li>Parallel communication for up to 15 batteries on EP25105ESS, EP51105ESS and EP51314ESS</li>
                 <li>BMS fault alarms: overvoltage, undervoltage, overcurrent, short-circuit and high-temperature protection trips</li>
                 <li>Over-The-Air (OTA) BMS firmware updates through the app</li>
@@ -96,7 +96,7 @@ export default function TechnologyPage() {
                 {PRODUCTS.map((p, i) => (
                   <li key={p.id}>
                     <small>{String(i + 1).padStart(2, '0')}</small>
-                    <span><Link href={`/products/${p.id}`} style={{ fontWeight: 600 }}>{p.id}</Link> · {p.jk ? 'JK BMS + active balancer' : 'JBD BMS'}{p.parallel ? ` · parallel ×${p.parallel}` : ''}</span>
+                    <span><Link href={`/products/${p.id}`} style={{ fontWeight: 600 }}>{p.id}</Link> · {p.category === 'rack' ? 'ANT BMS + passive balancer' : p.category === 'twowheeler' ? 'Smart BMS + active balancer' : p.jk ? 'JK BMS + active balancer' : 'JBD BMS'}{p.parallel ? ` · parallel ×${p.parallel}` : ''}</span>
                     <i />
                   </li>
                 ))}
@@ -113,11 +113,11 @@ export default function TechnologyPage() {
             {byEnergy.map((p) => (
               <div className="bar m" key={p.id}>
                 <span>{p.id}</span>
-                <div className="t"><Fill w={Number(((parseFloat(p.kwh) / 16.076) * 100).toFixed(1))} /></div>
+                <div className="t"><Fill w={Number(((parseFloat(p.kwh) / 48) * 100).toFixed(1))} /></div>
                 <b>{p.kwh}</b>
               </div>
             ))}
-            <div className="axis m"><span>0</span><span>8</span><span>16 kWh</span></div>
+            <div className="axis m"><span>0</span><span>24</span><span>48 kWh</span></div>
           </div>
         </div>
       </section>
@@ -132,8 +132,8 @@ export default function TechnologyPage() {
           <div className="hv" style={{ marginTop: 24 }}>
             <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true" style={{ flexShrink: 0 }}><path d="M12 3l10 18H2z" /><path d="M12 10v5M12 18h.01" /></svg>
             <div>
-              <h3>High-voltage DC · EPL961050S (96 V)</h3>
-              <p>This battery operates at up to 106.5 V DC. Use insulated tools and suitable protective equipment, and isolate the battery before working on terminals or wiring. Use only with inverters, UPS or charge controllers rated for the 90.0 – 106.5 V window.</p>
+              <h3>High-voltage DC · 73.6 V to 480 V models</h3>
+              <p>High-voltage batteries and rack systems operate at up to 525.0 V DC (EP4801050S). Use insulated tools and suitable protective equipment, and isolate the battery before working on terminals or wiring. Use only with inverters or power conversion systems rated for the model's specified voltage window.</p>
             </div>
           </div>
         </div>

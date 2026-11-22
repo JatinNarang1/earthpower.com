@@ -10,11 +10,7 @@ interface FaqItem {
 const FAQS: FaqItem[] = [
   {
     q: 'How does the EarthPower Battery app connect to my battery pack?',
-    a: 'The app pairs directly over Bluetooth Low Energy (BLE 4.2+) with the on-board Battery Management System (BMS) integrated inside your EarthPower LiFePO4 battery pack. No Wi-Fi router, cloud gateway, or active cellular connection is required for real-time monitoring within a 10-meter range.',
-  },
-  {
-    q: 'Does the application work offline without an active internet connection?',
-    a: 'Yes! Local telemetry streaming, real-time voltage monitoring, cell balancing readouts, cycle counting, and safety alarms function 100% offline via local Bluetooth communication. An internet connection is only needed when using the Help Centre to chat with support representatives or submit service requests.',
+    a: 'The app pairs directly over Bluetooth Low Energy (BLE 4.2+) with the on-board Battery Management System (BMS) integrated inside your EarthPower LiFePO4 battery pack.',
   },
   {
     q: 'Which BMS architectures and protocols are supported?',

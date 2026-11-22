@@ -90,7 +90,7 @@ export default function WarrantyForm() {
           {selected && (
             <>
               <Image src={selected.image} alt="" width={64} height={64} />
-              <div><b>{selected.id}</b><span>{selected.voltage} · {selected.capacity} · {selected.energy} · 5-year warranty</span></div>
+              <div><b>{selected.id}</b><span>{selected.voltage} · {selected.capacity} · {selected.energy}</span></div>
             </>
           )}
         </div>

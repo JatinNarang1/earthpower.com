@@ -17,8 +17,8 @@ const SCREENSHOTS: ScreenshotItem[] = [
     id: 'home-dark',
     src: '/app/screenshot-home-dark.jpg',
     title: 'Live Battery Telemetry (Dark Theme)',
-    description: 'Real-time telemetry showing 78% State of Charge, 0.6 kW active load, 53.0V bus voltage, 11.3A current, 31°C internal temperature, 212 lifetime cycles, and 16-cell series min/max/delta balance.',
-    caption: '78% SOC · 0.6 kW Load · 53.0V · 11.3A · 31°C · 16 Cells (30mV Delta)',
+    description: 'Real-time telemetry showing 78% State of Charge, 0.6 kW active load, 53.0V bus voltage, 11.3A current, 31°C internal temperature, 212 lifetime cycles, and cell series min/max/delta balance.',
+    caption: '78% SOC · 0.6 kW Load · 53.0V · 11.3A · 31°C · Cell Series Diagnostics',
     badge: 'Dashboard · Dark Mode',
   },
   {

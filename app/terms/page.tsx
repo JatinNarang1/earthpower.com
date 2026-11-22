@@ -136,7 +136,7 @@ export default function TermsOfServicePage() {
               <div className="p-4 rounded-xl bg-white/[0.03] border border-white/5 space-y-2 text-sm text-gray-300">
                 <p><strong>Earth Power Battery</strong></p>
                 <p>G-960, DSIIDC Industrial Area Narela, New Delhi – 110040, India</p>
-                <p>Phone: +011 41435047</p>
+                <p>Phone: +91 11 4143 5047</p>
                 <p>Email: <a href="mailto:contact@earthpowerbattery.com" className="text-earth-neon-green hover:underline">contact@earthpowerbattery.com</a></p>
               </div>
             </section>

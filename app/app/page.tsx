@@ -127,7 +127,7 @@ export default function AppPage() {
 
                 <div className="ps-stat-col">
                   <div className="ps-stat-val">BLE 4.2+</div>
-                  <span className="ps-stat-sub">Offline Bluetooth</span>
+                  <span className="ps-stat-sub">Bluetooth LE</span>
                 </div>
               </div>
 
@@ -188,7 +188,7 @@ export default function AppPage() {
 
           <div className="ps-about-body">
             <p>
-              The <strong>EarthPower Battery</strong> mobile application pairs directly over <strong>Bluetooth Low Energy (BLE 4.2+)</strong> with the on-board Battery Management System inside your EarthPower LiFePO4 battery pack. It provides real-time telemetry, individual cell diagnostics, safety alarms, and customer support access — completely offline without requiring an active cellular or internet connection.
+              The <strong>EarthPower Battery</strong> mobile application pairs directly over <strong>Bluetooth Low Energy (BLE 4.2+)</strong> with the on-board Battery Management System inside your EarthPower LiFePO4 battery pack. It provides real-time telemetry, individual cell diagnostics, safety alarms, and customer support access.
             </p>
             <p>
               Whether tracking a 48V home inverter battery, managing an electric vehicle pack, or monitoring a solar energy storage rack, EarthPower Battery delivers precision visibility over your pack&apos;s health and operating parameters.
@@ -205,7 +205,7 @@ export default function AppPage() {
                 <strong>Dynamic Backup Estimator:</strong> Real-time projection of remaining backup runtime based on active load calculations.
               </li>
               <li>
-                <strong>16-Cell Series Diagnostics:</strong> Millivolt-grade tracking for up to 16 cells in series with minimum, maximum, and delta balance (<span style={{ fontFamily: 'var(--f-m)' }}>&lt;30mV</span>) health indicators.
+                <strong>Cell Series Diagnostics:</strong> Millivolt-grade tracking of individual cells in series, with minimum, maximum, and delta balance health indicators.
               </li>
               <li>
                 <strong>Safety &amp; Protection Status:</strong> Live monitoring of Charge and Discharge MOSFET gates, high-temperature cutoff alerts, and deep-discharge protection barriers.

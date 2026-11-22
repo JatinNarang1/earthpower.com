@@ -25,7 +25,7 @@ export default function ContactPage() {
               <h2 style={{ marginBottom: 6 }}>We respond within <span className="hl">24 hours</span></h2>
               <div className="cinfo">
                 <div><small>Email</small><div><a href={`mailto:${SITE.email}`}>{SITE.email}</a><em>24/7 Support Available</em></div></div>
-                <div><small>Call</small><div><a href={SITE.phoneHref}>{SITE.phone}</a><em>Sun-Fri: 9:00 AM - 6:00 PM</em></div></div>
+                <div><small>Call</small><div><a href={SITE.phoneHref}>{SITE.phone}</a><em>{SITE.hours}</em></div></div>
                 <div>
                   <small>Visit</small>
                   <div>

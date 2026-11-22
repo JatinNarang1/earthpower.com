@@ -3,8 +3,11 @@ import Image from 'next/image'
 import Hero3D from '@/components/ep/Hero3D'
 import AppPhone from '@/components/ep/AppPhone'
 import { Arrow, Reveal, SectionHead } from '@/components/ep/ui'
-import { PRODUCTS } from '@/data/products'
+import { PRODUCTS, STATS } from '@/data/products'
 import { ADV, APP_FEATURES, WHY3 } from '@/data/content'
+
+const FEATURED = ['EPL121058H', 'EP51105ESS', 'EPL51304S', 'EPL60456S', 'EPL961050S', 'EPL1021050S', 'EP1211050S', 'EP4801050S']
+  .map((id) => PRODUCTS.find((p) => p.id === id)!)
 
 export default function HomePage() {
   return (
@@ -24,15 +27,15 @@ export default function HomePage() {
               </p>
               <div className="cta-row">
                 <Link href="/products" className="btn btn-primary">Explore Products <Arrow /></Link>
-                <Link href="/warranty" className="btn btn-outline">5-Year Warranty</Link>
+                <Link href="/warranty" className="btn btn-outline">Warranty &amp; Registration</Link>
               </div>
             </div>
             <Hero3D />
           </div>
           <div className="kpis">
-            <div><b>8 models</b><span>12.8 V to 96 V</span></div>
-            <div><b>1.280–16.076 kWh</b><span>Nominal energy range</span></div>
-            <div><b>5-year</b><span>Warranty on every model</span></div>
+            <div><b>{STATS.count} models</b><span>{STATS.minV} V to {STATS.maxV} V</span></div>
+            <div><b>{STATS.minKwh}–{STATS.maxKwh} kWh</b><span>Nominal energy range</span></div>
+            <div><b>Warranty</b><span>Online registration</span></div>
             <div><b>−20 to 60 °C</b><span>Operating temperature</span></div>
             <div><b>Bluetooth BMS</b><span>Live monitoring in the app</span></div>
           </div>
@@ -61,11 +64,11 @@ export default function HomePage() {
         <div className="wrap">
           <SectionHead
             eyebrow="Product range"
-            title={<>Eight models. <span className="hl">One platform.</span></>}
-            lead="From 12.8 V inverter batteries to a 96 V high-voltage pack and a 16.076 kWh energy-storage battery. Every model ships with a datasheet and a five-year warranty."
+            title={<>{STATS.count} models. <span className="hl">One platform.</span></>}
+            lead="From 12.8 V inverter batteries and two-wheeler packs to 480 V rack systems. Every model has its own datasheet, specifications and warranty registration."
           />
           <Reveal className="tiles">
-            {PRODUCTS.map((p) => (
+            {FEATURED.map((p) => (
               <Link key={p.id} className="tile" href={`/products/${p.id}`}>
                 <Image src={p.image} alt={`Earth Power ${p.id} LiFePO4 battery`} width={500} height={500} sizes="(max-width: 1180px) 50vw, 25vw" loading="lazy" />
                 <div>
@@ -145,7 +148,7 @@ export default function HomePage() {
               <AppPhone src="/app/screenshot-home-dark.jpg" alt="EarthPower Battery App Live Telemetry Dashboard" />
               <div className="app-float-badge bottom-right">
                 <span className="mono" style={{ color: 'var(--signal)', fontSize: '0.74rem' }}>BLE 4.2+</span>
-                <span><b>16 Cells</b> · 30mV Delta</span>
+                <span><b>Cell Series</b> · Diagnostics</span>
               </div>
             </Reveal>
           </div>

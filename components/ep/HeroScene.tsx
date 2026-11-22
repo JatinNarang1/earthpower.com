@@ -121,7 +121,7 @@ function makeLabel(): { tex: THREE.CanvasTexture; ready: Promise<void> } {
     g.stroke()
     g.fillStyle = '#E7F7EA'
     g.font = '600 28px Montserrat, Arial, sans-serif'
-    g.fillText('BLUETOOTH BMS  ·  5-YEAR WARRANTY', w / 2, 1100)
+    g.fillText('BLUETOOTH BMS  ·  LiFePO₄ TECHNOLOGY', w / 2, 1100)
     tex.needsUpdate = true
   }
 

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { PRODUCTS, SAFETY, getProduct } from '@/data/products'
+import { PRODUCTS, SAFETY, TWO_WHEELER_SAFETY, getProduct } from '@/data/products'
 import { Arrow, DatasheetButton, PageHero } from '@/components/ep/ui'
 
 export function generateStaticParams() {
@@ -14,7 +14,7 @@ export function generateMetadata({ params }: { params: { id: string } }): Metada
   if (!p) return { title: 'Product not found' }
   return {
     title: `${p.id} — ${p.voltage} ${p.capacity} ${p.name}`,
-    description: `Earth Power ${p.id}: ${p.voltage}, ${p.capacity}, ${p.energy} LiFePO4 battery with Bluetooth BMS and a 5-year warranty. Download the datasheet (PDF).`,
+    description: `Earth Power ${p.id}: ${p.voltage}, ${p.capacity}, ${p.energy} LiFePO4 battery with Bluetooth BMS. Download the datasheet (PDF).`,
   }
 }
 
@@ -54,7 +54,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                 <div><small>Nominal voltage</small><b>{p.voltage}</b></div>
                 <div><small>Nominal capacity</small><b>{p.capacity}</b></div>
                 <div><small>Nominal energy</small><b>{p.energy}</b></div>
-                <div><small>Warranty</small><b>5 years</b></div>
+                <div><small>Cell configuration</small><b>{p.cfg}</b></div>
               </div>
               <div className="acts">
                 <DatasheetButton p={p} cls="btn-primary" />
@@ -67,15 +67,18 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               <h2>Applications</h2>
               <div className="chips">{p.applications.map((a) => <span key={a}>{a}</span>)}</div>
               <p style={{ fontSize: '.82rem', color: 'var(--mut)', marginTop: -6 }}>
-                Datasheet: compatible inverter and stationary energy-storage applications{p.highVoltage ? ' (high-voltage inverter, UPS)' : ''}. Home backup and solar storage per the Earth Power website.
+                {p.category === 'storage' && 'Datasheet: compatible inverter and stationary energy-storage applications. Home backup and solar storage per the Earth Power website.'}
+                {p.category === 'highvoltage' && 'Datasheet: compatible high-voltage inverter and stationary energy-storage applications.'}
+                {p.category === 'rack' && 'Datasheet: compatible high-voltage inverter, commercial and industrial energy-storage applications.'}
+                {p.category === 'twowheeler' && 'Datasheet: compatible electric two-wheeler and scooter applications.'}
               </p>
 
               {p.highVoltage && (
                 <div className="hv" style={{ marginTop: 22 }}>
                   <Warn />
                   <div>
-                    <h3>High-voltage DC · up to 106.5 V</h3>
-                    <p>Use insulated tools and suitable protective equipment, and isolate the battery before working on terminals or wiring. Use only with inverters, UPS or charge controllers rated for the 90.0 – 106.5 V window. Installation by suitably qualified personnel only.</p>
+                    <h3>High-voltage DC · up to {p.maxVoltage}</h3>
+                    <p>Use insulated tools and suitable protective equipment, and isolate the battery before working on terminals or wiring. Use only with inverters or power conversion systems rated for the {p.range} window. Installation by suitably qualified personnel only.</p>
                   </div>
                 </div>
               )}
@@ -97,14 +100,14 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               <h2>Safety, handling &amp; installation</h2>
               <ul className="note-list">
                 {p.highVoltage && (
-                  <li><b>High-voltage DC:</b> this battery operates at up to 106.5 V DC. Use insulated tools and suitable protective equipment, and isolate the battery before working on terminals or wiring.</li>
+                  <li><b>High-voltage DC:</b> this {p.category === 'rack' ? 'battery system' : 'battery'} operates at up to {p.maxVoltage} DC. Use insulated tools and suitable protective equipment, and isolate the battery before working on terminals or wiring.</li>
                 )}
-                {SAFETY.map((s) => <li key={s}>{s}</li>)}
+                {(p.category === 'twowheeler' ? TWO_WHEELER_SAFETY : SAFETY).map((s) => <li key={s}>{s}</li>)}
               </ul>
 
               <h2>Warranty</h2>
               <p style={{ color: 'var(--tx-2)' }}>
-                5-year warranty period. The warranty is governed by the applicable written warranty document.{' '}
+                Earth Power batteries are covered by a manufacturer warranty governed by the applicable written warranty document.{' '}
                 <Link className="link" href="/warranty">Warranty terms &amp; registration</Link>
               </p>
 
