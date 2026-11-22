@@ -8,7 +8,7 @@ export const SITE = {
   address: 'G-960, DSIIDC Industrial Area Narela, New Delhi – 110040',
   addressShort: 'Narela, New Delhi',
   hours: 'Monday–Friday, 10:00 AM – 5:00 PM',
-  url: 'https://earthpowerbattery.com',
+  url: 'https://www.earthpowerbattery.com',
 } as const
 
 export const MAP_URL =

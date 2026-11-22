@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Earth Power — LiFePO4 Battery Solutions',
     description: 'LiFePO4 batteries with Bluetooth BMS for energy storage, two-wheelers, high-voltage and rack systems.',
-    url: 'https://earthpowerbattery.com',
+    url: 'https://www.earthpowerbattery.com',
     siteName: 'Earth Power Battery',
     locale: 'en_IN',
     type: 'website',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     description: 'LiFePO4 batteries with Bluetooth BMS for energy storage, two-wheelers, high-voltage and rack systems.',
     images: ['/icons/og-image.png'],
   },
-  metadataBase: new URL('https://earthpowerbattery.com'),
+  metadataBase: new URL('https://www.earthpowerbattery.com'),
   manifest: '/manifest.webmanifest',
   icons: {
     icon: [
