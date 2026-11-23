@@ -4,6 +4,7 @@ import { PageHero, Reveal, SectionHead } from '@/components/ep/ui'
 import { Fill } from '@/components/ep/Bars'
 import { ADV } from '@/data/content'
 import { PRODUCTS, SAFETY } from '@/data/products'
+import { TechnologyBmsPanel, TechnologyEnergyChart } from '@/components/ep/TechnologyPanels'
 
 export const metadata: Metadata = {
   title: 'Technology',
@@ -90,18 +91,7 @@ export default function TechnologyPage() {
                 <li>Over-The-Air (OTA) BMS firmware updates through the app</li>
               </ul>
             </div>
-            <div className="panel">
-              <div className="panel-h mono"><span>BMS by model</span><b>Datasheet</b></div>
-              <ul className="tele">
-                {PRODUCTS.map((p, i) => (
-                  <li key={p.id}>
-                    <small>{String(i + 1).padStart(2, '0')}</small>
-                    <span><Link href={`/products/${p.id}`} style={{ fontWeight: 600 }}>{p.id}</Link> · {p.category === 'rack' ? 'ANT BMS + passive balancer' : p.category === 'twowheeler' ? 'Smart BMS + active balancer' : p.jk ? 'JK BMS + active balancer' : 'JBD BMS'}{p.parallel ? ` · parallel ×${p.parallel}` : ''}</span>
-                    <i />
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <TechnologyBmsPanel products={PRODUCTS} />
           </div>
         </div>
       </section>
@@ -109,16 +99,7 @@ export default function TechnologyPage() {
       <section className="sec" id="lineup">
         <div className="wrap">
           <SectionHead eyebrow="Lineup at a glance" title={<>Nominal energy <span className="hl">by model</span></>} lead="Nominal energy (kWh) from each datasheet. Energy equals nominal voltage × nominal capacity." />
-          <div className="chart" style={{ maxWidth: 'none' }}>
-            {byEnergy.map((p) => (
-              <div className="bar m" key={p.id}>
-                <span>{p.id}</span>
-                <div className="t"><Fill w={Number(((parseFloat(p.kwh) / 48) * 100).toFixed(1))} /></div>
-                <b>{p.kwh}</b>
-              </div>
-            ))}
-            <div className="axis m"><span>0</span><span>24</span><span>48 kWh</span></div>
-          </div>
+          <TechnologyEnergyChart products={byEnergy} />
         </div>
       </section>
 

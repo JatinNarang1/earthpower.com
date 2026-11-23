@@ -953,3 +953,15 @@ button.app-phone-btn:hover .app-phone-hint,button.app-phone-btn:focus-visible .a
 .app-zoom img{width:auto;height:auto;max-width:min(92vw,420px);max-height:90vh;object-fit:contain;border-radius:28px;box-shadow:0 30px 80px -20px rgba(0,0,0,.8);cursor:default}
 .app-zoom-close{position:absolute;top:16px;right:16px;width:44px;height:44px;border:1px solid var(--d-line);border-radius:50%;color:#fff;font-size:1.6rem;line-height:1;display:grid;place-items:center}
 .app-zoom-close:hover{border-color:var(--signal);color:var(--signal)}
+
+/* Dark theme pagination */
+.dark .ep-pagination-bar{border-top-color:var(--d-line)}
+.dark .ep-pagination-summary{color:var(--d-mut)}
+.dark .ep-pagination-summary strong{color:var(--d-tx)}
+.dark .ep-pagination-page-indicator{color:var(--d-mut)}
+.dark .ep-page-btn{background:var(--ink-3);border-color:var(--d-line);color:var(--d-tx)}
+.dark .ep-page-btn:hover:not(:disabled){background:var(--ink);border-color:var(--signal);color:var(--signal)}
+.dark .ep-page-btn.active{background:var(--brand);border-color:var(--brand);color:#ffffff;box-shadow:0 2px 8px rgba(74,222,128,0.25)}
+.dark .ep-page-btn:disabled{opacity:.35;border-color:var(--d-line)}
+.dark .ep-page-ellipsis{color:var(--d-mut)}
+

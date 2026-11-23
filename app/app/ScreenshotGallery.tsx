@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import Image from 'next/image'
 
 interface ScreenshotItem {
@@ -58,8 +59,13 @@ const SCREENSHOTS: ScreenshotItem[] = [
 export function ScreenshotGallery() {
   const trackRef = useRef<HTMLDivElement>(null)
   const [activeIdx, setActiveIdx] = useState<number | null>(null)
+  const [mounted, setMounted] = useState(false)
   const touchStartX = useRef<number | null>(null)
   const touchEndX = useRef<number | null>(null)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const scroll = (direction: 'left' | 'right') => {
     if (!trackRef.current) return
@@ -160,46 +166,43 @@ export function ScreenshotGallery() {
 
       <div className="ps-gallery-track" ref={trackRef} tabIndex={0} role="region" aria-label="App screenshot gallery">
         {SCREENSHOTS.map((item, idx) => (
-          <article key={item.id} className="ps-screen-card">
-            <button
-              type="button"
-              className="ps-screen-btn"
-              onClick={() => setActiveIdx(idx)}
-              aria-label={`Open full-size view: ${item.title}`}
-            >
-              <div className="ps-screen-frame">
-                <Image
-                  src={item.src}
-                  alt={item.title}
-                  width={360}
-                  height={780}
-                  quality={88}
-                  sizes="(max-width: 768px) 200px, 240px"
-                />
-                <div className="ps-screen-expand" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" width="22" height="22" style={{ flexShrink: 0 }}>
-                    <circle cx="11" cy="11" r="8" />
-                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                    <line x1="11" y1="8" x2="11" y2="14" />
-                    <line x1="8" y1="11" x2="14" y2="11" />
-                  </svg>
-                  <span>Click to expand</span>
-                </div>
+          <article
+            key={item.id}
+            className="ps-screen-card"
+            onClick={() => setActiveIdx(idx)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                setActiveIdx(idx)
+              }
+            }}
+            aria-label={`Open preview: ${item.title}`}
+          >
+            <div className="ps-screen-frame">
+              <Image
+                src={item.src}
+                alt={item.title}
+                width={360}
+                height={780}
+                quality={88}
+                draggable={false}
+                sizes="(max-width: 768px) 200px, 240px"
+                style={{ pointerEvents: 'none', userSelect: 'none' }}
+              />
+              <div className="ps-screen-expand" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" width="22" height="22" style={{ flexShrink: 0 }}>
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  <line x1="11" y1="8" x2="11" y2="14" />
+                  <line x1="8" y1="11" x2="14" y2="11" />
+                </svg>
+                <span>Click to expand</span>
               </div>
-            </button>
-            <div
-              className="ps-screen-caption"
-              onClick={() => setActiveIdx(idx)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault()
-                  setActiveIdx(idx)
-                }
-              }}
-              aria-label={`Open preview for ${item.title}`}
-            >
+            </div>
+
+            <div className="ps-screen-caption">
               <strong>{item.title}</strong>
               <p>{item.caption}</p>
             </div>
@@ -207,8 +210,8 @@ export function ScreenshotGallery() {
         ))}
       </div>
 
-      {/* Lightbox Modal */}
-      {activeIdx !== null && (
+      {/* Lightbox Modal rendered directly into document.body via React Portal */}
+      {mounted && activeIdx !== null && createPortal(
         <div
           className="lightbox-backdrop"
           onClick={() => setActiveIdx(null)}
@@ -296,7 +299,8 @@ export function ScreenshotGallery() {
               <path d="M9 18l6-6-6-6" />
             </svg>
           </button>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   )
