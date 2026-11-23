@@ -1,12 +1,15 @@
 'use client'
 
 import Link from 'next/link'
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect, useRef } from 'react'
 import { CATEGORIES, PRODUCTS, type Category } from '@/data/products'
 import ProductCard from './ProductCard'
+import Pagination from './Pagination'
 import { Arrow, SectionHead } from './ui'
 
 type Sort = 'v' | 'e' | 'm'
+
+const PAGE_SIZE = 6
 
 const ROWS: [string, (p: (typeof PRODUCTS)[number]) => React.ReactNode][] = [
   ['Nominal voltage', (p) => p.voltage],
@@ -35,6 +38,8 @@ export default function ProductsBrowser() {
   const [group, setGroup] = useState<'All' | Category>('All')
   const [q, setQ] = useState('')
   const [sort, setSort] = useState<Sort>('v')
+  const [page, setPage] = useState(1)
+  const tableRef = useRef<HTMLDivElement>(null)
 
   const list = useMemo(() => {
     let L = PRODUCTS.filter(
@@ -45,10 +50,28 @@ export default function ProductsBrowser() {
     return L
   }, [group, q, sort])
 
+  // Reset page whenever filter, search or sorting changes
+  useEffect(() => {
+    setPage(1)
+  }, [group, q, sort])
+
+  const totalPages = Math.ceil(list.length / PAGE_SIZE)
+
+  const paginatedList = useMemo(() => {
+    const start = (page - 1) * PAGE_SIZE
+    return list.slice(start, start + PAGE_SIZE)
+  }, [list, page])
+
+  const scrollTable = (dir: 'left' | 'right') => {
+    if (!tableRef.current) return
+    const offset = dir === 'left' ? -280 : 280
+    tableRef.current.scrollBy({ left: offset, behavior: 'smooth' })
+  }
+
   return (
     <section className="sec paper" style={{ paddingTop: 'clamp(48px,6vw,80px)' }}>
       <div className="wrap">
-        <div className="faqbar">
+        <div className="faqbar" id="products-top">
           <div className="filters" role="group" aria-label="Filter by nominal voltage">
             {[{ id: 'All' as const, label: 'All models' }, ...CATEGORIES].map((c) => (
               <button
@@ -76,16 +99,28 @@ export default function ProductsBrowser() {
             </select>
           </div>
         </div>
+
         <p className="mono" style={{ color: 'var(--mut)', marginBottom: 22 }} aria-live="polite">
-          Showing {list.length} of {PRODUCTS.length} models
+          Showing {list.length === 0 ? 0 : `${(page - 1) * PAGE_SIZE + 1}–${Math.min(page * PAGE_SIZE, list.length)}`} of {list.length} matching models ({PRODUCTS.length} total)
         </p>
 
-        <div className="pgrid">
-          {list.map((p, i) => (
-            <ProductCard key={p.id} p={p} priority={i < 4} />
+        <div className="pgrid" id="products-grid">
+          {paginatedList.map((p, i) => (
+            <ProductCard key={p.id} p={p} priority={page === 1 && i < 3} />
           ))}
         </div>
         {list.length === 0 && <p className="empty">No models match your search.</p>}
+
+        {/* Pagination component */}
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages}
+          totalItems={list.length}
+          pageSize={PAGE_SIZE}
+          onPageChange={setPage}
+          itemLabel="models"
+          scrollTargetId="products-top"
+        />
 
         <div className="custom-band">
           <div>
@@ -101,34 +136,77 @@ export default function ProductsBrowser() {
             title="Compare all models"
             lead="Every value is taken from the model's datasheet; values a datasheet does not state are marked “Not specified”. Select a model number for its full page."
           />
-          <div className="mx">
-            <table style={{ minWidth: Math.max(760, 220 + list.length * 150) }}>
-              <thead>
-                <tr>
-                  <th scope="col">Specification</th>
-                  {list.map((p) => (
-                    <th scope="col" key={p.id}>
-                      <Link href={`/products/${p.id}`}>{p.id}</Link>
-                      <small>{p.voltage} · {p.capacity}</small>
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {ROWS.map(([k, f]) => (
-                  <tr key={k}>
-                    <th scope="row">{k}</th>
-                    {list.map((p) => {
-                      const v = f(p)
-                      return <td key={p.id} className={v === 'Not specified' ? 'na' : undefined}>{v}</td>
-                    })}
+
+          <div className="mx-card">
+            <div className="mx-scroll-bar">
+              <span className="mx-scroll-hint">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true" style={{ flexShrink: 0 }}>
+                  <path d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+                <span>Scroll horizontally to compare all <strong>{list.length}</strong> models</span>
+              </span>
+              <div className="mx-scroll-actions" aria-label="Table navigation controls">
+                <button
+                  type="button"
+                  className="mx-scroll-btn"
+                  onClick={() => scrollTable('left')}
+                  aria-label="Scroll comparison table left"
+                  title="Scroll left"
+                >
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true" style={{ flexShrink: 0 }}>
+                    <path d="M15 18l-6-6 6-6" />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  className="mx-scroll-btn"
+                  onClick={() => scrollTable('right')}
+                  aria-label="Scroll comparison table right"
+                  title="Scroll right"
+                >
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true" style={{ flexShrink: 0 }}>
+                    <path d="M9 18l6-6-6-6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div
+              className="mx"
+              ref={tableRef}
+              tabIndex={0}
+              role="region"
+              aria-label="Product technical specifications comparison table"
+            >
+              <table className="spec-table" style={{ minWidth: Math.max(760, 240 + list.length * 160) }}>
+                <thead>
+                  <tr>
+                    <th scope="col" className="spec-sticky-col">Specification</th>
+                    {list.map((p) => (
+                      <th scope="col" key={p.id}>
+                        <Link href={`/products/${p.id}`}>{p.id}</Link>
+                        <small>{p.voltage} · {p.capacity}</small>
+                      </th>
+                    ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {ROWS.map(([k, f]) => (
+                    <tr key={k}>
+                      <th scope="row" className="spec-sticky-col">{k}</th>
+                      {list.map((p) => {
+                        const v = f(p)
+                        return <td key={p.id} className={v === 'Not specified' ? 'na' : undefined}>{v}</td>
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </section>
   )
 }
+
