@@ -1123,5 +1123,517 @@
   .ps-steps-grid {
     grid-template-columns: 1fr;
   }
-
 }
+
+/* =====================================================================
+   SEGMENTED TWO-APP NAVIGATION CONTROL
+   ===================================================================== */
+.ps-segmented-nav-wrapper {
+  background: #ffffff;
+  border-bottom: 1px solid #e8eaed;
+  padding: 14px 0;
+  position: relative;
+  z-index: 10;
+}
+
+.ps-segmented-control-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.ps-segmented-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #f1f3f4;
+  padding: 4px;
+  border-radius: 36px;
+  border: 1px solid #dadce0;
+  max-width: 100%;
+}
+
+.ps-segmented-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-radius: 28px;
+  border: none;
+  background: transparent;
+  color: #5f6368;
+  font-family: var(--f-d);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.22s cubic-bezier(0.2, 0, 0, 1);
+  outline: none;
+}
+
+.ps-segmented-btn:hover {
+  color: #202124;
+}
+
+.ps-segmented-btn:focus-visible {
+  outline: 2px solid #01875f;
+  outline-offset: 2px;
+}
+
+.ps-segmented-btn.active {
+  background: #ffffff;
+  color: #01875f;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.ps-segmented-text {
+  display: inline-block;
+  letter-spacing: -0.01em;
+}
+
+.ps-segmented-pill {
+  font-family: var(--f-b);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 2px 8px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1.4;
+  transition: all 0.2s ease;
+}
+
+.ps-segmented-pill.pill-customer {
+  background: rgba(1, 135, 95, 0.1);
+  color: #01875f;
+  border: 1px solid rgba(1, 135, 95, 0.2);
+}
+
+.ps-segmented-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #01875f;
+  display: inline-block;
+}
+
+.ps-segmented-pill.pill-dealer {
+  background: rgba(234, 134, 0, 0.1);
+  color: #b06000;
+  border: 1px solid rgba(234, 134, 0, 0.25);
+}
+
+/* =====================================================================
+   DEALER APP SECTION STYLES (MATCHING CUSTOMER APP DESIGN)
+   ===================================================================== */
+.dealer-fullpage-cs-banner {
+  background: linear-gradient(90deg, #f0fdf4 0%, #ecfdf5 50%, #f0fdf4 100%);
+  border-bottom: 1px solid #bbf7d0;
+  padding: 12px 0;
+  color: #14532d;
+  font-size: 0.88rem;
+}
+.dealer-fullpage-cs-inner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+}
+.dealer-cs-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #15803d;
+  color: #ffffff;
+  font-family: var(--f-m);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+.dealer-cs-text {
+  margin: 0;
+  flex: 1;
+  min-width: 260px;
+  line-height: 1.45;
+}
+.dealer-cs-link {
+  color: #15803d;
+  font-weight: 700;
+  font-size: 0.84rem;
+  text-decoration: underline;
+  white-space: nowrap;
+}
+.dealer-cs-link:hover {
+  color: #166534;
+}
+
+.ps-dealer-icon {
+  position: relative;
+  background: linear-gradient(135deg, #f7faf8 0%, #eef5f0 100%);
+  border: 1px solid rgba(1, 135, 95, 0.15);
+}
+
+.ps-dealer-icon-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.ps-dealer-tag {
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  background: #0B1F14;
+  color: #4ADE80;
+  font-family: var(--f-d);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 3px 7px;
+  border-radius: 6px;
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.ps-coming-soon-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(1, 135, 95, 0.08);
+  color: #01875f;
+  border: 1px solid rgba(1, 135, 95, 0.25);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 16px;
+}
+
+.ps-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #01875f;
+  box-shadow: 0 0 0 rgba(1, 135, 95, 0.4);
+  animation: psPulse 2s infinite ease-in-out;
+}
+
+@keyframes psPulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(1, 135, 95, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(1, 135, 95, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(1, 135, 95, 0);
+  }
+}
+
+.ps-status-pill {
+  color: #01875f;
+  font-weight: 700;
+}
+
+/* Action button variations */
+.btn-ps-disabled {
+  background: #f1f3f4 !important;
+  color: #70757a !important;
+  border: 1px solid #dadce0 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  opacity: 0.9;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 8px;
+}
+.btn-ps-disabled:hover {
+  background: #f1f3f4 !important;
+  box-shadow: none !important;
+}
+
+.btn-ps-secondary {
+  background: #ffffff;
+  color: #01875f !important;
+  border: 1px solid #01875f;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+.btn-ps-secondary:hover {
+  background: rgba(1, 135, 95, 0.06);
+  border-color: #01875f;
+  box-shadow: 0 2px 8px rgba(1, 135, 95, 0.15);
+}
+
+/* Dealer Phone Preview Cards in Screenshot Gallery */
+.dealer-screen-placeholder-frame {
+  background: #0B1F14 !important;
+  border: 1px solid #1c3322 !important;
+}
+
+.dealer-phone-card-preview {
+  width: 100%;
+  height: 100%;
+  padding: 20px 14px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #ffffff;
+  background: linear-gradient(180deg, #0e271a 0%, #0B1F14 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.dealer-card-top-notch {
+  width: 44px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 3px;
+  margin: 0 auto 12px;
+}
+
+.dealer-card-brand-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dealer-card-status-chip {
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  background: rgba(74, 222, 128, 0.18);
+  color: #4ADE80;
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: var(--f-m);
+}
+
+.dealer-card-center-icon {
+  margin: 16px auto;
+  display: grid;
+  place-items: center;
+}
+
+.dealer-center-icon-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  background: rgba(74, 222, 128, 0.12);
+  border: 1px solid rgba(74, 222, 128, 0.28);
+  color: #4ADE80;
+  display: grid;
+  place-items: center;
+}
+
+.dealer-card-text-block {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.dealer-card-module-tag {
+  font-size: 0.6rem;
+  font-family: var(--f-m);
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.dealer-card-title {
+  font-family: var(--f-d);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 4px 0;
+  line-height: 1.25;
+}
+
+.dealer-card-sub {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.dealer-card-points-list {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dealer-card-pt {
+  font-size: 0.66rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dealer-card-pt span {
+  color: #4ADE80;
+  font-weight: bold;
+}
+
+/* Dealer Preview Lightbox Card */
+.dealer-lightbox-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: clamp(24px, 4vw, 36px);
+  color: #202124;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
+  position: relative;
+}
+
+.dealer-lightbox-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.dealer-lightbox-title {
+  font-family: var(--f-d);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #202124;
+  margin: 0 0 4px 0;
+}
+
+.dealer-lightbox-subtitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #01875f;
+  margin: 0 0 16px 0;
+}
+
+.dealer-lightbox-desc {
+  font-size: 0.94rem;
+  line-height: 1.6;
+  color: #5f6368;
+  margin: 0 0 20px 0;
+}
+
+.dealer-lightbox-points h4 {
+  font-family: var(--f-d);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #202124;
+  margin: 0 0 8px 0;
+}
+
+.dealer-lightbox-points ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dealer-lightbox-points li {
+  font-size: 0.88rem;
+  color: #3c4043;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dealer-lightbox-points li::before {
+  content: "✓";
+  color: #01875f;
+  font-weight: bold;
+}
+
+.dealer-lightbox-footer {
+  border-top: 1px solid #f1f3f4;
+  padding-top: 14px;
+  font-size: 0.8rem;
+  color: #5f6368;
+}
+
+/* Dealer QR Code Placeholder */
+.dealer-qr-placeholder-frame {
+  background: #f8faf8 !important;
+  display: grid !important;
+  place-items: center !important;
+}
+
+.dealer-qr-placeholder-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  padding: 12px;
+}
+
+.dealer-qr-icon-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: rgba(1, 135, 95, 0.1);
+  color: #01875f;
+  display: grid;
+  place-items: center;
+}
+
+.dealer-qr-coming-soon-tag {
+  font-family: var(--f-m);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  background: rgba(1, 135, 95, 0.12);
+  color: #01875f;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.dealer-qr-placeholder-sub {
+  font-size: 0.75rem;
+  color: #5f6368;
+  margin: 0;
+}
+
+/* Responsive Dealer Rules */
+@media (max-width: 640px) {
+  .ps-segmented-control {
+    width: 100%;
+  }
+  .ps-segmented-btn {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 0.88rem;
+    justify-content: center;
+  }
+}
+
