@@ -3,7 +3,7 @@ export const SITE = {
   name: 'Earth Power',
   legalName: 'Earth Power Battery',
   email: 'contact@earthpowerbattery.com',
-  phone: '+91 11 4143 5047',
+  phone: '+91 11414 35047',
   phoneHref: 'tel:+911141435047',
   address: 'G-960, DSIIDC Industrial Area Narela, New Delhi – 110040',
   addressShort: 'Narela, New Delhi',
