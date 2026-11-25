@@ -22,6 +22,6 @@ export const FAQ: { cat: string; q: string; a: string }[] = [
   { cat: 'Datasheets', q: 'Where can I download datasheets?', a: 'Every product has a “Download Datasheet (PDF)” button on its card and its product page. [Go to products](/products).' },
   { cat: 'Warranty', q: 'What warranty do the batteries have?', a: 'Earth Power batteries are covered by a manufacturer warranty, governed by the applicable written warranty document. [Warranty page](/warranty).' },
   { cat: 'Warranty', q: 'What can void the warranty?', a: "According to the Terms of Service, tampering, unapproved cell modification, exposure to unauthorized charging parameters, or physical damage voids the manufacturer's warranty. The full written warranty document governs." },
-  { cat: 'Warranty', q: 'How do I register my warranty?', a: 'Use the [warranty registration form](/warranty#register) with your product model, serial number, purchase date and dealer details. The EarthPower app also supports warranty tracking and an optional QR / barcode scan on the battery for registration.' },
+  { cat: 'Warranty', q: 'How do I get warranty support or documentation?', a: 'Online battery registration is currently unavailable on the website. Keep your purchase invoice and contact your authorized Earth Power dealer or [contact Earth Power](/contact) for warranty assistance.' },
   { cat: 'Contact', q: 'How do I contact Earth Power?', a: `Email ${SITE.email} or call ${SITE.phone}, ${SITE.hours}. Address: ${SITE.address}. We respond to enquiries within 24 hours. [Contact page](/contact).` },
 ]

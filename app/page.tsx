@@ -27,7 +27,7 @@ export default function HomePage() {
               </p>
               <div className="cta-row">
                 <Link href="/products" className="btn btn-primary">Explore Products <Arrow /></Link>
-                <Link href="/warranty" className="btn btn-outline">Warranty &amp; Registration</Link>
+                <Link href="/warranty" className="btn btn-outline">Warranty Terms</Link>
               </div>
             </div>
             <Hero3D />
@@ -35,7 +35,7 @@ export default function HomePage() {
           <div className="kpis">
             <div><b>{STATS.count} models</b><span>{STATS.minV} V to {STATS.maxV} V</span></div>
             <div><b>{STATS.minKwh}–{STATS.maxKwh} kWh</b><span>Nominal energy range</span></div>
-            <div><b>Warranty</b><span>Online registration</span></div>
+            <div><b>Warranty</b><span>Manufacturer coverage</span></div>
             <div><b>−20 to 60 °C</b><span>Operating temperature</span></div>
             <div><b>Bluetooth BMS</b><span>Live monitoring in the app</span></div>
           </div>

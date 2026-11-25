@@ -50,7 +50,7 @@ export default function Footer() {
               <h4>Resources</h4>
               <ul>
                 <li><Link href="/products">Product datasheets</Link></li>
-                <li><Link href="/warranty#register">Register your warranty</Link></li>
+                <li><Link href="/warranty">Warranty terms &amp; coverage</Link></li>
                 <li><Link href="/app">Customer &amp; dealer apps</Link></li>
                 <li><Link href="/faq">Frequently asked questions</Link></li>
               </ul>

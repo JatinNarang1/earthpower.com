@@ -1,12 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Arrow, PageHero, Reveal, SectionHead } from '@/components/ep/ui'
-import WarrantyForm from '@/components/ep/WarrantyForm'
+import { Arrow, Reveal, SectionHead } from '@/components/ep/ui'
 import { SITE } from '@/lib/site'
 
 export const metadata: Metadata = {
-  title: 'Warranty & Registration',
-  description: 'Earth Power battery warranty information and online warranty registration.',
+  title: 'Warranty',
+  description: 'Earth Power battery warranty coverage, conditions, and claim support information.',
 }
 
 export default function WarrantyPage() {
@@ -15,11 +14,11 @@ export default function WarrantyPage() {
       <section className="ph-hero dark">
         <div className="wrap">
           <div className="crumb"><Link href="/">Home</Link> / <b>Warranty</b></div>
-          <div className="eyebrow" style={{ color: 'var(--signal)' }}>Warranty &amp; registration</div>
-          <h1>Warranty <em>&amp; registration</em></h1>
-          <p className="lead">Earth Power batteries are backed by a manufacturer warranty. Register your battery below so your purchase details are on record.</p>
+          <div className="eyebrow" style={{ color: 'var(--signal)' }}>Warranty</div>
+          <h1>Manufacturer <em>Warranty</em></h1>
+          <p className="lead">Earth Power batteries are backed by a manufacturer warranty governed by the applicable written warranty document. Review our coverage terms and conditions below.</p>
           <div className="cta-row">
-            <a href="#register" className="btn btn-primary">Register your battery <Arrow /></a>
+            <Link href="/contact" className="btn btn-primary">Contact support <Arrow /></Link>
             <Link href="/products" className="btn btn-outline">Product datasheets</Link>
           </div>
         </div>
@@ -59,27 +58,6 @@ export default function WarrantyPage() {
               <a className="link" href={`mailto:${SITE.email}`}>{SITE.email}</a> · <a className="link" href={SITE.phoneHref}>{SITE.phone}</a>
             </p>
           </Reveal>
-        </div>
-      </section>
-
-      <section className="sec paper" id="register">
-        <div className="wrap">
-          <div className="wreg">
-            <div>
-              <div className="eyebrow">Warranty registration</div>
-              <h2 style={{ marginBottom: 20 }}>Register your <span className="hl">battery</span></h2>
-              <p className="lead">Keep your purchase on record. Have these details ready:</p>
-              <ul className="need">
-                <li>Product model <span>Required</span></li>
-                <li>Battery serial number <span>Required</span></li>
-                <li>Purchase date <span>Required</span></li>
-                <li>Dealer name &amp; location <span>Required</span></li>
-                <li>Purchase invoice number <span>Optional</span></li>
-              </ul>
-              <p style={{ marginTop: 22, fontSize: '.9rem', color: 'var(--mut)' }}>The EarthPower app also supports warranty tracking and an optional QR / barcode scan on the battery casing for warranty registration. <Link className="link" href="/app">About the app</Link></p>
-            </div>
-            <WarrantyForm />
-          </div>
         </div>
       </section>
     </>

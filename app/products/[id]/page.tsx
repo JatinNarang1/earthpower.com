@@ -108,7 +108,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               <h2>Warranty</h2>
               <p style={{ color: 'var(--tx-2)' }}>
                 Earth Power batteries are covered by a manufacturer warranty governed by the applicable written warranty document.{' '}
-                <Link className="link" href="/warranty">Warranty terms &amp; registration</Link>
+                <Link className="link" href="/warranty">Warranty terms &amp; coverage</Link>
               </p>
 
               <h2>General disclaimer</h2>
