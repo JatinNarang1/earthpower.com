@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { NAV, SITE } from '@/lib/site'
 
 const isActive = (path: string, href: string) =>
@@ -13,22 +13,37 @@ export default function Header() {
   const pathname = usePathname() || '/'
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [mnavTop, setMnavTop] = useState(72)
+  const hdrRef = useRef<HTMLElement>(null)
 
   useEffect(() => setOpen(false), [pathname])
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
+    const syncTop = () => {
+      if (hdrRef.current) {
+        setMnavTop(Math.max(0, Math.round(hdrRef.current.getBoundingClientRect().bottom)))
+      }
+    }
+    const onScroll = () => {
+      setScrolled(window.scrollY > 8)
+      syncTop()
+    }
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', syncTop, { passive: true })
     window.addEventListener('keydown', onKey)
     return () => {
       window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', syncTop)
       window.removeEventListener('keydown', onKey)
     }
   }, [])
 
   useEffect(() => {
+    if (open && hdrRef.current) {
+      setMnavTop(Math.max(0, Math.round(hdrRef.current.getBoundingClientRect().bottom)))
+    }
     document.documentElement.style.overflow = open ? 'hidden' : ''
     return () => {
       document.documentElement.style.overflow = ''
@@ -61,7 +76,7 @@ export default function Header() {
         </div>
       </div>
 
-      <header id="hdr" className={scrolled ? 'sh' : ''}>
+      <header id="hdr" ref={hdrRef} className={scrolled ? 'sh' : ''}>
         <div className="wrap nav">
           <Link href="/" className="logo" aria-label="Earth Power — home">
             <Image src="/brand/earthpower-logo.png" alt="Earth Power" width={117} height={46} priority style={{ height: 46, width: 'auto' }} />
@@ -86,7 +101,13 @@ export default function Header() {
         </div>
       </header>
 
-      <nav className={`mnav${open ? ' on' : ''}`} id="mnav" aria-label="Mobile">
+      <nav
+        className={`mnav${open ? ' on' : ''}`}
+        id="mnav"
+        aria-label="Mobile"
+        aria-hidden={!open}
+        style={{ top: `${mnavTop}px` }}
+      >
         {NAV.map((n) => (
           <Link key={n.href} href={n.href} aria-current={isActive(pathname, n.href) ? 'page' : undefined} tabIndex={open ? 0 : -1}>
             {n.name} <span>→</span>

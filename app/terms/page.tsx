@@ -31,51 +31,51 @@ export default function TermsOfServicePage() {
   return (
     <div className="bg-earth-charcoal-900 text-white min-h-screen">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden border-b border-white/10 bg-gradient-to-b from-earth-charcoal-800/80 via-earth-charcoal-900 to-earth-charcoal-900">
+      <section className="relative py-14 sm:py-20 overflow-hidden border-b border-white/10 bg-gradient-to-b from-earth-charcoal-800/80 via-earth-charcoal-900 to-earth-charcoal-900">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-earth-green-500/10 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="container-custom relative z-10 text-center">
-          <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-earth-green-500/10 border border-earth-green-500/30 text-earth-neon-green text-sm font-medium mb-6 backdrop-blur-sm">
-            <Scale className="w-4 h-4 text-earth-neon-green" />
+          <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-earth-green-500/10 border border-earth-green-500/30 text-earth-neon-green text-xs sm:text-sm font-medium mb-6 backdrop-blur-sm">
+            <Scale className="w-4 h-4 shrink-0 text-earth-neon-green" />
             <span>Legal Agreement &amp; Terms of Use</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold font-display text-white mb-6 tracking-tight">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold font-display text-white mb-6 tracking-tight">
             Terms of <span className="gradient-text">Service</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
             Please read these Terms of Service carefully before using the <strong className="text-white">Earth Power Battery</strong> website, mobile applications, and battery management services.
           </p>
 
           <div className="flex items-center justify-center space-x-2 text-sm text-gray-400">
-            <Calendar className="w-4 h-4 text-earth-neon-green" />
+            <Calendar className="w-4 h-4 shrink-0 text-earth-neon-green" />
             <span>Last Updated: <strong className="text-gray-200">{lastUpdated}</strong></span>
           </div>
         </div>
       </section>
 
       {/* Main Content */}
-      <section className="py-16 md:py-24">
+      <section className="py-12 sm:py-16 md:py-24">
         <div className="container-custom max-w-4xl">
-          <div className="space-y-10 text-gray-300 leading-relaxed text-sm sm:text-base">
-            <section className="p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-4">
-              <h2 className="text-2xl font-bold text-white flex items-center">
-                <span className="w-8 h-8 rounded-lg bg-earth-green-500/20 text-earth-neon-green flex items-center justify-center text-sm mr-3">1</span>
+          <div className="space-y-6 sm:space-y-10 text-gray-300 leading-relaxed text-sm sm:text-base">
+            <section className="p-5 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-white flex items-center">
+                <span className="w-8 h-8 shrink-0 rounded-lg bg-earth-green-500/20 text-earth-neon-green flex items-center justify-center text-sm mr-3">1</span>
                 Agreement to Terms
               </h2>
-              <p>
+              <p className="break-words">
                 By accessing or using the website at{' '}
-                <Link href="/" className="text-earth-neon-green hover:underline">
+                <Link href="/" className="text-earth-neon-green hover:underline break-all">
                   https://earthpowerbattery.com
                 </Link>{' '}
                 and the Earth Power Battery mobile applications (collectively referred to as the &ldquo;Services&rdquo;), you agree to be bound by these Terms of Service. If you disagree with any part of these terms, you may not access the Services.
               </p>
             </section>
 
-            <section className="p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-4">
-              <h2 className="text-2xl font-bold text-white flex items-center">
-                <span className="w-8 h-8 rounded-lg bg-earth-green-500/20 text-earth-neon-green flex items-center justify-center text-sm mr-3">2</span>
+            <section className="p-5 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-white flex items-center">
+                <span className="w-8 h-8 shrink-0 rounded-lg bg-earth-green-500/20 text-earth-neon-green flex items-center justify-center text-sm mr-3">2</span>
                 Use of Mobile Application &amp; Telemetry
               </h2>
               <p>
@@ -88,9 +88,9 @@ export default function TermsOfServicePage() {
               </ul>
             </section>
 
-            <section className="p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-4">
-              <h2 className="text-2xl font-bold text-white flex items-center">
-                <span className="w-8 h-8 rounded-lg bg-earth-green-500/20 text-earth-neon-green flex items-center justify-center text-sm mr-3">3</span>
+            <section className="p-5 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-white flex items-center">
+                <span className="w-8 h-8 shrink-0 rounded-lg bg-earth-green-500/20 text-earth-neon-green flex items-center justify-center text-sm mr-3">3</span>
                 Product Warranty &amp; Safety
               </h2>
               <p>
@@ -98,9 +98,9 @@ export default function TermsOfServicePage() {
               </p>
             </section>
 
-            <section className="p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-4">
-              <h2 className="text-2xl font-bold text-white flex items-center">
-                <span className="w-8 h-8 rounded-lg bg-earth-green-500/20 text-earth-neon-green flex items-center justify-center text-sm mr-3">4</span>
+            <section className="p-5 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-white flex items-center">
+                <span className="w-8 h-8 shrink-0 rounded-lg bg-earth-green-500/20 text-earth-neon-green flex items-center justify-center text-sm mr-3">4</span>
                 Intellectual Property
               </h2>
               <p>
@@ -108,9 +108,9 @@ export default function TermsOfServicePage() {
               </p>
             </section>
 
-            <section className="p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-4">
-              <h2 className="text-2xl font-bold text-white flex items-center">
-                <span className="w-8 h-8 rounded-lg bg-earth-green-500/20 text-earth-neon-green flex items-center justify-center text-sm mr-3">5</span>
+            <section className="p-5 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-white flex items-center">
+                <span className="w-8 h-8 shrink-0 rounded-lg bg-earth-green-500/20 text-earth-neon-green flex items-center justify-center text-sm mr-3">5</span>
                 Limitation of Liability
               </h2>
               <p>
@@ -118,9 +118,9 @@ export default function TermsOfServicePage() {
               </p>
             </section>
 
-            <section className="p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-4">
-              <h2 className="text-2xl font-bold text-white flex items-center">
-                <span className="w-8 h-8 rounded-lg bg-earth-green-500/20 text-earth-neon-green flex items-center justify-center text-sm mr-3">6</span>
+            <section className="p-5 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-white flex items-center">
+                <span className="w-8 h-8 shrink-0 rounded-lg bg-earth-green-500/20 text-earth-neon-green flex items-center justify-center text-sm mr-3">6</span>
                 Governing Law &amp; Dispute Resolution
               </h2>
               <p>
@@ -128,16 +128,16 @@ export default function TermsOfServicePage() {
               </p>
             </section>
 
-            <section className="p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-4">
-              <h2 className="text-2xl font-bold text-white flex items-center">
-                <span className="w-8 h-8 rounded-lg bg-earth-green-500/20 text-earth-neon-green flex items-center justify-center text-sm mr-3">7</span>
+            <section className="p-5 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-white flex items-center">
+                <span className="w-8 h-8 shrink-0 rounded-lg bg-earth-green-500/20 text-earth-neon-green flex items-center justify-center text-sm mr-3">7</span>
                 Contact Information
               </h2>
-              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/5 space-y-2 text-sm text-gray-300">
+              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/5 space-y-2 text-sm text-gray-300 break-words">
                 <p><strong>Earth Power Battery</strong></p>
                 <p>G-960, DSIIDC Industrial Area Narela, New Delhi – 110040, India</p>
-                <p>Phone: +91 11414 35047</p>
-                <p>Email: <a href="mailto:contact@earthpowerbattery.com" className="text-earth-neon-green hover:underline">contact@earthpowerbattery.com</a></p>
+                <p>Phone: <a href="tel:+911141435047" className="text-earth-neon-green hover:underline">+91 11414 35047</a></p>
+                <p>Email: <a href="mailto:contact@earthpowerbattery.com" className="text-earth-neon-green hover:underline break-all">contact@earthpowerbattery.com</a></p>
               </div>
             </section>
           </div>

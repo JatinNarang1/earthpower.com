@@ -220,7 +220,7 @@ export function DealerScreenshotGallery() {
       {/* Lightbox Modal (rendered via React Portal to document.body) */}
       {mounted && activeIdx !== null && createPortal(
         <div
-          className="ps-lightbox-backdrop"
+          className="lightbox-backdrop"
           onClick={() => setActiveIdx(null)}
           role="dialog"
           aria-modal="true"
@@ -243,7 +243,7 @@ export function DealerScreenshotGallery() {
 
           <button
             type="button"
-            className="lightbox-nav-btn prev"
+            className="lightbox-nav-btn lightbox-prev-btn"
             onClick={(e) => {
               e.stopPropagation()
               setActiveIdx((prev) => (prev === null ? null : (prev - 1 + PREVIEWS.length) % PREVIEWS.length))
@@ -257,7 +257,7 @@ export function DealerScreenshotGallery() {
 
           <button
             type="button"
-            className="lightbox-nav-btn next"
+            className="lightbox-nav-btn lightbox-next-btn"
             onClick={(e) => {
               e.stopPropagation()
               setActiveIdx((prev) => (prev === null ? null : (prev + 1) % PREVIEWS.length))
@@ -270,9 +270,9 @@ export function DealerScreenshotGallery() {
           </button>
 
           <div
-            className="ps-lightbox-content"
+            className="lightbox-dialog"
             onClick={(e) => e.stopPropagation()}
-            style={{ maxWidth: 500, width: '92%' }}
+            style={{ maxWidth: 500, width: '100%' }}
           >
             <div className="dealer-lightbox-card">
               <div className="dealer-lightbox-header">

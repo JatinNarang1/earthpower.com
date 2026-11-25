@@ -16,14 +16,14 @@ export default function Error({
   }, [error])
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-earth-charcoal-900 to-earth-green-900">
-      <div className="text-center max-w-md mx-auto px-4">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 bg-gradient-to-br from-earth-charcoal-900 to-earth-green-900">
+      <div className="text-center max-w-md mx-auto w-full">
         <div className="relative w-24 h-24 mx-auto mb-6">
           <div className="absolute inset-0 bg-red-500/20 rounded-full animate-pulse" />
           <AlertTriangle className="absolute inset-4 text-red-500" />
         </div>
         
-        <h1 className="text-4xl font-bold text-white mb-4">Oops! Something Went Wrong</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">Oops! Something Went Wrong</h1>
         <p className="text-gray-300 mb-8">
           We encountered an unexpected error. Don't worry, our team has been notified.
         </p>

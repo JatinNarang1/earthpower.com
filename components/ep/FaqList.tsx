@@ -24,7 +24,7 @@ export default function FaqList() {
   return (
     <div className="wrap" style={{ maxWidth: 960 }}>
       <div className="faqbar">
-        <div className="filters" role="group" aria-label="FAQ topics" style={{ flexWrap: 'wrap' }}>
+        <div className="filters" role="group" aria-label="FAQ topics">
           {CATS.map((c) => (
             <button key={c} type="button" aria-pressed={cat === c} aria-selected={cat === c} onClick={() => setCat(c)}>{c}</button>
           ))}

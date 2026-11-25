@@ -178,7 +178,7 @@ export default function ProductsBrowser() {
               role="region"
               aria-label="Product technical specifications comparison table"
             >
-              <table className="spec-table" style={{ minWidth: Math.max(760, 240 + list.length * 160) }}>
+              <table className="spec-table">
                 <thead>
                   <tr>
                     <th scope="col" className="spec-sticky-col">Specification</th>

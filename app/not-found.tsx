@@ -5,16 +5,16 @@ import { Battery, Home, ArrowLeft } from 'lucide-react'
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-earth-charcoal-900 via-earth-green-900 to-earth-charcoal-900">
-      <div className="text-center max-w-lg mx-auto px-4">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 bg-gradient-to-br from-earth-charcoal-900 via-earth-green-900 to-earth-charcoal-900">
+      <div className="text-center max-w-lg mx-auto w-full">
         <div className="relative mb-8">
-          <div className="text-9xl font-bold text-white/10">404</div>
+          <div className="text-7xl sm:text-9xl font-bold text-white/10">404</div>
           <div className="absolute inset-0 flex items-center justify-center">
-            <Battery className="w-24 h-24 text-earth-neon-green animate-pulse" />
+            <Battery className="w-16 h-16 sm:w-24 sm:h-24 text-earth-neon-green animate-pulse" />
           </div>
         </div>
         
-        <h1 className="text-4xl font-bold text-white mb-4">Page Not Found</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">Page Not Found</h1>
         <p className="text-gray-300 mb-8 text-lg">
           Looks like this page is out of charge. Let's get you back on track.
         </p>

@@ -74,10 +74,9 @@ export function DealerFaqAccordion() {
             </button>
             <div
               id={`dealer-faq-ans-${idx}`}
-              className="faq-answer-panel"
+              className={`faq-answer-collapse ${isOpen ? 'expanded' : ''}`}
               role="region"
               aria-labelledby={`dealer-faq-btn-${idx}`}
-              hidden={!isOpen}
             >
               <div className="faq-answer-inner">
                 <p>{item.a}</p>
