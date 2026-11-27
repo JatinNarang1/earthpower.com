@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { NAV, SITE } from '@/lib/site'
+import { NAV, SITE, BESS_CATALOGUE } from '@/lib/site'
 
 export default function Footer() {
   return (
@@ -50,6 +50,7 @@ export default function Footer() {
               <h4>Resources</h4>
               <ul>
                 <li><Link href="/products">Product datasheets</Link></li>
+                <li><a href={BESS_CATALOGUE.href} download={BESS_CATALOGUE.fileName}>BESS catalogue (PDF)</a></li>
                 <li><Link href="/warranty">Warranty terms &amp; coverage</Link></li>
                 <li><Link href="/app">Customer &amp; dealer apps</Link></li>
                 <li><Link href="/faq">Frequently asked questions</Link></li>

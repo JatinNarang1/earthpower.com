@@ -11,6 +11,13 @@ export const SITE = {
   url: 'https://www.earthpowerbattery.com',
 } as const
 
+/** Downloadable BESS company catalogue (PDF in /public/catalogues). */
+export const BESS_CATALOGUE = {
+  href: '/catalogues/EarthPower-BESS-Catalogue.pdf',
+  fileName: 'EarthPower BESS Catalogue.pdf',
+  title: 'BESS Catalogue',
+} as const
+
 export const MAP_URL =
   'https://www.google.com/maps/search/?api=1&query=' +
   encodeURIComponent('G-960, DSIIDC Industrial Area Narela, New Delhi – 110040')

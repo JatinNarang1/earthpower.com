@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import Hero3D from '@/components/ep/Hero3D'
+import { BESS_CATALOGUE } from '@/lib/site'
 import AppPhone from '@/components/ep/AppPhone'
 import { Arrow, Reveal, SectionHead } from '@/components/ep/ui'
 import { PRODUCTS, STATS } from '@/data/products'
@@ -78,7 +79,10 @@ export default function HomePage() {
               </Link>
             ))}
           </Reveal>
-          <p style={{ marginTop: 30 }}><Link className="btn btn-dark" href="/products">View full catalogue <Arrow /></Link></p>
+          <p style={{ marginTop: 30, display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+            <Link className="btn btn-dark" href="/products">View full catalogue <Arrow /></Link>
+            <a className="btn btn-outline" href={BESS_CATALOGUE.href} download={BESS_CATALOGUE.fileName}>Download BESS Catalogue (PDF)</a>
+          </p>
         </div>
       </section>
 
