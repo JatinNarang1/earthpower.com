@@ -24,9 +24,9 @@ export default function ProductCard({ p, priority = false }: { p: Product; prior
         </div>
         <p className="nm">{p.name}</p>
         <div className="sp3">
-          <div><small>Voltage</small><b>{p.voltage}</b></div>
-          <div><small>Capacity</small><b>{p.capacity}</b></div>
-          <div><small>Energy</small><b>{p.energy}</b></div>
+          {p.headline.slice(0, 3).map(([k, v]) => (
+            <div key={k}><small>{k}</small><b>{v}</b></div>
+          ))}
         </div>
         <div className="chips">
           {p.chips.map((c) => (

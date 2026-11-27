@@ -6,7 +6,7 @@ import { BESS_CATALOGUE } from '@/lib/site'
 export const metadata: Metadata = {
   title: 'Products',
   description:
-    'The full Earth Power LiFePO4 range — energy storage, two-wheeler, high-voltage and rack systems from 12.8 V to 480 V — with model numbers, specifications and downloadable PDF datasheets.',
+    'The full Earth Power LiFePO4 range — energy storage, two-wheeler, high-voltage and rack batteries from 12.8 V to 480 V, plus liquid-cooled BESS from 261 kWh to 5.016 MWh — with model numbers, specifications and downloadable PDF datasheets.',
 }
 
 export default function ProductsPage() {

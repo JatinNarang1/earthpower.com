@@ -57,6 +57,22 @@ export default function ProductsBrowser() {
 
   const totalPages = Math.ceil(list.length / PAGE_SIZE)
 
+  // Comparison table: BESS systems have their own spec rows, so they are compared among themselves.
+  const bessOnly = list.length > 0 && list.every((p) => p.category === 'bess')
+  const tableList = bessOnly ? list : list.filter((p) => p.category !== 'bess')
+  const bessRows: [string, (p: (typeof PRODUCTS)[number]) => React.ReactNode][] = useMemo(() => {
+    const keys: string[] = []
+    list.forEach((p) => p.specs.forEach(([k]) => !keys.includes(k) && keys.push(k)))
+    return [
+      ...keys.map((k): [string, (p: (typeof PRODUCTS)[number]) => React.ReactNode] => [
+        k,
+        (p) => p.specs.find(([sk]) => sk === k)?.[1] ?? 'Not specified',
+      ]),
+      ['Catalogue', (p) => <a className="link" href={p.datasheet} download={p.datasheetName}>PDF</a>],
+    ]
+  }, [list])
+  const rows = bessOnly ? bessRows : ROWS
+
   const paginatedList = useMemo(() => {
     const start = (page - 1) * PAGE_SIZE
     return list.slice(start, start + PAGE_SIZE)
@@ -134,7 +150,7 @@ export default function ProductsBrowser() {
           <SectionHead
             eyebrow="Technical specifications"
             title="Compare all models"
-            lead="Every value is taken from the model's datasheet; values a datasheet does not state are marked “Not specified”. Select a model number for its full page."
+            lead="Every value is taken from the model's datasheet; values a datasheet does not state are marked “Not specified”. Select a model number for its full page. BESS systems are compared under the BESS filter."
           />
 
           <div className="mx-card">
@@ -143,7 +159,7 @@ export default function ProductsBrowser() {
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true" style={{ flexShrink: 0 }}>
                   <path d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
-                <span>Scroll horizontally to compare all <strong>{list.length}</strong> models</span>
+                <span>Scroll horizontally to compare all <strong>{tableList.length}</strong> models</span>
               </span>
               <div className="mx-scroll-actions" aria-label="Table navigation controls">
                 <button
@@ -182,19 +198,19 @@ export default function ProductsBrowser() {
                 <thead>
                   <tr>
                     <th scope="col" className="spec-sticky-col">Specification</th>
-                    {list.map((p) => (
+                    {tableList.map((p) => (
                       <th scope="col" key={p.id}>
                         <Link href={`/products/${p.id}`}>{p.id}</Link>
-                        <small>{p.voltage} · {p.capacity}</small>
+                        <small>{p.category === 'bess' ? `${p.energy} · ${p.headline[3][1]}` : `${p.voltage} · ${p.capacity}`}</small>
                       </th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
-                  {ROWS.map(([k, f]) => (
+                  {rows.map(([k, f]) => (
                     <tr key={k}>
                       <th scope="row" className="spec-sticky-col">{k}</th>
-                      {list.map((p) => {
+                      {tableList.map((p) => {
                         const v = f(p)
                         return <td key={p.id} className={v === 'Not specified' ? 'na' : undefined}>{v}</td>
                       })}

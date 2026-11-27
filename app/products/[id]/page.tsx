@@ -13,8 +13,10 @@ export function generateMetadata({ params }: { params: { id: string } }): Metada
   const p = getProduct(params.id)
   if (!p) return { title: 'Product not found' }
   return {
-    title: `${p.id} — ${p.voltage} ${p.capacity} ${p.name}`,
-    description: `Earth Power ${p.id}: ${p.voltage}, ${p.capacity}, ${p.energy} LiFePO4 battery with Bluetooth BMS. Download the datasheet (PDF).`,
+    title: p.category === 'bess' ? `${p.energy} ${p.name}` : `${p.id} — ${p.voltage} ${p.capacity} ${p.name}`,
+    description: p.category === 'bess'
+      ? `Earth Power ${p.name} — ${p.energy}, ${p.headline[1][1]}, ${p.voltage}. Liquid-cooled LFP battery energy storage system. Download the BESS catalogue (PDF).`
+      : `Earth Power ${p.id}: ${p.voltage}, ${p.capacity}, ${p.energy} LiFePO4 battery with Bluetooth BMS. Download the datasheet (PDF).`,
   }
 }
 
@@ -44,17 +46,16 @@ export default function ProductPage({ params }: { params: { id: string } }) {
           <div className="pd">
             <div className="photo">
               <span className="vtag">{p.voltage}</span>
-              <Image src={p.image} alt={`Earth Power ${p.id} LiFePO4 battery photograph`} width={900} height={900} priority sizes="(max-width: 960px) 90vw, 45vw" style={{ objectFit: 'contain' }} />
+              <Image src={p.image} alt={p.category === 'bess' ? `Earth Power ${p.energy} ${p.name}` : `Earth Power ${p.id} LiFePO4 battery photograph`} width={900} height={900} priority sizes="(max-width: 960px) 90vw, 45vw" style={{ objectFit: 'contain' }} />
             </div>
             <div>
-              <div className="mlab">Model number</div>
-              <h1>{p.id}</h1>
-              <p className="sub">{p.name} · {p.voltage}, {p.capacity}, {p.energy}</p>
+              <div className="mlab">{p.category === 'bess' ? 'Battery energy storage system' : 'Model number'}</div>
+              <h1>{p.category === 'bess' ? `BESS ${p.energy}` : p.id}</h1>
+              <p className="sub">{p.category === 'bess' ? `${p.name} · ${p.headline[1][1]}, ${p.voltage}` : `${p.name} · ${p.voltage}, ${p.capacity}, ${p.energy}`}</p>
               <div className="sp4">
-                <div><small>Nominal voltage</small><b>{p.voltage}</b></div>
-                <div><small>Nominal capacity</small><b>{p.capacity}</b></div>
-                <div><small>Nominal energy</small><b>{p.energy}</b></div>
-                <div><small>Cell configuration</small><b>{p.cfg}</b></div>
+                {p.headline.map(([k, v]) => (
+                  <div key={k}><small>{p.category === 'bess' ? k : k === 'Voltage' ? 'Nominal voltage' : k === 'Capacity' ? 'Nominal capacity' : k === 'Energy' ? 'Nominal energy' : k}</small><b>{v}</b></div>
+                ))}
               </div>
               <div className="acts">
                 <DatasheetButton p={p} cls="btn-primary" />
@@ -71,6 +72,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                 {p.category === 'highvoltage' && 'Datasheet: compatible high-voltage inverter and stationary energy-storage applications.'}
                 {p.category === 'rack' && 'Datasheet: compatible high-voltage inverter, commercial and industrial energy-storage applications.'}
                 {p.category === 'twowheeler' && 'Datasheet: compatible electric two-wheeler and scooter applications.'}
+                {p.category === 'bess' && 'Application areas as listed in the Earth Power BESS catalogue.'}
               </p>
 
               {p.highVoltage && (
@@ -92,29 +94,45 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                 </tbody>
               </table>
 
-              <h2>System integration{p.parallel ? ' & expansion' : ''}</h2>
-              <ul className="note-list">
-                {p.integration.map(([k, v]) => <li key={k}><b>{k}:</b> {v}</li>)}
-              </ul>
+              {p.integration.length > 0 && (
+                <>
+                  <h2>System integration{p.parallel ? ' & expansion' : ''}</h2>
+                  <ul className="note-list">
+                    {p.integration.map(([k, v]) => <li key={k}><b>{k}:</b> {v}</li>)}
+                  </ul>
+                </>
+              )}
 
-              <h2>Safety, handling &amp; installation</h2>
-              <ul className="note-list">
-                {p.highVoltage && (
-                  <li><b>High-voltage DC:</b> this {p.category === 'rack' ? 'battery system' : 'battery'} operates at up to {p.maxVoltage} DC. Use insulated tools and suitable protective equipment, and isolate the battery before working on terminals or wiring.</li>
-                )}
-                {(p.category === 'twowheeler' ? TWO_WHEELER_SAFETY : SAFETY).map((s) => <li key={s}>{s}</li>)}
-              </ul>
+              {p.category === 'bess' ? (
+                <>
+                  <h2>Project information</h2>
+                  <p style={{ color: 'var(--tx-2)' }}>
+                    {p.note}{' '}
+                    <Link className="link" href={`/contact?model=${p.id}`}>Discuss this system</Link>
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h2>Safety, handling &amp; installation</h2>
+                  <ul className="note-list">
+                    {p.highVoltage && (
+                      <li><b>High-voltage DC:</b> this {p.category === 'rack' ? 'battery system' : 'battery'} operates at up to {p.maxVoltage} DC. Use insulated tools and suitable protective equipment, and isolate the battery before working on terminals or wiring.</li>
+                    )}
+                    {(p.category === 'twowheeler' ? TWO_WHEELER_SAFETY : SAFETY).map((s) => <li key={s}>{s}</li>)}
+                  </ul>
 
-              <h2>Warranty</h2>
-              <p style={{ color: 'var(--tx-2)' }}>
-                Earth Power batteries are covered by a manufacturer warranty governed by the applicable written warranty document.{' '}
-                <Link className="link" href="/warranty">Warranty terms &amp; coverage</Link>
-              </p>
+                  <h2>Warranty</h2>
+                  <p style={{ color: 'var(--tx-2)' }}>
+                    Earth Power batteries are covered by a manufacturer warranty governed by the applicable written warranty document.{' '}
+                    <Link className="link" href="/warranty">Warranty terms &amp; coverage</Link>
+                  </p>
 
-              <h2>General disclaimer</h2>
-              <p style={{ color: 'var(--mut)', fontSize: '.9rem' }}>
-                Specifications and operating limits must be checked against the latest approved product documentation before purchase, installation or commissioning. System performance depends on installation conditions, inverter configuration, charging source, operating profile and ambient temperature. The warranty is governed by the applicable written warranty document.
-              </p>
+                  <h2>General disclaimer</h2>
+                  <p style={{ color: 'var(--mut)', fontSize: '.9rem' }}>
+                    Specifications and operating limits must be checked against the latest approved product documentation before purchase, installation or commissioning. System performance depends on installation conditions, inverter configuration, charging source, operating profile and ambient temperature. The warranty is governed by the applicable written warranty document.
+                  </p>
+                </>
+              )}
             </div>
           </div>
 

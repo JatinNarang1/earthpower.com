@@ -89,7 +89,7 @@ export default function AboutPage() {
         <div className="wrap">
           <SectionHead eyebrow="Capabilities" title={<>Engineering &amp; <span className="hl">support</span></>} lead="Experience the advantages of advanced LFP technology combined with our commitment to excellence and customer success." />
           <div className="why3">
-            <Reveal><small>01</small><h3>{STATS.count} LiFePO4 models</h3><ul><li>Inverter, two-wheeler, high-voltage and rack systems</li><li>{STATS.minV} V to {STATS.maxV} V</li><li>{STATS.minKwh} kWh to {STATS.maxKwh} kWh</li><li>Datasheet for every model</li></ul></Reveal>
+            <Reveal><small>01</small><h3>{STATS.count} LiFePO4 models</h3><ul><li>Inverter, two-wheeler, high-voltage, rack and BESS systems</li><li>{STATS.voltageRange}</li><li>{STATS.energyRange}</li><li>Datasheet for every model</li></ul></Reveal>
             <Reveal delay={80}><small>02</small><h3>Battery intelligence</h3><ul><li>Bluetooth BMS on every model</li><li>Active balancing (JK BMS models)</li><li>Parallel communication up to 15 batteries (EP-series)</li><li>EarthPower customer &amp; dealer apps</li></ul></Reveal>
             <Reveal delay={160}><small>03</small><h3>Support</h3><ul><li>Expert consultation</li><li>Response to enquiries within 24 hours</li><li>24/7 email support available</li><li>Facility visits at Narela, Monday–Friday 10:00 AM – 5:00 PM</li></ul></Reveal>
           </div>

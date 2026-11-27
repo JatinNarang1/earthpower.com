@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { PageHero, Reveal, SectionHead } from '@/components/ep/ui'
 import { Fill } from '@/components/ep/Bars'
 import { ADV } from '@/data/content'
-import { PRODUCTS, SAFETY } from '@/data/products'
+import { BATTERIES, SAFETY } from '@/data/products'
 import { TechnologyBmsPanel, TechnologyEnergyChart } from '@/components/ep/TechnologyPanels'
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ const SYSTEM: [string, string][] = [
   ['Specifications', 'Check specifications and operating limits against the latest approved product documentation before purchase, installation or commissioning.'],
 ]
 
-const byEnergy = [...PRODUCTS].sort((a, b) => parseFloat(a.kwh) - parseFloat(b.kwh))
+const byEnergy = [...BATTERIES].sort((a, b) => parseFloat(a.kwh) - parseFloat(b.kwh))
 
 export default function TechnologyPage() {
   return (
@@ -91,7 +91,7 @@ export default function TechnologyPage() {
                 <li>Over-The-Air (OTA) BMS firmware updates through the app</li>
               </ul>
             </div>
-            <TechnologyBmsPanel products={PRODUCTS} />
+            <TechnologyBmsPanel products={BATTERIES} />
           </div>
         </div>
       </section>

@@ -8,13 +8,14 @@ const JBD = 'JBD BMS (Bluetooth)'
 const ANT = 'ANT BMS + Passive Balancer (Bluetooth)'
 const TW_BMS = 'BMS with built-in active balancer (Bluetooth)'
 
-export type Category = 'storage' | 'twowheeler' | 'highvoltage' | 'rack'
+export type Category = 'storage' | 'twowheeler' | 'highvoltage' | 'rack' | 'bess'
 
 export const CATEGORIES: { id: Category; label: string; blurb: string }[] = [
   { id: 'storage', label: 'Inverter & ESS', blurb: '12.8 V – 51.2 V energy-storage batteries' },
   { id: 'twowheeler', label: 'Two-wheeler', blurb: '51.2 V – 73.6 V scooter battery packs' },
   { id: 'highvoltage', label: 'High-voltage', blurb: '73.6 V – 102.4 V high-voltage batteries' },
   { id: 'rack', label: 'Rack systems', blurb: '121.6 V – 480 V stacked rack systems' },
+  { id: 'bess', label: 'BESS', blurb: '261 kWh – 5.016 MWh liquid-cooled systems' },
 ]
 
 interface Raw {
@@ -82,6 +83,9 @@ export interface Product {
   image: string
   datasheet: string
   datasheetName: string
+  datasheetLabel: string
+  /** Four headline figures (cards show the first three). */
+  headline: [string, string][]
   chips: string[]
   features: string[]
   applications: string[]
@@ -95,6 +99,7 @@ export interface Product {
   bms: string
   weight?: string
   dimensions?: string
+  note?: string
 }
 
 export const SAFETY: string[] = [
@@ -119,6 +124,7 @@ const CAT_NAME: Record<Category, string> = {
   twowheeler: 'LiFePO4 Two-Wheeler Battery Pack',
   highvoltage: 'LiFePO4 High-Voltage Battery',
   rack: 'LiFePO4 High-Voltage Rack Battery System',
+  bess: 'Battery Energy Storage System',
 }
 
 function build(r: Raw): Product {
@@ -258,6 +264,8 @@ function build(r: Raw): Product {
     image: `/products/${r.id}.${r.img}`,
     datasheet: `/datasheets/EarthPower-${r.id}-Datasheet.pdf`,
     datasheetName: `EarthPower ${r.id} Datasheet.pdf`,
+    datasheetLabel: 'Download Datasheet (PDF)',
+    headline: [['Voltage', voltage], ['Capacity', capacity], ['Energy', energy], ['Cell configuration', r.cfg]],
     chips,
     features,
     applications,
@@ -274,14 +282,239 @@ function build(r: Raw): Product {
   }
 }
 
-export const PRODUCTS: Product[] = RAW.map(build)
+/* ------------------------------------------------------------------ */
+/* BESS systems — values from the Earth Power BESS catalogue (PDF).    */
+/* The catalogue gives no model numbers or separate datasheets, so     */
+/* systems are identified by their rated energy and link to the        */
+/* catalogue itself.                                                   */
+/* ------------------------------------------------------------------ */
+const CATALOGUE = '/catalogues/EarthPower-BESS-Catalogue.pdf'
+const CELL: [string, string] = ['Cell', 'LFP, 314 Ah']
+const BESS_APPS = [
+  'Solar self-consumption',
+  'Backup power & DG replacement',
+  'Peak shaving & tariff arbitrage',
+  'Demand-charge reduction',
+  'Grid support & renewables',
+  'Microgrids & remote sites',
+]
+const BESS_NOTE =
+  'Specifications are as published in the Earth Power BESS catalogue. Contact Earth Power for project-specific configuration, certification documents, site requirements and commissioning.'
+
+function bess(o: {
+  id: string
+  name: string
+  kwh: string
+  energy: string
+  power: string
+  dc: string
+  enclosure: string
+  image: string
+  chips: string[]
+  features: string[]
+  specs: [string, string][]
+}): Product {
+  return {
+    id: o.id,
+    name: o.name,
+    category: 'bess',
+    v: parseFloat(o.dc.replace(/[^\d.]/g, '')),
+    kwh: o.kwh,
+    voltage: o.dc,
+    capacity: '314 Ah cells',
+    energy: o.energy,
+    group: o.enclosure,
+    highVoltage: false,
+    maxVoltage: '',
+    jk: false,
+    image: `/products/${o.image}.jpg`,
+    datasheet: CATALOGUE,
+    datasheetName: 'EarthPower BESS Catalogue.pdf',
+    datasheetLabel: 'Download BESS Catalogue (PDF)',
+    headline: [
+      ['Rated energy', o.energy],
+      ['Rated power', o.power],
+      ['Rated DC voltage', o.dc],
+      ['Enclosure', o.enclosure],
+    ],
+    chips: o.chips,
+    features: o.features,
+    applications: BESS_APPS,
+    specs: o.specs,
+    integration: [],
+    range: '',
+    chg: 0,
+    dis: 0,
+    cfg: '',
+    bms: '',
+    note: BESS_NOTE,
+  }
+}
+
+const BESS_PRODUCTS: Product[] = [
+  bess({
+    id: 'BESS-261kWh',
+    name: 'Liquid-Cooled C&I Outdoor Cabinet',
+    kwh: '261',
+    energy: '261 kWh',
+    power: '125 kW AC',
+    dc: '832 V DC',
+    enclosure: 'Outdoor cabinet',
+    image: 'BESS-cabinet',
+    chips: ['C&I', 'Liquid cooling', 'Aerosol fire suppression'],
+    features: ['Outdoor all-in-one cabinet with integrated PCS', 'Liquid cooling', 'Aerosol fire suppression', 'LFP 314 Ah cells', '832 V DC · 400 V AC'],
+    specs: [
+      ['System', 'C&I outdoor all-in-one cabinet'],
+      ['Rated energy', '261 kWh'],
+      ['Rated AC power', '125 kW (max. 137.5 kW)'],
+      CELL,
+      ['Battery configuration', '1P260S · 5 × 1P52S packs'],
+      ['Rated DC voltage', '832 V (715 – 936 V)'],
+      ['Rated AC voltage', '400 V ±15%'],
+      ['PCS max. efficiency', '98.5%'],
+      ['AC–AC round-trip efficiency', '≥ 86% incl. auxiliary'],
+      ['Cooling · fire protection', 'Liquid · aerosol'],
+      ['Protection · corrosion', 'IP55 · C3 (C4/C5 on request)'],
+      ['Ambient temperature', '−30 to 55 °C (derating above 45 °C)'],
+      ['Dimensions (W × D × H)', '1,035 × 1,400 × 2,350 mm'],
+      ['Weight', '≈ 2.5 t'],
+    ],
+  }),
+  bess({
+    id: 'BESS-418kWh',
+    name: 'Liquid-Cooled C&I Outdoor Cabinet',
+    kwh: '418',
+    energy: '418 kWh',
+    power: '209 kW AC',
+    dc: '1,331.2 V DC',
+    enclosure: 'Outdoor cabinet',
+    image: 'BESS-cabinet',
+    chips: ['C&I', 'Liquid cooling', 'Aerosol fire suppression'],
+    features: ['Outdoor all-in-one cabinet with integrated PCS', 'Liquid cooling', 'Aerosol fire suppression', 'LFP 314 Ah cells', '1,331 V DC · 690 V AC'],
+    specs: [
+      ['System', 'C&I outdoor all-in-one cabinet'],
+      ['Rated energy', '418 kWh'],
+      ['Rated AC power', '209 kW'],
+      CELL,
+      ['Battery configuration', '1P416S · 8 × 1P52S packs'],
+      ['Rated DC voltage', '1,331.2 V (1,164.8 – 1,497.6 V)'],
+      ['Rated AC voltage', '690 V ±10% (800 V optional)'],
+      ['PCS max. efficiency', '99%'],
+      ['AC–AC round-trip efficiency', '≥ 88% excl. auxiliary'],
+      ['Cooling · fire protection', 'Liquid · aerosol'],
+      ['Protection · corrosion', 'IP55 · C3 (C4/C5 on request)'],
+      ['Ambient temperature', '−30 to 55 °C (derating above 45 °C)'],
+      ['Dimensions (W × D × H)', '1,300 × 1,350 × 2,350 mm'],
+      ['Weight', '≈ 4 t'],
+    ],
+  }),
+  bess({
+    id: 'BESS-1044kWh',
+    name: 'All-in-One 10-ft Plug-and-Play AC System',
+    kwh: '1044',
+    energy: '1.044 MWh',
+    power: '500 kW AC',
+    dc: '832 V DC',
+    enclosure: '10-ft enclosure',
+    image: 'BESS-enclosure',
+    chips: ['C&I / Utility', 'Smart liquid cooling', 'Aerosol fire suppression'],
+    features: ['Battery, PCS, liquid cooling and fire protection in one 10-ft enclosure', 'Plug-and-play AC system', 'Smart liquid cooling', 'LFP 314 Ah cells', '832 V DC · 400 V AC'],
+    specs: [
+      ['System', 'All-in-one 10-ft plug-and-play AC system'],
+      ['Rated energy', '1.044 MWh'],
+      ['Rated power', '500 kW (4 × 125 kW)'],
+      CELL,
+      ['Battery configuration', '4P260S · 1P52S packs'],
+      ['Rated DC voltage', '832 V (715 – 936 V)'],
+      ['AC output', '400 V AC, 50/60 Hz'],
+      ['Charge / discharge rate', '0.5C'],
+      ['Thermal management', 'Smart liquid cooling'],
+      ['Fire protection', 'Detection, aerosol suppression, ventilation, water interface'],
+      ['Protection · corrosion', 'IP55 · C4 (C5 optional)'],
+      ['Operating temperature', '−30 to 55 °C (derating above 45 °C)'],
+      ['Dimensions (L × W × H)', '2,991 × 2,438 × 2,896 mm'],
+      ['Weight', '16 t'],
+    ],
+  }),
+  bess({
+    id: 'BESS-2508kWh',
+    name: 'All-in-One 10-ft Plug-and-Play AC System',
+    kwh: '2508',
+    energy: '2.508 MWh',
+    power: '1.29 MW AC',
+    dc: '1,331.2 V DC',
+    enclosure: '10-ft enclosure',
+    image: 'BESS-enclosure',
+    chips: ['C&I / Utility', 'Smart liquid cooling', 'Water fire-fighting interface'],
+    features: ['Battery, PCS, liquid cooling and fire protection in one 10-ft enclosure', 'Plug-and-play AC system', 'Smart liquid cooling', 'LFP 314 Ah cells', '1,331 V DC · 690 V AC'],
+    specs: [
+      ['System', 'All-in-one 10-ft plug-and-play AC system'],
+      ['Rated energy', '2.508 MWh'],
+      ['Rated power', '1.29 MW (3 × 430 kW)'],
+      CELL,
+      ['Battery configuration', '6P416S · 1P104S packs'],
+      ['Rated DC voltage', '1,331.2 V (1,164.8 – 1,497.6 V)'],
+      ['AC output', '690 V AC, 50/60 Hz'],
+      ['Charge / discharge rate', '0.5C'],
+      ['Thermal management', 'Smart liquid cooling'],
+      ['Fire protection', 'Detection, ventilation, water fire-fighting interface'],
+      ['Protection · corrosion', 'IP55 · C4 (C5 optional)'],
+      ['Operating temperature', '−30 to 55 °C (derating above 45 °C)'],
+      ['Dimensions (L × W × H)', '2,991 × 2,438 × 2,896 mm'],
+      ['Weight', '23 t'],
+    ],
+  }),
+  bess({
+    id: 'BESS-5016kWh',
+    name: 'Penta — Liquid-Cooled DC Container',
+    kwh: '5016',
+    energy: '5.016 MWh',
+    power: '≤ 2.5 MW DC',
+    dc: '1,331.2 V DC',
+    enclosure: '20-ft container',
+    image: 'BESS-container',
+    chips: ['Utility / large C&I', 'Liquid cooling', 'UL 9540 certified'],
+    features: [
+      '20-ft liquid-cooled DC battery block',
+      '≥ 94% DC round-trip efficiency at 0.5C',
+      'UL 9540 certified, UL 9540A tested (per catalogue)',
+      '25 years design calendar life',
+      'LFP 314 Ah cells',
+      'IP55 container · IP67 pack',
+    ],
+    specs: [
+      ['System', 'Penta — 20-ft liquid-cooled DC container'],
+      ['Rated energy', '5.016 MWh'],
+      ['Rated power', '≤ 2.5 MW (0.5C)'],
+      ['Configuration', '12 clusters × (4 × 1P104S)'],
+      ['Cell', 'LFP, 314 Ah'],
+      ['Rated voltage', '1,331.2 V DC'],
+      ['Voltage range', '1,164.8 – 1,497.6 V DC'],
+      ['DC round-trip efficiency', '≥ 94% at 0.5C'],
+      ['Design calendar life', '25 years'],
+      ['Certification (per catalogue)', 'IEC · UL — UL 9540 certified, UL 9540A tested'],
+      ['Thermal management', 'Liquid cooling, 60 kW cooling capacity'],
+      ['Fixed auxiliary load', '3.1 kW'],
+      ['Protection', 'IP55 container · IP67 pack'],
+      ['Operating temperature', '−30 to +55 °C (derating above 45 °C)'],
+      ['Altitude', '≤ 4,000 m (derating above 2,000 m)'],
+      ['Communication', 'PCS: CAN / RS485 · EMS: IEC 61850'],
+      ['Dimensions (L × W × H)', '6,058 × 2,438 × 2,896 mm'],
+      ['Weight', '42.5 t'],
+    ],
+  }),
+]
+
+export const PRODUCTS: Product[] = [...RAW.map(build), ...BESS_PRODUCTS]
+/** Battery models only (excludes BESS systems, whose figures are not comparable cell-for-cell). */
+export const BATTERIES: Product[] = PRODUCTS.filter((p) => p.category !== 'bess')
 export const getProduct = (id: string) => PRODUCTS.find((p) => p.id === id)
 
-const kwhNums = PRODUCTS.map((p) => parseFloat(p.kwh))
+const kwhNums = BATTERIES.map((p) => parseFloat(p.kwh))
 export const STATS = {
   count: PRODUCTS.length,
   minV: Math.min(...PRODUCTS.map((p) => p.v)),
   maxV: Math.max(...PRODUCTS.map((p) => p.v)),
-  minKwh: PRODUCTS.find((p) => parseFloat(p.kwh) === Math.min(...kwhNums))!.kwh,
-  maxKwh: PRODUCTS.find((p) => parseFloat(p.kwh) === Math.max(...kwhNums))!.kwh,
+  voltageRange: '12.8 V to 1,331.2 V',
+  energyRange: `${BATTERIES.find((p) => parseFloat(p.kwh) === Math.min(...kwhNums))!.kwh} kWh – 5.016 MWh`,
 }

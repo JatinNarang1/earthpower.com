@@ -34,8 +34,8 @@ export default function HomePage() {
             <Hero3D />
           </div>
           <div className="kpis">
-            <div><b>{STATS.count} models</b><span>{STATS.minV} V to {STATS.maxV} V</span></div>
-            <div><b>{STATS.minKwh}–{STATS.maxKwh} kWh</b><span>Nominal energy range</span></div>
+            <div><b>{STATS.count} models</b><span>{STATS.voltageRange}</span></div>
+            <div><b>{STATS.energyRange}</b><span>Nominal energy range</span></div>
             <div><b>Warranty</b><span>Manufacturer coverage</span></div>
             <div><b>−20 to 60 °C</b><span>Operating temperature</span></div>
             <div><b>Bluetooth BMS</b><span>Live monitoring in the app</span></div>
@@ -66,7 +66,7 @@ export default function HomePage() {
           <SectionHead
             eyebrow="Product range"
             title={<>{STATS.count} models. <span className="hl">One platform.</span></>}
-            lead="From 12.8 V inverter batteries and two-wheeler packs to 480 V rack systems. Every model has its own datasheet, specifications and warranty registration."
+            lead="From 12.8 V inverter batteries and two-wheeler packs to 480 V rack systems and liquid-cooled BESS up to 5 MWh. Every model has its specifications and a datasheet or catalogue download."
           />
           <Reveal className="tiles">
             {FEATURED.map((p) => (

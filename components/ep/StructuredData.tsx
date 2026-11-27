@@ -15,7 +15,7 @@ export default function StructuredData() {
         logo: { '@type': 'ImageObject', url: logo, width: 512, height: 512 },
         image: [logo, `${SITE.url}/icons/og-image.png`],
         description:
-          'LiFePO4 batteries from 12.8 V to 480 V — energy storage, two-wheeler, high-voltage and rack systems with Bluetooth BMS.',
+          'LiFePO4 batteries from 12.8 V to 480 V and liquid-cooled battery energy storage systems up to 5 MWh.',
         email: SITE.email,
         telephone: '+911141435047',
         address: {

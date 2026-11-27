@@ -146,7 +146,7 @@ export function DatasheetButton({ p, cls = 'btn-outline btn-sm' }: { p: Product;
   return (
     <a className={`btn ${cls}`} href={p.datasheet} download={p.datasheetName} data-ds={p.id}>
       <DownloadIcon />
-      Download Datasheet (PDF)
+      {p.datasheetLabel}
     </a>
   )
 }

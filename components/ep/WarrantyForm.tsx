@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
-import { PRODUCTS, getProduct } from '@/data/products'
+import { BATTERIES, getProduct } from '@/data/products'
 import { Arrow } from './ui'
 
 interface F {
@@ -82,7 +82,7 @@ export default function WarrantyForm() {
         <div className="fld"><label htmlFor="wm">Product model *</label>
           <select id="wm" className={errors.model ? 'bad' : ''} {...register('model', { required: 'Please choose your model' })}>
             <option value="">Select model</option>
-            {PRODUCTS.map((p) => <option key={p.id} value={p.id}>{p.id} — {p.voltage}, {p.capacity}</option>)}
+            {BATTERIES.map((p) => <option key={p.id} value={p.id}>{p.id} — {p.voltage}, {p.capacity}</option>)}
           </select><Err m={errors.model?.message} /></div>
         <div className="fld"><label htmlFor="ws">Battery serial number *</label>
           <input id="ws" autoComplete="off" className={errors.serial ? 'bad' : ''} {...register('serial', { required: 'Please enter the serial number' })} /><Err m={errors.serial?.message} /></div>

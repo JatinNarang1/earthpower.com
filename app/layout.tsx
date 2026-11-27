@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     template: '%s — Earth Power',
   },
   description:
-    'Earth Power — LiFePO4 batteries from 12.8 V to 480 V: energy storage, two-wheeler, high-voltage and rack systems with Bluetooth BMS and downloadable datasheets. Narela, New Delhi.',
+    'Earth Power — LiFePO4 batteries from 12.8 V to 480 V and liquid-cooled BESS up to 5 MWh: energy storage, two-wheeler, high-voltage, rack and BESS systems with downloadable datasheets and catalogue. Narela, New Delhi.',
   keywords: 'LFP battery, lithium iron phosphate, LiFePO4, energy storage battery India, inverter battery, Earth Power',
   authors: [{ name: 'Earth Power' }],
   applicationName: 'Earth Power Battery',
