@@ -1,9 +1,11 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { PRODUCTS, SAFETY, TWO_WHEELER_SAFETY, getProduct } from '@/data/products'
+import { CATEGORIES, PRODUCTS, SAFETY, TWO_WHEELER_SAFETY, getProduct } from '@/data/products'
 import { Arrow, DatasheetButton, PageHero } from '@/components/ep/ui'
+import { ProductBackButton, ProductBottomBackLink } from '@/components/ep/ProductBackLink'
 
 export function generateStaticParams() {
   return PRODUCTS.map((p) => ({ id: p.id }))
@@ -30,19 +32,31 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const i = PRODUCTS.indexOf(p)
   const prev = PRODUCTS[(i + PRODUCTS.length - 1) % PRODUCTS.length]
   const next = PRODUCTS[(i + 1) % PRODUCTS.length]
+  const catLabel = CATEGORIES.find((c) => c.id === p.category)?.label ?? 'Products'
 
   return (
     <>
       <section className="ph-hero dark" style={{ paddingBottom: 'clamp(36px,4vw,56px)' }}>
         <div className="wrap">
           <div className="crumb" style={{ marginBottom: 0 }}>
-            <Link href="/">Home</Link> / <Link href="/products">Products</Link> / <b>{p.id}</b>
+            <Link href="/">Home</Link> / <Link href="/products">Products</Link> / <Link href={`/products?category=${p.category}`}>{catLabel}</Link> / <b>{p.id}</b>
           </div>
         </div>
       </section>
 
-      <section className="sec paper" style={{ paddingTop: 'clamp(40px,5vw,64px)' }}>
+      <section className="sec paper" style={{ paddingTop: 'clamp(32px,4.5vw,56px)' }}>
         <div className="wrap">
+          <Suspense
+            fallback={
+              <div className="pd-back">
+                <Link href={`/products?category=${p.category}`} className="btn btn-outline btn-sm">
+                  ← Back to {catLabel}
+                </Link>
+              </div>
+            }
+          >
+            <ProductBackButton productCategory={p.category} />
+          </Suspense>
           <div className="pd">
             <div className="photo">
               <span className="vtag">{p.voltage}</span>
@@ -138,7 +152,9 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
           <div className="pnav">
             <Link href={`/products/${prev.id}`}>← Previous model<b>{prev.id}</b></Link>
-            <Link href="/products">All models<b>Catalogue</b></Link>
+            <Suspense fallback={<Link href={`/products?category=${p.category}`}>Back to category<b>{catLabel}</b></Link>}>
+              <ProductBottomBackLink productCategory={p.category} />
+            </Suspense>
             <Link href={`/products/${next.id}`}>Next model →<b>{next.id}</b></Link>
           </div>
         </div>

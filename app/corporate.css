@@ -382,6 +382,16 @@ form.f>p{grid-column:1/-1;color:var(--mut);margin-top:-12px;font-size:.94rem}
 .fld textarea{height:130px;padding:12px 14px;resize:vertical}
 .fld input:focus,.fld select:focus,.fld textarea:focus{outline:0;border-color:var(--brand-700);box-shadow:0 0 0 3px rgba(53,189,56,.18)}
 .fld .bad{border-color:#C4412F}
+.combo{position:relative;width:100%}
+.combo input{padding-right:42px}
+.combo-toggle{position:absolute;top:0;right:0;width:42px;height:48px;display:grid;place-items:center;color:var(--mut)}
+.combo-toggle:hover{color:var(--tx)}
+.combo-list{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:25;list-style:none;background:var(--white);border:1px solid var(--line-2);border-radius:var(--r);box-shadow:var(--shadow);max-height:240px;overflow-y:auto;padding:4px 0}
+.combo-opt{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;text-align:left;font-size:.94rem;color:var(--tx)}
+.combo-opt:hover,.combo-opt.active{background:var(--paper)}
+.combo-opt.selected{color:var(--brand-700);font-weight:600}
+.combo-opt svg{color:var(--brand-700);flex-shrink:0}
+.combo-hint{padding:8px 14px;border-top:1px solid var(--line);font-size:.76rem;color:var(--mut);margin-top:2px}
 .err{font-size:.78rem;color:#B13A2A;min-height:0}
 .err:empty{display:none}
 .fsub{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-top:6px}
@@ -663,6 +673,8 @@ html:not(.js) .rv{opacity:1;transform:none}
 .tile span{display:block;font-family:var(--f-m);font-size:.74rem;color:var(--mut);margin-top:4px;letter-spacing:.04em;overflow-wrap:break-word}
 
 /* ---------- product detail ---------- */
+.pd-back{margin-bottom:22px}
+.pd-back .btn:hover svg{transform:translateX(-3px)}
 .pd{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(28px,5vw,72px);align-items:start}
 .pd .photo{position:sticky;top:104px;background:var(--white);border:1px solid var(--line);border-radius:var(--r-2);aspect-ratio:1/1.02;display:grid;place-items:center}
 .pd .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:36px}

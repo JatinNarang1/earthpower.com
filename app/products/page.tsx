@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import ProductsBrowser from '@/components/ep/ProductsBrowser'
 import { PageHero } from '@/components/ep/ui'
 
@@ -16,7 +17,9 @@ export default function ProductsPage() {
         title={<>Power <em>Solutions</em></>}
         lead="Advanced LFP battery technology designed for performance, safety, and longevity. Every model comes with its real photograph, datasheet and specifications."
       />
-      <ProductsBrowser />
+      <Suspense fallback={null}>
+        <ProductsBrowser />
+      </Suspense>
     </>
   )
 }

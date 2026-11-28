@@ -1,15 +1,18 @@
 'use client'
 
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import { Fragment, useMemo, useState, useEffect, useRef } from 'react'
 import { CATEGORIES, PRODUCTS, type Category } from '@/data/products'
 import ProductCard from './ProductCard'
-import Pagination from './Pagination'
 import { Arrow, SectionHead } from './ui'
 
 type Sort = 'v' | 'e' | 'm'
-
-const PAGE_SIZE = 6
+const VALID_CATS = new Set<string>(CATEGORIES.map((c) => c.id))
+const parseCat = (raw: string | null): 'All' | Category =>
+  raw && VALID_CATS.has(raw) ? (raw as Category) : 'All'
+const parseSort = (raw: string | null): Sort =>
+  raw === 'e' || raw === 'm' ? raw : 'v'
 
 type P = (typeof PRODUCTS)[number]
 type Cell = React.ReactNode | undefined
@@ -72,12 +75,45 @@ function cardRows(p: P, visible: { row: (typeof ROWS)[number]; group?: string }[
 }
 
 export default function ProductsBrowser() {
-  const [group, setGroup] = useState<'All' | Category>('All')
-  const [q, setQ] = useState('')
-  const [sort, setSort] = useState<Sort>('v')
-  const [page, setPage] = useState(1)
+  const searchParams = useSearchParams()
+  const [group, setGroup] = useState<'All' | Category>(() => parseCat(searchParams.get('category')))
+  const [q, setQ] = useState(() => searchParams.get('q') ?? '')
+  const [sort, setSort] = useState<Sort>(() => parseSort(searchParams.get('sort')))
   const [cmp, setCmp] = useState<'All' | Category>('All')
   const tableRef = useRef<HTMLDivElement>(null)
+
+  // Keep filter state synchronized if URL query changes via navigation
+  useEffect(() => {
+    setGroup(parseCat(searchParams.get('category')))
+    setQ(searchParams.get('q') ?? '')
+    setSort(parseSort(searchParams.get('sort')))
+  }, [searchParams])
+
+  // Sync active filters back to the URL so browser back / deep links preserve state
+  const syncUrl = (nextGroup: 'All' | Category, nextQ: string, nextSort: Sort) => {
+    if (typeof window === 'undefined') return
+    const qs = new URLSearchParams()
+    if (nextGroup !== 'All') qs.set('category', nextGroup)
+    if (nextQ.trim()) qs.set('q', nextQ.trim())
+    if (nextSort !== 'v') qs.set('sort', nextSort)
+    const str = qs.toString()
+    window.history.replaceState(null, '', str ? `/products?${str}` : '/products')
+  }
+
+  const handleGroupChange = (next: 'All' | Category) => {
+    setGroup(next)
+    syncUrl(next, q, sort)
+  }
+
+  const handleSearchChange = (next: string) => {
+    setQ(next)
+    syncUrl(group, next, sort)
+  }
+
+  const handleSortChange = (next: Sort) => {
+    setSort(next)
+    syncUrl(group, q, next)
+  }
 
   const list = useMemo(() => {
     let L = PRODUCTS.filter(
@@ -88,12 +124,23 @@ export default function ProductsBrowser() {
     return L
   }, [group, q, sort])
 
-  // Reset page whenever filter, search or sorting changes
-  useEffect(() => {
-    setPage(1)
+  const cardContextQuery = useMemo(() => {
+    const qs = new URLSearchParams()
+    if (group === 'All') qs.set('from', 'all')
+    else qs.set('category', group)
+    if (q.trim()) qs.set('q', q.trim())
+    if (sort !== 'v') qs.set('sort', sort)
+    const s = qs.toString()
+    return s ? `?${s}` : ''
   }, [group, q, sort])
 
-  const totalPages = Math.ceil(list.length / PAGE_SIZE)
+  const cmpContextQuery = useMemo(() => {
+    const qs = new URLSearchParams()
+    if (cmp === 'All') qs.set('from', 'all')
+    else qs.set('category', cmp)
+    const s = qs.toString()
+    return s ? `?${s}` : ''
+  }, [cmp])
 
   // Comparison table always covers every model, independent of the card filters above.
   const tableList = useMemo(() => (cmp === 'All' ? PRODUCTS : PRODUCTS.filter((p) => p.category === cmp)), [cmp])
@@ -112,11 +159,6 @@ export default function ProductsBrowser() {
   }, [tableList])
   const catBands = CATEGORIES.map((c) => ({ ...c, count: tableList.filter((p) => p.category === c.id).length })).filter((c) => c.count > 0)
 
-  const paginatedList = useMemo(() => {
-    const start = (page - 1) * PAGE_SIZE
-    return list.slice(start, start + PAGE_SIZE)
-  }, [list, page])
-
   const scrollTable = (dir: 'left' | 'right') => {
     if (!tableRef.current) return
     const offset = dir === 'left' ? -280 : 280
@@ -127,14 +169,14 @@ export default function ProductsBrowser() {
     <section className="sec paper" style={{ paddingTop: 'clamp(48px,6vw,80px)' }}>
       <div className="wrap">
         <div className="faqbar" id="products-top">
-          <div className="filters" role="group" aria-label="Filter by nominal voltage">
+          <div className="filters" role="group" aria-label="Filter by product category">
             {[{ id: 'All' as const, label: 'All models' }, ...CATEGORIES].map((c) => (
               <button
                 key={c.id}
                 type="button"
                 aria-pressed={group === c.id}
                 aria-selected={group === c.id}
-                onClick={() => setGroup(c.id)}
+                onClick={() => handleGroupChange(c.id)}
               >
                 {c.label}
                 <small>{c.id === 'All' ? PRODUCTS.length : PRODUCTS.filter((p) => p.category === c.id).length}</small>
@@ -144,10 +186,10 @@ export default function ProductsBrowser() {
           <div className="tools">
             <div className="search">
               <label className="sr" htmlFor="psearch">Search by model number</label>
-              <input id="psearch" type="search" placeholder="Search model number" autoComplete="off" value={q} onChange={(e) => setQ(e.target.value)} />
+              <input id="psearch" type="search" placeholder="Search model number" autoComplete="off" value={q} onChange={(e) => handleSearchChange(e.target.value)} />
             </div>
             <label className="sr" htmlFor="psort">Sort products</label>
-            <select id="psort" value={sort} onChange={(e) => setSort(e.target.value as Sort)}>
+            <select id="psort" value={sort} onChange={(e) => handleSortChange(e.target.value as Sort)}>
               <option value="v">Sort: catalogue order</option>
               <option value="e">Sort: energy (high–low)</option>
               <option value="m">Sort: model number</option>
@@ -156,26 +198,15 @@ export default function ProductsBrowser() {
         </div>
 
         <p className="mono" style={{ color: 'var(--mut)', marginBottom: 22 }} aria-live="polite">
-          Showing {list.length === 0 ? 0 : `${(page - 1) * PAGE_SIZE + 1}–${Math.min(page * PAGE_SIZE, list.length)}`} of {list.length} matching models ({PRODUCTS.length} total)
+          Showing {list.length} {list.length === 1 ? 'model' : 'models'} ({PRODUCTS.length} total)
         </p>
 
         <div className="pgrid" id="products-grid">
-          {paginatedList.map((p, i) => (
-            <ProductCard key={p.id} p={p} priority={page === 1 && i < 3} />
+          {list.map((p, i) => (
+            <ProductCard key={p.id} p={p} priority={i < 4} contextQuery={cardContextQuery} />
           ))}
         </div>
         {list.length === 0 && <p className="empty">No models match your search.</p>}
-
-        {/* Pagination component */}
-        <Pagination
-          currentPage={page}
-          totalPages={totalPages}
-          totalItems={list.length}
-          pageSize={PAGE_SIZE}
-          onPageChange={setPage}
-          itemLabel="models"
-          scrollTargetId="products-top"
-        />
 
         <div className="custom-band">
           <div>
@@ -261,7 +292,7 @@ export default function ProductsBrowser() {
                   <tr className="mx-models">
                     {tableList.map((p) => (
                       <th scope="col" key={p.id}>
-                        <Link href={`/products/${p.id}`}>{p.id}</Link>
+                        <Link href={`/products/${p.id}${cmpContextQuery}`}>{p.id}</Link>
                         <small><span>{p.voltage}</span> · <span>{p.category === 'bess' ? p.energy : p.capacity}</span></small>
                       </th>
                     ))}
@@ -308,7 +339,7 @@ export default function ProductsBrowser() {
                     </Fragment>
                   ))}
                 </dl>
-                <Link className="btn btn-dark btn-sm" href={`/products/${p.id}`}>View {p.id} <Arrow /></Link>
+                <Link className="btn btn-dark btn-sm" href={`/products/${p.id}${cmpContextQuery}`}>View {p.id} <Arrow /></Link>
               </details>
             ))}
           </div>

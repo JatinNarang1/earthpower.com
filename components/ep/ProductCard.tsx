@@ -3,10 +3,19 @@ import Link from 'next/link'
 import type { Product } from '@/data/products'
 import { Arrow, DatasheetButton } from './ui'
 
-export default function ProductCard({ p, priority = false }: { p: Product; priority?: boolean }) {
+export default function ProductCard({
+  p,
+  priority = false,
+  contextQuery = '',
+}: {
+  p: Product
+  priority?: boolean
+  contextQuery?: string
+}) {
+  const href = `/products/${p.id}${contextQuery}`
   return (
     <article className="pcard" data-id={p.id}>
-      <Link className="ph" href={`/products/${p.id}`} aria-label={`${p.id} details`}>
+      <Link className="ph" href={href} aria-label={`${p.id} details`}>
         <span className="vtag">{p.voltage}</span>
         <Image
           src={p.image}
@@ -20,7 +29,7 @@ export default function ProductCard({ p, priority = false }: { p: Product; prior
       </Link>
       <div className="pb">
         <div className="mod">
-          <Link href={`/products/${p.id}`}>{p.id}</Link>
+          <Link href={href}>{p.id}</Link>
         </div>
         <p className="nm">{p.name}</p>
         <div className="sp3">
@@ -34,7 +43,7 @@ export default function ProductCard({ p, priority = false }: { p: Product; prior
           ))}
         </div>
         <div className="acts">
-          <Link className="btn btn-dark btn-sm" href={`/products/${p.id}`}>
+          <Link className="btn btn-dark btn-sm" href={href}>
             View details <Arrow />
           </Link>
           <DatasheetButton p={p} />

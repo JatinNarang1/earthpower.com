@@ -12,10 +12,10 @@ export type Category = 'storage' | 'twowheeler' | 'highvoltage' | 'rack' | 'bess
 
 export const CATEGORIES: { id: Category; label: string; blurb: string }[] = [
   { id: 'storage', label: 'Inverter & ESS', blurb: '12.8 V – 51.2 V energy-storage batteries' },
-  { id: 'twowheeler', label: 'Two-wheeler', blurb: '51.2 V – 73.6 V scooter battery packs' },
   { id: 'highvoltage', label: 'High-voltage', blurb: '73.6 V – 102.4 V high-voltage batteries' },
   { id: 'rack', label: 'Rack systems', blurb: '121.6 V – 480 V stacked rack systems' },
   { id: 'bess', label: 'BESS', blurb: '261 kWh – 5.016 MWh liquid-cooled systems' },
+  { id: 'twowheeler', label: 'Two-wheeler', blurb: '51.2 V – 73.6 V scooter battery packs' },
 ]
 
 interface Raw {
@@ -505,7 +505,10 @@ const BESS_PRODUCTS: Product[] = [
   }),
 ]
 
-export const PRODUCTS: Product[] = [...RAW.map(build), ...BESS_PRODUCTS]
+const CAT_RANK = new Map(CATEGORIES.map((c, i) => [c.id, i]))
+export const PRODUCTS: Product[] = [...RAW.map(build), ...BESS_PRODUCTS].sort(
+  (a, b) => (CAT_RANK.get(a.category) ?? 0) - (CAT_RANK.get(b.category) ?? 0),
+)
 /** Battery models only (excludes BESS systems, whose figures are not comparable cell-for-cell). */
 export const BATTERIES: Product[] = PRODUCTS.filter((p) => p.category !== 'bess')
 export const getProduct = (id: string) => PRODUCTS.find((p) => p.id === id)
